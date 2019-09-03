@@ -1,0 +1,1591 @@
+Historical Information for Agora.cgi users
+------------------------------------------
+
+Below is the original README.INSTALLATION file for web_store.cgi package. 
+While much of this has changed over time, there is a great deal of useful
+information in here.  Much of the task of setting up variables has been
+done for you by the settings in the manager.cgi program.  However, you may
+need to "hack" the code sometime, and this information can be quite
+helpful. 
+
+*****************************************************************************
+
+#######################################################################
+#                          BASIC INFORMATION                          #
+#######################################################################
+
+Name: WebStore
+Authors: Selena Sol and Gunther Birznieks
+Version: 1.0
+Last Modified: 11-18-96
+
+#######################################################################
+#                               DESCRIPTION                           #
+#######################################################################
+
+Shopping cart applications are some of the most popular, interesting to
+customize, and programmatically demanding CGI applications currently in
+use on the web.  Such applications allow companies to display their
+inventories online such that clients can quickly and easily browse through
+and order items of interest.
+
+Some of the more famous and groundbreaking examples include Virtual
+Vineyards (http://www.virtualvin.com/) and CD Now (http://www.cdnow.com/).
+Both of these sites generate tens of thousands of dollars from virtual
+clients through their user-friendly interfaces and sleek design.  Because
+warehouses are virtual and sales staff automated, the virtual store is a
+profitable option for many small and mid-sized businesses who gain instant
+access to a global market.  Web stores can also provide larger,
+established companies with alternative outlets for their products as well
+as a continued presence in emerging markets.
+
+Further, clients receive the benefits of dynamic, customizable browsing
+tools.  Rather than deal with mail order catalogs, 1-800 numbers and
+faxable (or worse yet-snail mail-based) order forms, a customer need only
+web over to their favorite store, click to their section of interest, add
+some items to their virtual shopping cart, type in some shipping
+information and submit the information over a secure channel of the
+Internet.  As David Cook writes in Launching a Business on the Web, "The
+idea of a virtual shopping system is to make the job of picking products
+as painless as possible.  In essence, we want the user to do no more than
+simply point to a picture or word to purchase an item.
+
+Yet however invisible and seamless the application is to the customer, a
+shopping cart system, is a demanding application to program, customize
+and/or install because it integrates so many CGI functions into one
+system.  Consider the complexity.  A shopping cart application must be
+able to manage every function of shopping;  not only from the perspective
+of the customer, but from that of the vendor as well.
+
+Store Management From the Vendor's Perspective
+
+For one, the application must be able to manage and display the store's
+inventory.  That is, the application must be able to keep track of every
+item in the store's inventory and be able to present them in an efficient
+and sensible way.   Think of this function as that of the store employee
+who must continually re-stock the shelves of the store with new items,
+change some prices here, remove some items there, introduce "specials",
+and generally make sure that aisles are clean, current, and organized for
+the convenience of customers.
+
+In terms of the shopping cart application, the program must be able to
+generate/display browsable  HTML "product pages" according to the needs of
+the client.  These product pages might be organized hierarchically,
+according to categories and sub-categories of products or they might be
+generated dynamically based upon the customer's search criteria.  Further,
+depending on the desires of the vendor and the demands of the inventory
+itself,  the inventory might be physically stored as a flatfile or SQL
+database or may be described as a series of pre-designed HTML pages.  The
+shopping cart system must be flexible and intelligent enough to produce a
+consistent look and feel while all around is variable and changing.
+A further complication lies in the fact that every item must be uniquely
+identified and may have unique qualities which differentiate it from other
+items, even within that same category.  One good example of that is the
+application of options.  Many items, even within the same category may
+have different options available for them.  For example in an online music
+shop, certain albums might come in CD format only, or in Tape or CD
+format, or even LP only.  The application must have a means for
+interpreting such unique qualities for every item and incorporate them
+into the logic of the process.  In a thousand item store, there may be a
+thousand "special cases".
+
+The Web Store must also be able to keep track of many customers
+simultaneously and at different times in their shopping process.  Some of
+those clients might be just entering the store.  Some might be at the cash
+register. Others might be browsing the shelves casually or with a specific
+product in mind.  The Web Store must be able to handle each of these
+situations so seamlessly that each customer should feel as if she is the
+only customer in the store.  Speed and consistency are paramount.
+
+Keeping track of visitors also involves a motley of administrative
+functions.  For example, just as someone must constantly keep track of
+used shopping carts at your local supermarket, so must the web store
+application deal with its own old, used shopping carts.  After all, it
+would not do to continually save all the carts used by all the customers.
+If all goes well and your products attract droves of wandering webites,
+you might generate hundreds of carts per day.  Though each cart will be
+only a small text file in itself, when combined, the set of all carts
+could cause your server's hard disk to fill up quickly.  Thus, the
+application must be responsible for pruning old carts at some regular
+interval.
+
+Another administrative function is that of logging accesses and errors.
+Every new client will bring with her a set of valuable information which
+if gathered and interpreted wisely could yield insights crucial to your
+continued success.
+
+How many of your clients are international?  How many are repeat visitors?
+Which pages do clients most often request?  Which items do they most often
+buy?  What percent of your visitors are smart enough to use Netscape?
+When are your daily peak hours?  These are the kinds of data which should
+be available in your access logs for analysis.
+
+Similarly, you should have a complete error log.  Have there been any
+attempted hacks?  Are there errors in your configuration that slipped by
+you?  Has some environment variable on your server changed which demands
+your attention like a change in permissions?  The error log can be used to
+quickly diagnose problems with the application as it evolves to your own
+needs.  In some cases, a well analyzed error log can save you from having
+to hire a programming consultant to do trouble shooting.
+
+Finally, the Web Store must be your cashier, totaling up shopping carts
+full of items, and accepting payment from the customers.  In doing so, it
+must be able to handle your local taxes, shipping costs, discounts,
+specials and any number of surprise price modifications, on the fly, for
+every customer.
+
+More crucially, it must do this flawlessly and securely.  Not only must
+the connection between the browser and server be secure (an issue between
+you and your ISP), but orders must then be sent securely from the server
+to the person handling order processing.  What good is a powerful (and
+expensive) SSL account if credit card and personal information are sent
+unprotected via email.  A secure store is only as secure as its weakest
+link.  The Web Store must be able to support SSL technology as well as
+provide a secure method of getting that information from the secure server
+to you.
+
+Whatever the case, the application must be able to quickly provide a
+virtual store environment with seamless access to products.  At this
+infant stage of the web, there are already enough barriers between the
+clients and vendors; speed, ignorance, unfamiliarity, etc.  The Web Store
+technology must not add another barrier.  It must be an interface which
+makes the user want to come back.
+
+Shopping From the Customer's Perspective
+
+A shopping cart system is also responsible for handling the needs of the
+customer.  It must follow each client through (even if their are dozens of
+clients shopping simultaneously) the store acting as their shopping
+servant.  When the customer says grab this item, it must do so.  It must
+also get more of one item or be able to put all the items back on the
+virtual shelves if so instructed.  It must do this for every customer over
+several self-referential instances.
+
+What is a "self-referential instance"?  To answer that, a short discussion
+of client server technology is in order.  When you type enter a URL into
+the location window of your favorite browser, you are becoming a client to
+some server from which you are requesting some service.  Typically, you
+will be asking the server to send you a document formatted with hyper
+Hyper-Text Markup Language (HTML).  In the case of a CGI script, you ask
+the server to execute the program and send you back the results of the
+processing.
+
+One of the facts of life with client server architecture is the fact that
+each request sent from a client and processed by a server is considered a
+new and unique one.  That is, there is no real dialogue between you and
+the server.  There is only a series of unrelated queries and responses.
+The server maintains no link with each client.  Instead it simply,
+blindly, automatically waits for a query, answers the query and settled
+back down waiting for the next query to arrive.  You may ask it for a
+second document with another hyperlink, but the server will treat you as
+the unknown stranger you are.  It will not "remember" anything about you
+or your past interactions with it.
+
+So how do you create a dialogue, a relationship; a complex relationship
+between a customer and a vendor?  For example, in order for each client to
+maintain a unique set of shopping cart items, the application must keep
+track of each client and each client's virtual cart.  Maintaining state,
+as this is called, is difficult because HTTP, as we have mentioned,  is a
+"connectionless" protocol: every time a Web browser requests the attention
+of your server, it is considered a new request, unrelated to any other
+requests fulfilled by the server.  Because each request is considered
+independently of others, the server has no way to keep track of what
+clients have been doing in the past.  
+
+How then can the server "remember" what items you have already placed in
+your cart?  If you want to keep track of a client's activities from page
+to page (perhaps keeping track of items that the client has ordered), your
+CGI application must find a way to "remember" these transactions, because
+the server cannot.
+
+Furthermore, the cart itself is a database file that is built and modified
+on the fly based on the client's needs.  The client must be able to add
+and delete items from the cart as well as change the quantities of items
+ordered.  The maintenance of the cart, therefor requires a full-fledged
+database management system.
+
+Yet the script must do more than just display and modify shopping cart
+items that are contained in the datafile.  It must also manipulate the
+database fields to perform price calculations, such as subtotaling and
+generating grand totals from subtotals.
+
+All this while still performing all the usual CGI functions like reading
+and parsing incoming form data, checking that form data against bad input.
+
+#######################################################################
+#               BASIC INSTALLATION (UNARCHIVING THE APPLICATION)      #
+#######################################################################
+
+Tar is a UNIX command that allows you to create a single archive file
+containing many files.  Such archiving allows you to maintain directory
+relationships and facilitates transferring complex programs with many
+separate but integrated parts which must have their relationships
+preserved. Tar has a motley of options which allow you to do archiving and
+unarchiving in many ways.  However, for the purpose of untarring this
+application, the commands will be fairly simple.
+
+Once you have downloaded the TAR file transfer it to an executable
+directory on your web server and "untar" it.  On UNIX systems, you may
+type the following at the command line (in the same directory as the TAR
+file itself):
+
+			tar xvfp web_store.tar
+
+Tar will go through the archive file and separate out each individual
+directory and file, expanding them into their appropriate places
+underneath the current directory.  The "xvfp" letters in the tar command
+above are parameters that tell the program to extract the files and
+directories out of the ".tar" file. Specifically, "x" tells tar to extract
+the files. "v" tells tar to output information about the status of its
+extraction while it is performing the work, "f" informs tar to use the
+".tar" filename as the source of the files to be extracted, and "p" notes 
+that the original permissions should be maintained. The reason the
+"f" parameter has to be used is that tar, by default, archives files and
+directories to a tape drive. Tar is actually short for "[T]ape [AR]chive".
+Figure 1-2 shows the output of the above command.  
+
+       (Note: If you are using a non-UNIX Operating System, you may 
+       download a TAR/UNTAR program by pointing your Web browser
+       to http://www.shareware.com  I suggest using "untar" as your
+       keyword when you search their inventory).
+
+#######################################################################
+#               BASIC INSTALLATION (SETTING PERMISSIONS)              # 
+#######################################################################
+
+Untarring the files is only one part of the equation of installing the Web
+Store application and getting it to actually run.  Frequently, the Web
+server needs to be given special permission to run your scripts and have
+the scripts perform their job with the appropriate "rights". 
+
+The cardinal rule for setting up Web server software is that the server
+should be given only minimal capabilities. This definitely rules out the
+Web server running as the ROOT user (Super user on UNIX). More often than
+not, it means the Web server is run as a user that has no rights to do
+anything significant -- the user "nobody". By default, "nobody" usually
+does not have permission to read any files in directories that you create.
+However, when you download scripts, you need to make it so that the
+scripts can be read and executed by the Web server software.  In other
+words, "nobody" has to be able to get to the files.
+
+In UNIX, the magic command for performing this task is "chmod". The
+directory structure of the Web-store root Directory is a good example of
+how you should use the chmod command. 
+
+For this example, we will assume you are sharing a server on an Internet
+Service Provider which is typically the most restrictive situation in
+terms of your security options and that all your CGI scripts are located
+in the default directory called "Web_store". 
+
+Administrative files like the log and counter files must be located in a
+directory called "Admin_files" under the "Web_store" directory. The
+example will assume we are in the directory above the one where the CGI
+scripts actually reside when we execute the chmod command. 
+
+There are four different sets of permissions that need to be granted in
+order for the user "nobody" to have the permissions needed to run this CGI
+script. First, the "Web_store" directory itself must be both readable and
+executable by the world. The directory is readable because we need to read
+the entries in the directory, and it has to be executable to go into the
+directory and open the files in it. This is done using the following
+commands:
+
+chmod 755 Web_store
+
+The 775 number tells chmod to make the "Web_store" directory readable,
+writable, and executable by the owner of the file (you) while making it
+only readable and executable by the world and the group you are.
+
+How did we come up with the number? Well, files in UNIX have three types
+of permissions: USER (the owner of the file), GROUP (The security group
+you are in), and OTHER (For the world to see. Each digit in the number
+above corresponds to one of these categories. The first digit is user, the
+second digit is group, and the final digit is other.  Thus, in the example
+above, 7=USER, 7=GROUP and OTHER=5.
+
+The actual value of the digit determines the permissions granted to that
+area. Permissions consist of three numbers -- 4 for read, 2 for write, and
+1 for execute access.  By adding these numbers together, you form the
+permissions that make up one digit. For example, 4 + 2 + 1 = 7 which
+grants read, write, and execute permissions. 4 + 1 = 5 which only grants
+read and execute permissions. Thus, 755 grants 7 (read, write, execute) to
+the owner of the file, and 5 (read and execute) to the group the file is
+in and the world. Below is a chart which will can be used as a quick
+reference
+
+	PERMISSION	COMMAND   
+         U   G   W
+	rwx rwx rwx 	chmod 777 filename   	
+	rwx rwx r-x	chmod 775 filename
+	rwx r-x r-x	chmod 755 filename
+	rw- rw- r--	chmod 664 filename
+	rw- r-- r--	chmod 644 filename
+
+	U = User 
+	G = Group 
+	W = World
+
+	r = Readable
+	w = writable
+	x = executable 
+	- = no permission
+
+
+The files within the "Web_store" directory need to be readable and
+executable since the web server will be running the CGI scripts in it.
+To set those permissions, we use the following command:
+
+			chmod 755 Web_store/*.*
+
+This command operates the same as the one above, except it changes all the
+files (* pattern matches everything) inside the "Web_store" directory to
+be readable and executable by everyone. These scripts should not be
+writable! 
+
+Nor should the Web_store directory be writable, since that would allow
+other users on the system place scripts there. The "Admin_files" directory
+is another issue. Since it contains log files which the Web server must
+write to, the "Admin_files" directory must be made writable so that the
+CGI script can write to the directory. In addition, the files generated in
+that directory should also be readable in case the Web Store script needs
+to access them. To change the directory so that it is also writable as
+well as being given read and execute access, use the following command: 
+
+		chmod 777 Web_store/Admin_files
+
+This will change the Admin_files directory under the Web_store directory
+to be readable, writable, and executable by the world.
+
+[WARNING] You may be tempted to simply use chmod 777 on all the files and
+directories since that assures the Web server can do anything with the
+files. However, it is strongly advised that you do not leave the files in
+this state. It is considered a big security risk to leave your scripts
+open to changes by the Web server instead of being read-only. Anyone on
+the server could use another rogue CGI script to write over your scripts
+and make them do something completely different. There is still a risk
+involved in making the messages directory writable, but at least if
+someone is going to be messing with your area, they will only destroy a
+bit of data and not your main programs. It is "OK" to set the scripts to
+777 if you are troubleshooting a problem and want to rule out permissions
+entirely, but do not leave the scripts like this. On another security
+note, if you are really concerned with the security of your data such as,
+please do not use a shared server where other people can write CGI scripts
+using the same Web server configuration.  It is much better to use your
+own server software or purchase space on a "virtual server" which may be
+shared, but is set up in such a way that each user's scripts are shielded
+from each other.
+
+	Note: Not setting your permissions correctly is the 
+	NUMBER 1 reason why installations fail.  Take time to 
+	get this right.
+
+The actual permissions required for the subdirectories and files used by
+this application are listed in the next section.
+
+#######################################################################
+#        BASIC INSTALLATION (FILES, DIRECTORIES, AND PERMISSIONS)     # 
+#######################################################################
+
+The TAR file will then expand into a root directory called Web_store.
+Web_store will contain several sub-directories and several files.
+The diagram below depicts the directory structure as well as the
+permissions which must be applied to the files and subdirectories used by
+the application.
+
+Web_store Root Directory (drwxr-xr-x)
+   |____Admin_files (drwxrwxrwx)
+   |       |___access.log (-rw-rw-rw-)
+   |       |___counter.file (-rw-rw-rw-)
+   |       |___error.log (-rw-rw-rw-)
+   |       |___order.log (-rw-rw-rw-)
+   |____Data_files(drwxr-xr-x)
+   |       |___data.file (-rw-r--r--)
+   |____Html Sub-directory (drwxr-xr-x)
+   |       |___Images (drwxr-xr-x)
+   |       |      |___1.jpg (-rw-r--r--)
+   |       |      |___a.jpg (-rw-r--r--)
+   |       |      |___animated_circuit.gif (-rw-r--r--)
+   |       |      |___e.jpg (-rw-r--r--)
+   |       |      |___eight.gif (-rw-r--r--)
+   |       |      |___five.gif (-rw-r--r--)
+   |       |      |___four.gif (-rw-r--r--)
+   |       |      |___letters.gif (-rw-r--r--)
+   |       |      |___memes.gif (-rw-r--r--)
+   |       |      |___nine.gif (-rw-r--r--)
+   |       |      |___numbers.gif (-rw-r--r--)
+   |       |      |___one.gif (-rw-r--r--)
+   |       |      |___seven.gif (-rw-r--r--)
+   |       |      |___six.gif (-rw-r--r--)
+   |       |      |___symbols.gif (-rw-r--r--)
+   |       |      |___three.gif (-rw-r--r--)
+   |       |      |___two.gif (-rw-r--r--)
+   |       |      |___web_store_front.gif (-rw-r--r--)
+   |       |      |___white_space.gif (-rw-r--r--)
+   |       |      |___words.gif (-rw-r--r--)
+   |       |      |___zero.gif (-rw-r--r--)
+   |       |___Options (drwxr-xr-x)
+   |       |      |___option.html (-rw-r--r--)
+   |       |___Products (drwxr-xr-x)
+   |       |      |___Consonants.html (-rw-r--r--)
+   |       |      |___Letters.html (-rw-r--r--)
+   |       |      |___Letters.html.db (-rw-r--r--)
+   |       |      |___Memes.html (-rw-r--r--)
+   |       |      |___Numbers.html (-rw-r--r--)
+   |       |      |___Vowels.html (-rw-r--r--)
+   |       |      |___Words.html (-rw-r--r--)
+   |       |___frames_frontpage.html (-rw-r--r--)
+   |       |___frontpage.html (-rw-r--r--)
+   |       |___home.html (-rw-r--r--)
+   |       |___outlet_frontpage.html (-rw-r--r--)
+   |       |___outlet_frontpage_db.html (-rw-r--r--)
+   |       |___outlet_order_form.html (-rw-r--r--)
+   |       |___outlet_order_form_with_shipping.html (-rw-r--r--)
+   |       |___toc.html (-rw-r--r--)
+   |____Library Sub-directory(drwxr-xr-x)
+   |       |____cgi-lib.pl (-rw-r--r--)
+   |       |____mail-lib.pl (-rw-r--r--)
+   |       |____pgp-lib.pl (-rw-r--r--)
+   |       |____web_store.setup.db (-rw-r--r--)
+   |       |____web_store.setup.db.table (-rw-r--r--)
+   |       |____web_store.setup.frames (-rw-r--r--)
+   |       |____web_store.setup.frames.javascript (-rw-r--r--)
+   |       |____web_store.setup.frames.vbscript (-rw-r--r--)
+   |       |____web_store.setup.html (-rw-r--r--)
+   |       |____web_store_db_lib.pl (-rw-r--r--)
+   |       |____web_store_html_lib.pl (-rw-r--r--)
+   |       |____web_store_html_search.pl (-rw-r--r--)
+   |       |____web_store_order_lib.pl (-rw-r--r--)
+   |____Pgpfiles Sub-directory (drwxr-xr-x)
+   |       |____config.txt (-rw-r--r--)
+   |       |____pubring.pgp (-rw-r--r--)
+   |       |____randseed.bin (-rw-r--r--)
+   |       |____secring.pgp (-rw-r--r--)
+   |____User_carts Sub-directory (drwxrwxrwx)
+   |____README.INSTALLATION (-r--r--r--)
+   |____web_store.cgi (-rwxr-xr-x)
+   |____web_store_check_setup.cgi (-rwxr-xr-x)
+   |____web_store_log_analysis.cgi (-rwxr-xr-x)
+
+Web_store - This is the application's root directory.  The Web server
+	must have read and execute privileges for this directory.
+
+Admin_files - This sub-directory is used to hold various files that the
+	web server must have permission to read and write to.  Within the
+	directory are several logs which are used to keep track of store
+	usage as well as the counter file.  Each of these files must be
+	readable by and writable to the web server.  The directory itself
+	must be readable, writable and executable by the Web server.
+
+	access.log contains information about customers who access the
+	store frontpage.  It will contain the values of any environment
+	variables known by your server as well as the date of access.
+
+	counter.file is used to generate unique id numbers for every row
+	in customer carts.  Each item that the customer orders must be
+	uniquely identifiable if the script is to be able to modify and
+	delete cart items.
+
+	error.log contains information about errors that have occurred
+	during usage of the script.  Each row of the logfile contains
+	information about what error has occurred, the line number of the
+	error and any environment variables known by the web server
+
+	order.log contains a log of all the orders which have been
+	processed by web_store.cgi.  Each individual order is separated by
+	a line of dashes (----------------------------------------).
+
+Data_files - This sub-directory contains the data file used to generate
+	the product pages in the case of a database-based store or to
+	check against in the case of an HTML-based store with database
+	validation.  The directory itself must be readable and executable
+	by the web server and files within it must be readable.
+
+	data.file is the file which contains all of the store products.
+	Essentially, this is a simple flat file, ASCII, pipe delimited
+	database. It is crucial that you define the structure of the
+	database in the setup file however as each column must be defined 
+	in several "index" variables.  The data file and the index
+	variables will be discussed in greater detail later.
+
+Html - This sub-directory is used to hold various HTML documents that are
+        used by both the HTML-based and database-based versions of
+	web_store.cgi to provide navigation-like functions like the
+	frontpage, order form and list of product pages.  However,  in the
+ 	case of the HTML-based store, it is responsible for containing all
+	the product pages as well as the navigational pages.
+
+	The directory itself must be readable and executable by
+	the web server, Directories within it must be readable and
+	executable, and files within it and its sub-directories must be
+	readable.
+	
+	Images is a sub-directory containing images used by the
+	distribution default example store.  Note: If you are running this
+	script through a server which does not allow you to reference
+	images within the CGI directory, you may have to move this
+	directory elsewhere in order to actually see the images.  If you
+	are getting broken images, this is likely the cause.  It is
+	important to note that if you do move this directory, all links
+	hardcoded in the example HTML pages as well as those in data.file
+	must be changed to reflect the new location.
+
+	Options is a sub-directory containing any option files that you
+	create.  Option files are used in the Database-based version of
+	the store when you want many items to have the same option HTML code,
+	but you do not want to write that code in every single database
+	row.  Option files will be discussed in greater detail later.
+	This directory must be readable and executable and every option
+	file must be readable.
+
+	Products - This subdirectory contains pre-designed HTML pages
+	which the store may be asked to display during shopping.  There
+	are two types of pages stored here.  Firstly, "product pages" are
+	stored here. Product Pages are simply HTML forms written with a
+	specific format (using special tags discussed later) which allow
+	customers to buy specific store items.  These pages are used for
+	HTML-based stores which cannot generate pages from a data file.
+
+	Secondly, this sub-directory contains "list of product" pages
+	which are simply HTML pages which contain hyperlinks to "product
+	pages".   These list of product pages are used for both the
+	HTML and database-versions of the store.  Both "product pages"
+	and "list of product pages" will be discussed later.
+
+		Letters.html (Html-Based Store specific) and Letters.html.db
+		(Database-Based Store specific) are example of "list of
+		product pages" and Vowels.html is an example of a product
+		page.
+
+	The sub-directory must be readable and executable and all files
+	within must be readable by the Web server.
+
+	frames_frontpage.html, home.html, toc.html and frontpage.html are
+	all used in the Frames example of the store.  frames_frontpage.html
+	defines three frames which point to the others.
+
+	outlet_frontpage.html and outlet_frontpage_db.html are the
+	frontpage examples for the Html-base store and the Database-based
+	store respectively.
+
+	outlet_order_form.html, outlet_order_form_with_shipping.html are
+	two examples of how you might create your own order for.
+	outlet_order_form.html is a basic example, 
+	outlet_order_form_with_shipping.html contains the HTML necessary
+	to calculate sample shipping logic.
+
+	All of these files will be discussed in greater detail later.
+
+Library - This sub-directory is used to hold the associated library files
+        used by this application.  The directory itself must be readable
+	and executable by the web server and files within it must be
+	readable.
+
+	cgi-lib.pl is used to read and parse form data as well as provide
+	a convenient way to exit with explanation in case there is a
+	problem opening a file.
+
+	mail-lib.pl is used to send unencrypted email to the store
+	administrator.
+
+	pgp-lib.pl is used to send encrypted email to the store 
+        administrator.
+
+	web_store.setup.db.* - There are six sample setup files distributed
+	by default.  These setup files exemplify several methods
+	for defining the interface to the store. 
+
+	web_store.setup.db is the basic database-based store with a
+	non-table based product display (In usage, the setup file creates
+	product displays which mirror the HTML-based store).
+	
+	web_store.setup.db.table displays products tabularly;  Less nice
+	looking, but very efficient.
+
+	web_store.setup.frames gives an example of a frames based store.
+	By default, it uses the non-tabular database-based logic for
+	display of products. But it could as easily use the HTML logic.
+
+	web_store.setup.frames.javascript takes frames one step further by
+	integrating a javascript routine to calculate order totals before
+	a customer adds items to their cart.
+
+	web_store.setup.frames.vbscript does the same thing, but in VB
+	script.  web_store.setup.html shows an example of using an
+	HTML-based web store interface.  The differences between these
+	setup files, and the actual meaning of setup variables will be
+	discussed later.
+
+	web_store_db_lib.pl is a library which is used for searching the
+	database.
+
+	web_store_html_lib.pl is  a library of subroutines used to
+	generate most of the customizable HTML.  If you want to change
+	the look and feel of your store, you will most likely modify the
+	code in this library.  The specifics of the library will be
+	discussed later.
+
+	web_store_html_search.pl defines the search routines for the
+	HTML-based store which cannot search a database for keywords, but
+	which must read through product pages individually searching for
+	hits.
+
+	web_store_order_lib.pl defines the routines necessary to process
+	orders.
+
+Pgpfiles is the sub-directory used to store files necessary for
+	processing orders using PGP encryption. The directory itself
+        must be readable and executable by the web server and files
+        within it must be readable.
+
+	PGP is a 3rd party encryption tool written by Phil 
+        Zimmerman for the purpose of encrypting and decrypting files.
+	You have to know how to use PGP in order to use this
+	feature of the cart. By default, we turn off PGP 
+	encryption. Basically, you need to obtain PGP, generate
+	a public and private key for your Web Store and then store
+	the public key configuration files inside of this directory.
+
+User_carts - This sub-directory is used to store the actual shopping carts
+        used by people browsing your store. Initially, this sub-directory
+	will be empty.  As customers enter your store, the script will
+	automatically fill and prune the directory.  The directory must be
+	readable, writable and executable by the web server. The cart
+	files created within it must be readable and writable (Though the 
+	script will create and delete carts on its own).
+	
+web_store.cgi - is the main script which generates the GUI for the
+        online store.  It must be readable and executable by the web
+	server.
+
+web_store_check_setup.cgi is a script which you can use to help with
+	installation.  This script will go through and check the
+	permissions and path values that you have defined in your setup
+	file and report any problems it finds. It must be readable and
+	executable by the web server.
+
+web_store_log_analysis.cgi is a script used to browse your log files.  It
+	offers a simple keyword search box and asks which log file you
+	would like to review. It must be readable and executable by the
+	web server.
+
+#######################################################################
+#        BASIC INSTALLATION (SETUP FILES - WEB_STORE.SETUP.*)         # 
+#######################################################################
+
+In the Library directory, we have created six sample setup files which
+you can use to explore the possible store interfaces which may be defined.
+The six sample setup files are named: 
+
+		web_store.setup.html,
+		web_store.setup.db, 
+		web_store.setup.db.table,
+		web_store.setup.frames,
+		web_store.setup.frames.javascript,
+		web_store.setup.frames.vbscript
+
+These files go over the six most common paradigms used for
+stores that we have seen in the past, but you can certainly be a lot more
+creative than we have been.  We offer these only as demonstrations of the
+flexibility of this script.
+
+1. The HTML-based store uses predefined HTML product pages to create the
+   interface for the client.  The admin has quite a bit of artistic leeway
+   in how product pages are created, but must follow a basic format in
+   assigning values to the INPUT tag NAME arguments.
+
+   Specifically, every purchasable item MUST have a text field entry box
+   representing a quantity.  The INPUT tag must follow the following basic
+   format:
+
+   <INPUT TYPE = "text" NAME = "item-WWW|XXX|YYY|ZZZ"
+          SIZE = "3" MAXLENGTH = "4">
+
+   where WWW is a UNIQUE product identification (like an ISBN number) AND
+   XXX, YYY, and ZZZ are bits of information that you want displayed in
+   the customer's cart view.  Below is a sample INPUT tag taken from the
+   sample Vowels.html page
+
+   <INPUT TYPE = "text" NAME = "item-0010|Vowels|15.98|The letter A"
+          SIZE = "3" MAXLENGTH = "4">
+
+  In web_store.setup.html, you will need to key in the XXX,YYY, and ZZZ
+  values to the various display arrays discussed later.
+
+  Secondly, you MUST include a couple of hidden variables before the
+  closing </FORM> tag.  You must include the following lines:
+
+  <INPUT TYPE = "hidden" NAME = "cart_id" VALUE = "%%cart_id%%">
+  <INPUT TYPE = "hidden" NAME = "page" VALUE = "%%page%%">
+
+  These two lines will be "filtered" by web_store.cgi which will insert
+  the actual value of cart_id and page.  Unless web_store.cgi has the
+  opportunity to insert these values, the customer will lose their cart.
+  Thus, all HTML must always be filtered through the script.
+
+2. The Database-based Store grabs the data to be displayed from a
+  flatfile database.  It then uses a format string to format the data for
+  display in the browser window.  You still have a great deal of artistic
+  leeway in how data is presented but unlike with HTML, every product must
+  be displayed in the format defined by the format variable.  In the
+  default setup file , we have just set the setup file so that it will
+  display the same as the HTML-based cart.  Also, unlike the HTML-based
+  store, product pages need not be created as tey will be generated on the
+  fly by the script.
+
+3. The Database-based Table-display Store is a secondary setup of the
+   Database-based Store.  In this store, products are simply displayed
+   with a table of database rows.  This is a little bit ugly, but may be
+   space and time saving for users in a large store with bland products.
+
+4. The Frames Store is another template which we have provided as a
+   sample.  The Frames version in the example uses a database method of
+   creating the product pages (though it could also use the HTML method)
+   and presents the store as a frames based site, including a main display
+   frame, a table of contents frame and a return to frontpage frame. 
+
+5. The JavaScript Store is really an extension of option 4 which adds
+   the capability of allowing the user to do calculations on the
+   product display screen using Netscape's JavaScript language
+   in the Netscape Web Browser.  This is the setup file hardcoded into
+   web_store.cgi by default.
+
+6. The VBScript Store is also an extension option 4 which adds
+   the capability of allowing the user to do calculation on
+   the product display screen using Microsoft's VBScript language
+   in Internet Explorer.
+
+Which of the four setup files are actually used depends on what value
+you set for the setup file in web_store.cgi.  At line 86 of web_store.cgi,
+you will see the following line
+
+&require_supporting_libraries (__FILE__, __LINE__,
+ 			"./Library/web_store.setup.frames.javascript");
+
+This line tells the script to load up web_store.setup.frames.javascript.
+If you change this to web_store.setup.html or web_store.setup.db you will
+use instead the alternative setups.  Eventually, you can settle on just
+one setup file and delete the others.  They are not necessary, but included
+as examples.
+
+For the most part, these four setup files are the same.  Most of the
+variables defined in them will be consistent for all the interfaces.  Thus
+we will proceeded to go over them all at one time, pointing out
+differences when they occur.
+
+		Note: All variables defined in the setup file are prefixed
+		with "sc_" to denote that they are global variables.
+
+			GLOBAL FILE LOCATION VARIABLES 	 
+
+Every setup file begins by defining the locations of supporting files
+which are needed throughout the life of the application.  These paths can
+either be relative to the present working directory of web_store.cgi or
+can be hard coded as absolute paths.  In our default setup, we set paths
+relative to web_store.cgi so that when we define a path such as
+"./Library/file.name" we are referring to a file called "file.name" in a
+directory called "Library" which is a sub-directory of the directory
+containing web_store.cgi.
+
+		Note: If you are using a virtual server, be very careful
+		with paths.  What "you" see as your path when you log
+		into your account may not be what the "web server" sees
+		when it executes web_store.cgi.  The best thing to do is
+		contact your ISP and ask them for a detailed explanation
+		of how directories are mapped relative to your account and the
+		web server's account.
+
+In actual usage, there is rarely any reason to change these variables from
+what is distributed.  They should work just fine if you keep filenames and
+relative locations the same as in the distribution.  The only reason you
+may want to change them is if 1) you want to rename the files in question
+to be consistent with local filename standards or 2) you are not allowed
+to use subdirectories in your ISP's cgi-bin directory.  If you do need to
+change these values, be careful, but feel free. 
+
+$sc_cgi_lib_path is the location of cgi-lib.pl which is used to read and
+	parse incoming form data
+
+$sc_mail_lib_path is the location of mail-lib.pl which is used to mail
+	non-encrypted email.
+
+$sc_html_search_routines_library_path is the location of
+	web_store_html_search.pl which is used in case of a keyword search
+	request by the customer using an HTML-based Web Store.
+
+$sc_html_setup_file_path is the location of web_store_html_lib.pl in which
+	are defined most of the customizable HTML interface which is
+	specifically programatic.
+
+$sc_db_lib_path is the location of web_store_db_lib.pl which contains the
+	database search routines
+
+$sc_order_lib_path is the location of web_store_order_lib.pl which is full
+	of routines that process orders.
+
+$sc_pgp_lib_path is the location of the pgp-lib.pl which has a routine
+	to automatically encrypt final cart orders for sending in email
+	or logging to a file.  You must have installed PGP on your
+	web server and configured it for use previously.
+
+$sc_user_carts_directory_path is the location of the directory used to
+	store user shopping carts.
+
+$sc_data_file_path is the location of the flatfile database of items.
+	This variable is only necessary if the store uses a database to
+	generate product pages or if the store admin wishes to check all
+	orders derived from HTML-based product pages against a back end
+	database.  The reason you might want to do this is because in
+	theory, someone could hack the data between the product page and
+	the order form and thus manipulate fields like price.  If you did
+	not have a watchful eye over each order filled, someone might be
+	able to sneak some hefty discounts right under your nose.
+
+$sc_options_directory_path is the location of the directory which contains
+	"options" files.  These files are used to store the HTML code for
+	options which may accompany items in a store.  This variable is
+	only needed if you are using a database-based store.  If you are
+	using an HTML-based interface, you will hardcode the options HTML
+	directly into the product pages themselves.
+
+$sc_html_product_directory_path is the location of the directory
+	containing the HTML product pages and/or other HTML pages that
+	aid in store navigation.  This is needed for both the HTML and
+	database-based stores because "list of product" pages which do not
+	contain products, but which contain lists of links which point to
+	product pages are used by the database-based stores as well as the
+	HTML-based stores.
+
+$sc_html_order_form_path is the location of the order form which the
+	customer will use to enter their shipping information.
+
+$sc_store_front_path is the location of the HTML frontpage for your store.
+
+$sc_counter_file_path is the location of the file which you will use to
+	keep track of unique database row numbers for every item in the
+	customers cart.
+
+$sc_error_log_path is the location of the flatfile error log data file.
+
+$sc_access_log_path is the location of the flatfile access log data file.
+
+$sc_main_script_url is the URL of web_store.cgi.  This can either be
+	relative or absolute.
+
+$sc_order_script_url is the URL of the script which processes orders.  If
+	you are using a secure server setup, you may need to store this
+	in a secure directory other than the one the rest of the script is
+	contained in.
+
+
+			DATABASE DEFINITION VARIABLES
+
+These fields are used for the routines using the database
+	flatfile version of the cart.
+
+%db is an associative array that contains a mapping of your
+	own user defined fields to the index number of the
+	fields as they appear in the flatfile database.
+
+	NOTE: The database file has fields that are pipe (|) 
+	delimited.
+
+	For example:
+		$db{"product_id"} = 0;
+		$db{"product"}    = 1;
+		$db{"price"}      = 2;
+		$db{"name"}       = 3;
+		$db{"image_url"}  = 4;
+		$db{"description"}= 5;
+		$db{"options"}    = 6;
+
+	Means that product_id is the first field in the database.
+	Remember, fields start counting at ZERO!  An example of the
+	database row corresponding to the  above setup might be as
+	follows:
+
+	001|Product 1|1.00|1|<IMG SRC = "1.gif">|Number 1|%%OPTION%%opt.html
+
+@sc_db_display_fields is an array containing the descriptive
+	headers for the fields in the database we wish to
+	display to the user when they do a query search.
+
+@sc_db_index_for_display is an array containing the index numbers of the 
+	db fields that correspond to the display_fields array.  To access
+	those index numbers, we just utilize the %db associative array.
+
+@sc_db_index_for_defining_item_id is an array containing
+	the db fields that correspond to the fields from
+	the database that you wish to associate with a user's
+	cart when they select that item for purchase.
+
+$sc_db_index_of_price is an index to the field in the
+	database that contains the price. This is used by
+	the web store to decide how to print money. As well
+	as perform price calculations.  In the example above, this value
+	would be two.
+
+@sc_db_query_criteria is an array containing the criteria
+	that can be used to search on the database. This is
+	a powerful search mechanism. 
+
+	The array contains pipe-delimited fields inside each
+	list item. The fields are the
+
+	1. form variable name
+	2. index into the database that this criteria applies to
+	3. operator for comparison
+
+		Possible values: >,<,>=,<=,=,!= (not equal)
+
+		The operator is compared the following way:
+
+		form_variable OPERATOR database_field_value
+
+		That is, (1) above is the left hand side of the
+		operator and (2) above is the right hand side of
+		the operator.
+
+	4. data type of the field (This is cool because it
+		determines how the operator in (3) gets
+		applied to the data.
+
+		The data type can be:
+			date
+			number
+			string
+
+		If the data type is a date, then the operator
+		for comparison is done after the form value
+		and the fields being compared in the database
+		are converted to DATES.  
+
+		If the data type is a number, then the operator
+		for comparison is done based off of numerical
+		if operators (>,<,==, etc.)
+
+		If the data type is a string, then the operator
+		for comparison is done based off of string
+		if operators (gt, lt, eq, ne, etc.) with ONE
+		EXCEPTION.
+
+		If the datatype is a STRING *AND* the operator
+		is =, then the search that is done becomes a
+		more flexible search.
+
+		1. All the words in the form variable are split
+		apart and searched as separate keywords in the
+		text of the fields.
+
+		2. By default, the search on string = string
+		is a pattern match search and is not case
+		sensitive.
+
+		3. If you want this special string,= combination
+		searching to be case sensitive and to match on
+		whole words only, you MUST set up two new form
+		variables: case_sensitive and exact_match
+
+		If exact_match is on (checkbox) then the 
+		combination of string,= in the query criteria
+		array will match on WHOLE WORDS only.
+
+		If case_sensitive is on (checkbox) then the
+		combination of string,= in the query criteria 
+		array must have matching case values (upper/lower).
+
+	There are three main cases that you generally want to set 
+	up a query_criteria array for:
+
+	Case 1: General keyword search through the database.
+
+	(a) Set the first field equal to your keywords form variable
+	(eg keywords).  You will need something like the following in your
+	HTML page.
+
+	<INPUT TYPE = "text" NAME = "keywords" SIZE = "40" 
+	       MAXLENGTH = "40">
+
+	(b) Set the 2nd field equal to field numbers of the 
+	database file you want to search. Since you are going to
+	do a keyword search through the whole database, you want
+	to comma-separate these (eg 1,2,3,4,6 where database filed #5 is
+	not searched)
+
+	(c) operator is set to =, data type is set to string so
+	that the keyword search is done using pattern matching
+	and case insensitive.
+
+	@sc_db_query_criteria would be equal to
+		("keywords|1,2,3,4,6|=|string)
+
+	Case 2: Just want to do a search on a product category
+	and include that search term within URLs in a frontpage such
+	as web_store.cgi?product=Vowels.
+
+	(a) Set the form variable equal to the above (product)
+	
+	(b) set the 2nd field equal to the field in the database
+	corresponding to a product name (eg 1).
+
+	(c) set operator =, data type string to do a keyword
+	search that is case insensitive.
+	
+	@sc_db_query_criteria would be equal to
+		("product|1|=|string")
+
+	Case 3: You want to make a front page form where several
+		fields in the database are being searched.
+
+		You want to allow the user to search on a price
+		range, plus a keyword search on description field.
+
+		Here is the setup:
+
+	@sc_db_query_criteria would be equal to
+		("price_low_range|2|<=|number",
+		"price_high_range|2|>=|number",
+		"description|4|=|string");
+
+	Notice that we set up TWO form variables for allowing
+	the price range searching. This is because we allow the
+	user to enter the low range and the high range of the price
+	they want to search for (database field #2).
+
+	Note, also, that the "price_low_range|2|<=" means that
+	the database row returns a match if and only if the 
+	value of "price_low_range" form field is <=- the value of
+	field #2 in the database row (remember counting starts at 0).
+
+	Thus, if you have a database row with a price of $15.00, then
+	entering the low range as 10.00 will return a match because
+	10.00 <= 15.00 but if you enter a low range of 16.00, a 
+	match would not be returned because 16.00 is NOT <= 15.00
+
+	Then, we set the description form variable to be a keyword
+	(=,string) search on database field #4.
+
+	The form itself would have these fields as HTML:
+
+	Lowest Price To Search For:
+	<INPUT TYPE=TEXT NAME=price_low_range VALUE="">
+	
+	Highest Price To Search For:
+	<INPUT TYPE=TEXT NAME=price_high_range VALUE="">
+
+	Enter Keywords To Search For In Description:
+	<INPUT TYPE=TEXT NAME=description VALUE="">
+
+	SPECIAL NOTE: Only criteria that is entered on the form 
+	is queried against. If the user leaves one or more fields blank
+	(or you neglect to place them on the form), then those fields
+	never get queried.
+
+	Of the criteria that IS entered on the form, all the criteria
+	must be satisfied for that row before the row will be considered
+	safe to display to the user.
+
+	The same goes for the string,= (special case for keywords). 
+	When the string is split into keywords separated by whitespace,
+	all the keywords must be found in the database field before
+	the program will consider it a valid match.
+
+	This logic is there because we want to provide the capability
+	of letting the user narrow down the query as they enter more
+	data into the form.
+
+$sc_db_max_rows_returned is the maximum amount of rows you will
+	allow to be displayed to the user as the result of a query.
+	If the query gets above this number, the user is presented
+	with a message letting them know that they need to narrow
+	their query down.
+
+			CART DEFINITION VARIABLES
+
+%cart, the cart associative array, is defined via the
+	following steps:
+
+	1. The 0th field is ALWAYS the quantity of the
+	purchased item
+
+	2. The subsequent fields are the same fields
+	defined in the @sc_db_index_for_defining_item_id
+	variable.
+
+	This is done because whatever is defined in
+	this array, becomes the part of the product defined in the 
+	user's cart.
+
+	3. The field before the next to last field is ALWAYS the
+	"options" that have been selected by the user.  If you are
+	not using options, this field still needs to be here. It will
+	just be used as an empty place marker. 
+
+	4. The next to last field is ALWAYS the price
+	after options have been calculated in with the normal price.
+
+	5. The last field is ALWAYS a computer generated
+	unique identifier to distinguish cart line items from 
+	each other.
+
+	For example:
+
+	$cart{"quantity"}            = 0;
+	$cart{"product_id"}          = 1;
+	$cart{"product"}             = 2;
+	$cart{"price"}               = 3;
+	$cart{"name"}                = 4;
+	$cart{"image_url"}           = 5;
+	$cart{"options"}             = 6;
+	$cart{"price_after_options"} = 7;
+	$cart{"unique_cart_line_id"} = 8;
+
+$sc_cart_index_of_price is the original database price of the item.
+
+$sc_cart_index_of_price_after_options is the price after the user
+	selected options have been chosen which in the above example is
+	equal to three.
+
+$sc_cart_index_of_measured_value is the index value of whatever
+	field you want to use as a measured value in other
+	calculations (specifically for calculating things like
+	shipping). eg you may have a WEIGHT field that you wish
+	to total in the cart so that the shipping cost changes with
+	weight.
+
+@sc_cart_display_fields is an array containing the descriptive names
+	of the headers for displaying the cart fields.
+
+@sc_cart_index_for_display is an array containing an index into the
+	cart for which fields will be displayed to the user when they
+	are viewing their own cart.
+
+$sc_cart_index_of_item_id is the index to the unique product id which in
+	the example above is equal to one.
+
+$sc_cart_index_of_quantity is the index to field of the the user's
+	quantity of item they are currently purchasing which in the
+	example above is zero.
+
+			ORDER FORM DEFINITION VARIABLES
+
+%sc_order_form_array is the associative array of form variables that are
+	used on the order form to send in an order such as asking for
+	the user's name, address, etc. It maps a form field name with 
+	a descriptive name so that a legible email will be produced
+	later.
+
+@sc_order_form_required_fields is an array containing the form 
+	field names (as defined in %sc_order_form_array) that
+	are required fields. The order will not be processed without
+	these field names being entered on the form.
+
+$sc_order_with_hidden_fields is 'yes' or 'no'. If you want to submit
+	orders to another server or to a MAILTO: URL, then you can
+	use this option to make sure that hidden fields are actually
+	generated with the contents of the cart in them.
+
+The following variables tell the ordering part of the script how
+to calculate shipping, discount, and sales tax and in what order.
+
+The values are numerical (1,2,3) or 0 if we do not want to process
+anything.
+
+First, we determine whether these item (sales tax, shipping,
+	and discount) are even calculated at all at either the
+	display order form OR at the point where the order form
+	has been submitted for processing (process_form).
+
+Variables that we do not calculate at a given time are given
+	a value of ZERO (0) to show they never enter into 
+	the calculation.
+
+Otherwise, they are given an ORDER NUMBER 1, 2, or 3 to show
+	in what order they are calculated.
+
+Here are the variables:
+
+	$sc_calculate_discount_at_display_form
+	$sc_calculate_discount_at_process_form
+	$sc_calculate_shipping_at_display_form
+	$sc_calculate_shipping_at_process_form 
+	$sc_calculate_sales_tax_at_display_form
+	$sc_calculate_sales_tax_at_process_form 
+
+Example 1: We want shipping, discount, and sales tax
+	to be calculated off of the original subtotal
+	and then added to the subtotal all at once on the
+	order form.
+
+	$sc_calculate_discount_at_display_form = 1;
+	$sc_calculate_shipping_at_display_form = 1;
+	$sc_calculate_sales_tax_at_display_form = 1;
+
+	Because they are all set to 1, they are all
+	calculated at the same time and then added to the
+	subtotal.
+
+Example 2: We want the sales tax to get calculated first,
+	added to the subtotal AND THEN the discount and
+	shipping gets calculated on the order form.
+
+	$sc_calculate_discount_at_display_form = 2;
+	$sc_calculate_shipping_at_display_form = 2;
+	$sc_calculate_sales_tax_at_display_form = 1;
+
+	Because sales_tax is 1, it gets calculated before
+	the other values and then added to the subtotal. 
+	
+	Then, the discount and shipping (value = 2) are
+	calculated together and added to the subtotal based
+	off of the subtotal from above.
+
+NOTE: If you are calculating something on the order form
+	level, you need to calculate it on the process_form
+	level as well (otherwise the information won't be 
+	sent with the order in email).
+
+NOTE_2: If a particular field such as shipping is dependant on the
+	user entering a value into the Order Form, it CANNOT be
+	calculated on the Order form level. This is because the 
+	USER HAS NOT ENTERED THE FORM FIELD YET!
+
+	Thus, you will need to set shipping to 0 at the
+	display_form stage but set it to the appropriate 
+	value at the process_form stage since the user
+	will have, by then, entered the form value on the ORDER
+	FORM display.
+
+@sc_order_form_shipping_related_fields is an array containing the
+	names of the form variables on the order form that will
+	be used in calculating shipping. If you are calculating
+	shipping without regard to form values, leave this
+	array empty.
+
+@sc_order_form_discount_related_fields is an array containing the
+	names of the form variables on the order form that will	
+	be used in calculating a discount for the user. If you
+	are calculating a discount without regard to form values,
+	leave this array empty.
+
+@sc_shipping_logic is an array containing the logic for applying
+	the shipping cost to the order.  Each criteria is a separate
+	list element. The fields within the criteria are pipe 
+	delimited (|).
+
+	The values of the criteria are equal whole values (such
+	as UPS or 5 or 11) or they can be ranges separated by
+	hyphens (eg 1-5, 1-, -5). If a number is left off of the
+	hyphen, then the range is open-ended up to the value
+	defined by the hyphen. eg 5- says anything greater than
+	or equal to 5.
+
+	The first fields correspond to the fields in the
+	@sc_order_form_shipping_related_fields array. If this
+	array is empty, then no fields in @sc_shipping_logic
+	will correspond to the shipping.
+
+	The next field is the subtotal amount to compare 
+	against if you are determining shipping cost based on the
+	total sum of money needed to purchase what is in the cart.
+
+	The next field after that is the quantity of items to
+	compare against for determining shipping based on quantity.
+
+	The next field after quantity is the measured total of items
+	based on the measured field index determined in the cart
+	setup above.
+
+	The final field is the amount of money the shipping will
+	be if the criteria is matched in the above fields. If the
+	value is followed by a % symbol, then the value of the shipping
+	will be a PERCENT of the current subtotal.
+
+	For example:
+
+	@sc_order_form_shipping_related_fields = ();
+
+	@sc_shipping_logic =
+		("|11-||5",
+		"|1-10||10");
+
+	In this example, the related fields are empty, so 
+	the logic fields start with the comparison of the subtotal.
+	
+	There is nothing in the logic field for subtotal, so 
+	it is not compared in determining shipping.
+
+	The next field has 11-, and this is the quantity comparison
+	field, so the quantity must be 11 or greater.  For the
+	second row (1-10), the quantity is compared to see if
+	it falls within the range of 1 through 10..
+
+	The next field is blank (measured value) and it is 
+	blank so it never enters into the check.
+
+	The final values (5 and 10) for the rows are the dollar
+	amounts that the shipping would be if the criteria was
+	satisfied on the row.
+
+	Summary: If the quantity is 1-10, the shipping is $10.00.
+	If the quantity is >=11, the shipping is $5.00.
+
+	Second Example: (shipping is dependant on form variable)
+
+	@sc_order_form_shipping_related_fields = 
+		("22-shipping");
+
+	@sc_shipping_logic = 
+		("ups|1-10||5",
+		"ups|11-||10%",
+		"fedex|1-10||20",
+		"fedex|11-||30%");
+
+	Since there is ONE related form variable (22-shipping),
+	the first field of the shipping logic is corresponds to
+	the value of the 22-shipping form variable.
+
+	The rest of the fields are the same as Example 1 for the
+	most part.
+
+	Summary:
+
+	If the form value of 22-shipping is "ups" and quantity
+	is >=1 and <= 10, then shipping is $5.
+
+	If the form value of 22-shipping is "ups" and quantity
+	is >11, then shipping is 10% of the current subtotal
+	for the cart.
+
+	If the form value of 22-shipping is "fedex" and quantity
+	is >=1 and <= 10, then shipping is $20.
+
+	If the form value of 22-shipping is "fedex" and quantity
+	is >11, then shipping is 30% of the current subtotal
+	for the cart.
+
+@sc_discount_logic is an array containing the logic for applying
+	a discount to the order. The discount is calculated as
+	a dollar amount. Do not make the amounts NEGATIVE. The
+	web store SUBTRACTS the values in this array from the
+	subtotal when the discount is calculated.
+
+$sc_sales_tax is the value of sales tax (eg Maryland has 5%
+	sales tax, so this would be .05).
+
+$sc_sales_tax_form_variable is the name of a form variable
+	that will be used on the order form to determine if
+	the sales tax is applicable. (eg 05-b_state).
+
+@sc_sales_tax_form_value are the possible (case insensitive) 
+	values that the form variable above should be equal
+	to in order to apply sales tax. (eg md, maryland, etc.)
+
+$sc_order_email is the email address to send orders to.  Don't forget to
+        escape any "2" signs.  Thus you@yourdomain.com must be written as
+        you\@yourdomain.com   
+
+$sc_send_order_to_email = "yes" if you want orders sent to the
+	above email address.
+
+$sc_send_order_to_log = "yes" if you want the orders to be
+	recorded in a local log file.
+
+$sc_order_log_file is the path and filename of the logfile
+	where you want orders recorded in if the above
+	variable is "yes".
+
+$sc_order_check_db = "yes" if you want to use the database
+	routines to double check that the user has not 
+	attempted to fool around with the database by entering
+	in values for items based on form manipulation. It
+	basically double checks to see if the price in the
+	cart is the same as the recorded price in the current
+	database file.
+
+$sc_use_pgp = "yes" if you want to use the PGP library to
+	communicate with PGP for encrypting orders. You
+	must have previously installed PGP on your system and
+	set up your public/private key pairs.
+
+$sc_pgp_temp_file_path is the path where you want the
+	PGP program to generate temporary files. This should
+	be a directory that is writable to the web server.
+
+			STORE OPTION VARIABLES
+
+$sc_use_html_product_pages defines whether or not you want the script to
+	be an HTML-based or Database-based store.  If you set this to
+	"yes", the script will generate navigation using pre-designed HTML
+	pages in the Html/Products sub-directory.  If you set it to "no",
+	it will look to generate product pages from the data.file in
+	Data_files.
+
+$sc_should_i_display_cart_after_purchase determines where the customer
+	will go when they hit the "add this item to my cart" submit
+	button.  If this variable is set to "yes", the customer will be
+	sent to the cart display page where they can see the current
+	contents of their cart (including the new item).  If you set this
+	equal to "no", the client will be sent back to whatever product
+	page display they were just at with a note at the top of the page 
+	reminding the user that the item had been added to the cart.
+	
+$sc_shall_i_let_client_know_item_added defines whether or not the client
+	should be specifically told that the items they just ordered were
+	added to the cart.  If it is set to "yes" they will be told and if
+	it is set to "no" they won't.  This is mostly useful in the case
+	that $sc_should_i_display_cart_after_purchase has been set to "no"
+	because then the customer has some feedback after being
+	transported back to the page from which they just ordered.
+
+$sc_item_ordered_message is the message that the customer receives if you
+	have set $sc_shall_i_let_client_know_item_added equal to "yes".
+
+$sc_shall_i_email_if_error defines whether or not the admin receives an
+	email whenever an error occurs.  If this is set to "yes" the
+	admin will receive email whenever an error occurs in the
+	processing of the script. If it is set to "no", the admin will
+	receive nothing but is free to review the error logs.
+
+$sc_shall_i_log_errors defines whether or not the script should log errors
+	when they occur.  If it is set to "yes", all errors will be
+	logged in the error.log file.  If it is set to "no" no logging
+	will occur.
+
+$shall_i_log_accesses defines whether or not the script will log new
+	access to access.log.  If the variable is set to "yes", all new
+	accesses will be logged.  If it is set to "no", no accesses will
+	be logged.
+
+			HTML SEARCH VARIABLES
+
+$sc_root_web_path defines the actual location of the HTML product pages
+	that are being searched for keywords.  This is not a URL, it is
+	the actual path of the root HTML directory as the server would see
+	it.
+
+$sc_server_url is the URL to the root HTML directory of product pages.
+
+@sc_unwanted_files is the list of all file extensions which should not be
+	 searched by the HTML search routines.  Thus, if .cgi is in the
+	list, the keyword search routine will not search any file with
+	the file extension .cgi.
+
+			ERROR MESSAGE VARIABLES
+
+$sc_page_load_security_warning is the content of the error message sent to
+	the browser window if someone attempts to view files that do not
+	satisfy the @acceptable_file_extensions_to_display test.
+
+$sc_randomizer_error_message is the error message displayed to the browser
+	if the application is not able to find a unique cart id number.
+
+			MISCELLANEOUS VARIABLES
+
+$sc_admin_email is the email address which error notifications are sent if
+	$sc_shall_i_email_if_error has been set to "yes". Don't forget to
+	escape any "2" signs.  Thus you@yourdomain.com must be written as
+	you\@yourdomain.com
+
+@acceptable_file_extensions_to_display lists the extensions which you will
+	allow this appication to display to the browser window.  The goal
+	is to restrict browsers to only the minimum amount of files
+	possible so that their ability to hack is limited to only the
+	files that are publicly available anyway.
+
+$sc_money_symbol is the monetary symbol which you would like to display
+	with prices.  Make sure to escape the dollar sign ($) if you wish
+	to use that symbol.  Thus $sc_money_symbol = "\$"; is the correct
+	syntax not $sc_money_symbol = "$";
+
+$sc_money_symbol_placement defines whether or not you want the money symbol
+	to be placed in front of the amount or after.  If you set this
+	variable equal to "back" the monetary symbol will be placed after
+	the number.  If you set it to "front" it will be placed in front.
+        Thus, you might have $12.56 or 12.56 $US
+
+$sc_current_century is the current century.  Note that if the year is
+	1997, you should set this value to "20".  The script will
+	subtract one from this number when it prints out the current year. 
+
+$sc_number_days_keep_old_carts defines how long old carts are kept in the
+	User_carts subdirectory.  The trick to this is that you want to
+	leave carts in the directory long enough for the clients to
+	finish shopping, but not so long that your hard disk usage gets
+	too large.  We recommend a safe tie of half a day which is written
+	as ".5".
+
+$sc_no_frames_button defines the contents of any buttons you wish to
+	display in non-frames implementations.  This is usually the case
+	with a button like "Return to Frontpage" which loads the store
+	frontpage again. The problem with the frames version is that
+	submit buttons may not take a TARGET, so if the customer is able
+	to hit a return to frontpage button, they will cause the main
+	window to be divided into a sub frame with its own table of
+	contents and main window.  Thus, if you are running a frames
+	implementation, this variable should be empty.  Otherwise, you
+	may add the return to frontpage button which is shown by default.
+
+$sc_product_display_title is the text which should appear between the
+	<TITLE> and </TITLE> tags on database-based product pages.
+
+$sc_product_display_header is the header HTML used to display products in
+the database based implementation.  Notice that we use the %s character to
+substitute for any given product information.  The script will substitute
+product data for each product in place of the %s when the variable is
+actually used.
+
+$sc_product_display_footer is the footer for each product
+$sc_product_display_row is the %s imbedded product row variable.
+
+#######################################################################
+#				RUNNING THE SCRIPT 		      #
+#######################################################################
+
+This script should be run by pointing your browser to html_web_store.cgi.
+For example, you might use a URL such as:
+
+	http://www.yourdomain.com/cgi-bin/Web_store/web_store.cgi
+
+The log analyzer can be accessed with the following URL:
+
+   http://www.yourdomain.com/cgi-bin/Web_store/web_store_log_analysis.cgi
+
+The installation helper script can be executed with the following URL
+
+   http://www.yourdomain.com/cgi-bin/Web_store/web_store_check_setup.cgi
+
+One final note: NEVER point a customer to an HTML document.  In order for
+the customer carts to be created and remembered by the application,
+web_store.cgi must filter ALL HTML pages before they are sent to the
+customer.  Thus, you will never point to anything but web_store.cgi for
+every link having anything to do with the store.  The moment the user
+links to anything but web_store.cgi, they will lose their cart.  If you are
+experienceing a situation in which customers are 1) losing their cart
+contents or 2) having their cart contents merged with the cart contents of
+other customers, it means that you are probably providing a link to
+something other than web_store.cgi, or you have added a link without the
+proper state variables contained in the URL string.  If you must add links
+within product pages, to other locations within your store, always follow
+the format exemplified below.  This hyperlink reference is taken from the
+"list of product" page Letters.html.
+
+      <A HREF = "web_store.cgi?page=Vowels.html&&cart_id=">Vowels</A>
+
+Notice that the page and cart_id state variables are prepared for script
+filtering.
+
+
+#######################################################################
+#				MISCELLANEOUS NOTES
+#######################################################################
+
+6-1-98:
+
+Ignacio Bustamante noted that if you make your own INPUT FORM HTML variables,
+you should not use an "_NUMBER" at the end such as "_1" or "_2" since the
+web_store.cgi script actually looks for this stuff when it parses through
+the additions of items.  If you want to do this, use some other form such
+as letter sequences. For example, instead of "_1" suffix your variable 
+name with "_a" or "_b"  in place of "_2".
+
+

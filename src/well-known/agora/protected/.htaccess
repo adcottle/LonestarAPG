@@ -1,0 +1,9 @@
+
+AuthType Basic
+
+AuthName "Agora Cart Store Admin Admin"
+
+AuthUserFile "/home/lones6/.htpasswds/agora/protected/passwd"
+
+
+require valid-user

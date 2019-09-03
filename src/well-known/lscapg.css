@@ -1,0 +1,122 @@
+
+/* Limit margins and padding  */
+* {
+  padding: 0;
+  line-height: 1.25;
+}
+a:link {
+	font-weight: bold;
+	text-decoration: none;
+	color: #12428e;
+}
+
+a:visited {
+	font-weight: bold;
+	text-decoration: none;
+	color: #990000;
+}
+
+a:hover {
+	font-weight: bold;
+	text-decoration: underline;
+	background-color: #ececec;
+}
+
+BODY { 
+	margin:0 20px 20px 20px; 
+	line-height: 150%;
+    background: #ffffff url("images/bgfade.jpg") top repeat;
+	color: #000000;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif, serif;
+
+}
+
+
+TD {
+	a:link {text-decoration: none; color:#12428e; font-weight: bold};
+	a:visited {text-decoration: none; color:#990000; font-weight: bold};
+	a:hover {text-decoration: underline; font-weight: bold};
+}
+
+
+/* table header */
+.tableheader {
+ font-size: 110%;
+ font-weight: bold;
+ font-style: normal;
+ text-align: center;
+}
+
+.pageheader {
+ line-height: 125%;
+ font-size: 175%;
+ font-weight: bold;
+ text-align: center;
+}
+
+.navbar {
+ font-weight: bold;
+}
+
+.bigboldctr {
+ font-size: 125%;
+ font-weight: bold;
+ text-align: center;
+}
+
+.imgctr {
+ text-align: center;
+ halign: center;
+}
+
+LI {
+	margin-top: 1em;
+	margin-left: 2em;
+}
+
+H1 { font-size: 125%; text-align: center; padding-bottom: 5px; padding-top: 15px }
+H2 { font-size: 100%; font-weight: bold; padding-bottom: 5px; padding-top: 15px }
+
+
+.textdiv {
+ background-color: #ffffff;
+ padding-left: 25px;
+ padding-right: 25px;
+ padding-top: 5px;
+ padding-bottom: 20px;
+}
+
+
+.membersvcs {
+  .textalign: left;
+}
+
+.membername {
+  font-size: 125%;
+  font-weight: bold;
+  text-align: center;
+}
+
+.memberurl {
+  text-align: left;
+
+}
+
+.membercard {
+  vertical-align: top;
+}
+
+/* certifications */
+.certifications {
+ font-size: 80%;
+ font-weight: normal;
+ font-style: normal;
+}
+
+/* footing: Footing */
+.footing {
+ font-size: 80%;
+ font-weight: normal;
+ font-style: normal;
+ text-align: center;
+}

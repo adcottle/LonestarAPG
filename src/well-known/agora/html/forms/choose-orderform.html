@@ -1,0 +1,41 @@
+<HTML>
+<HEAD>
+<TITLE>Secure Order Form</TITLE>
+</HEAD>
+<BODY>
+
+<FORM action="agora.cgi" method="POST">
+<H2>CART CONTENTS HERE</H2>
+</FORM>
+
+<CENTER>
+<TABLE WIDTH="550" BORDER="0" CELLPADDING="0">
+<TR>
+<TD COLSPAN="2" ALIGN="CENTER"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN="2" ALIGN="CENTER"><FONT SIZE="-1">What method 
+would you like to use to pay for the order?</FONT></TD>
+</TR>
+<TR>
+<TD width="50%" align="right">
+<FORM action="agora.cgi" method="POST">
+<INPUT TYPE=HIDDEN NAME = "ofn" VALUE = "PayPal">
+<INPUT TYPE=HIDDEN NAME = "submit" VALUE = "1">
+<INPUT TYPE=HIDDEN NAME="order_form_button" VALUE="1">
+<INPUT TYPE="IMAGE" NAME="Pay By Credit Card" VALUE="1"
+ALT="Bubba"
+SRC="agora.cgi?secpicserve=by_ccard.gif" border=0></FORM></TD>
+<TD width="50%" align="left">
+<FORM action="agora.cgi" method="POST">
+<INPUT TYPE=HIDDEN NAME = "ofn" VALUE = "Qdebit">
+<INPUT TYPE=HIDDEN NAME = "submit" VALUE = "1">
+<INPUT TYPE=HIDDEN NAME="order_form_button" VALUE="1">
+<INPUT TYPE="IMAGE" NAME="Pay By Check" VALUE="1"
+SRC="agora.cgi?secpicserve=by_check.gif" border=0></FORM></TD>
+</TR>
+</TABLE>
+</CENTER>
+</FORM>
+</BODY>
+</HTML>

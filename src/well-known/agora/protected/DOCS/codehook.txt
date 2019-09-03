@@ -1,0 +1,42 @@
+CODEHOOKS
+===========
+July 5, 2000
+
+The "codehooks" feature has been tested and updated a bit.  This will
+allow for seperate modules to be optionally added to the base code (things
+like inventory control, customer and affiliate tracking, etc.) without
+having to actually patch the base code to allow for it. 
+
+For example, to add a routine that is run everytime the store starts, you
+would write a library and place it in the "custom" directory (and make it
+executeable ... agora will detect and auto-load it.)  Upon library
+initialization, it would need to run the add_coodehook routine to add it's
+subroutines to be run at the appropriate times.  To run a routine called
+track_aff everytime the store started, you could hook in like this: 
+
+&add_codehook("open_for_business","track_aff");
+
+and the sub track_aff will be run when the script execution reaches the
+open_for_business code hook location. The code hooks are not documented
+yet (may never be, who has time!), but you can search for them throughout
+the code, and feel free to suggest where to place others that you need as
+you develop libraries. 
+
+So if a library called mycustom.pl consisted of:
+
+    # My library
+    &add_codehook("open_for_business","track_aff");
+    
+    sub track_aff {
+        print "Got Here!<br>\n";
+       }
+
+     1; #we are a library
+
+and were placed in the custom directory and made executeable, then it
+would print "Got Here!" at the top of every page.  Of course you would
+have to add more meaningful code. 
+
+There can be more than one code hook installed at any given location, they
+will be executed one at a time in the order they were added. 
+

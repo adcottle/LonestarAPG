@@ -1,0 +1,69 @@
+The 'agora' server side cookie
+------------------------------
+November 21, 2001
+
+Server side cookies allow the storing of a value on the server.
+Before implementation of such cookies, variables had to either be
+sent back and forth each transaction or stored on browser side
+cookies.  Sometimes browser cide cookies are turned off, making
+tracking much more difficult.  If the variables are not properly
+passed back and forth then they can be lost, so the server side
+cookies solve both of these problems.
+
+There is some added overhead with disk IO and storage on the 
+server, but it is minor.  Since 'transaction logging' was already
+implemented to prevent page reloads causing problems with multiple
+additions to the cart, such disk IO is already present in the 
+shopping cart.  For version 4.0a and higher, transaction logging 
+is done via the server-side cookies so the disk IO overhead is 
+minimized.
+
+For example, server side cookies can be used to set a refer 
+variable such that it is set only the first time it is encountered 
+but persists thereafter.  The code required to accomplish a task 
+such as this should look something like this:
+
+  if ($form_data{'refer'} ne '') {
+    if (&get_agora('refer') eq '') {
+      &set_agora('refer',$form_data{'refer'});
+     }
+   }
+  $x_refer = &get_agora('refer');
+
+This can be simplified by using the 'ain_agora' routine, add-if-new, 
+which does the same thing but is a little easier to code.  The arguments 
+to sin_agora are the same as set_agora, first is cookie name and second is 
+value, and only stores if the cookie is new and the value is not null:
+
+  &ain_agora('refer',$form_data{'refer'});
+  $x_refer = &get_agora('refer');
+
+If you want to detect if a server-side cookie has changed value
+since it was loaded, the chk_agora routine does than by returning
+'1' if it is the same, null otherwise.  For example:
+
+  if (&chk_agora('my_cookie_name')) {
+    print "It is the same!\n";
+   } else {
+    print "It is different!\n";
+   }
+
+Once you are done with a server-side cookie, you can delete it by
+setting it to a null string:
+
+  &set_agora('refer','');
+
+Server-side cookies will automatically expire at the same rate
+the shopping carts do, as they are found in the same directory.
+
+Internally, the variable is currently stored in a hash called
+%agora.  The routines &set_agora, &get_agora and &chk_agora allow
+for compatability with older (pre 3.2k) stores as well as any 
+future updates to the server-side cookies methodology. 
+
+You will need to be running agora version 4.0a or higher or have 
+the ashim40update.pl installed in the store/custom directory to 
+be able to use server-side cookies.
+
+By convention, all 'official' cookies used will be in all caps, so 
+all lowercase cookies are 'user' cookies.

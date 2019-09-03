@@ -1,0 +1,119 @@
+Subcategories Galore!
+(or how to use SMART CODING with Agoracgi, Commercecgi and Web_Store.) 
+
+Steve Kneizys
+19-FEB-2000
+www.agoracgi.com (formerly hosted by www.sanatoga.com)
+"Home of agora.cgi (FREE shopping cart!)"
+
+This document assumes you have a working knowledge of your shopping cart
+software.  The examples here use agora.cgi, but just as easily could be
+applied to commerce.cgi and web_store.cgi carts. 
+
+For the sake of illustration, assume you have category "shirts" and
+"jeans", and you have subcategories within those of "mens" and "womens". 
+Suppose that within each of those categories you have "toddlers",
+"children", "teens", and "adults".  We have decided that the hierarchy,
+from left to right, is: 
+
+ "clothing type" -> "gender" -> "age group"
+
+The next thing to do is figure out how we want to code the categories.  
+
+For "clothing type" we choose:
+ "shirt" for shirts
+ "jeans" for jeans
+
+For "gender" we choose:
+  "m" male
+  "f" female
+
+For "age group" we choose: 
+  "n" for newborns/toddlers
+  "c" for chilren"
+  "t" for teens
+  "a" for adults
+
+The hard part is over!  Now for just a little bit about searches.  If
+"exact_match=off" for the search, which is the default, the software just
+looks for the search string as being present somewhere within the target. 
+For our purposes, we would like our searches to start sometimes on the
+left word boundary.  We could modify the software or use more smart
+coding, well, lets do the coding!  It is suggested you begin all category
+names with "c_" or "cat_" to help start searches there on the left when
+required. 
+
+For this example, we are choosing to not have a delimiter between or
+subcategories, and we will run the name together.  You may want to use
+dashes or underscores in between to aid in searches or readability. 
+
+Putting it all together, here are a couple category name examples:
+
+ c_shirtwa id for Adult Women's Shirts
+ c_jeansmt is for Teenage Men's Jeans
+
+To search for all shirts, you would use product=c_shirt in the URI or FORM
+tag.  To search for all women's shirts, product=c_shirtw.  To search for
+all womens clothing, well, we have a problem.  We can't do that.  Perhaps
+if we use delimiters, like the "_", this will help. 
+
+Lets add the "_":     
+
+ c_shirt_w_a id for Adult Women's Shirts
+ c_jeans_m_t is for Teenage Men's Jeans
+
+Hmmm, I see another problem.  Perhaps there will be several different
+broad categories that use "men" and "women" subcategories, so lets make it
+unique here, say cw and cm for clothing for women and men, respectively: 
+
+ c_shirt_cw_a id for Adult Women's Shirts
+ c_jeans_cm_t is for Teenage Men's Jeans
+
+That's better!  To search for all clothing for women, we use the syntax
+"product=_cw_".  For all men's jeans, "product=jeans_cm".  For all
+newborn/toddler clothing, use "product=_n". 
+
+Suppose you desire to make a search form that allows people to limit the
+search using SELECTION boxes.  (You can do it in many ways, including
+Javascript to "build" a hidden field's value.)  Lets say you wanted to
+have multiple selection boxes, each with the same name, "product".  Find
+in the libray file *_db_lip.pl, there is a line: 
+
+   @word_list = split(/\s+/,$form_value);
+
+On agora.cgi ver 3.0e and higher, this is already done, but everyone else
+should add the following just before the one shown above: 
+
+   $form_value =~ s/\0/ /g;
+
+That enables multiple instances of product= or keywords= in the FORM data. 
+Now you can have multiple selection boxes, one for size, another for
+gender, another for clothing style, then have then type in text for the
+keyword search part.  Voila! 
+
+If you think you are cluttering up your nice clean category names, well,
+truth be told you may have a point.  But with agoracgi and commercecgi
+there is another option, just use one of the user-define fields for this
+category information instead!  In commerce.cgi, make the following change
+in the commerce.setup.db file: 
+
+@sc_db_query_criteria = (
+       "query_price_low_range|2|<=|number",
+       "query_price_high_range|2|>=|number",
+       "p_id|0|=|string",
+       "product|1|=|string",
+       "user1|$db{'user1'}|=|string",
+       "user2|$db{'user2'}|=|string",
+       "user3|$db{'user3'}|=|string",
+       "user4|$db{'user4'}|=|string",
+       "user5|$db{'user5'}|=|string",
+       "keywords|1,5|=|string");  
+
+This is how it is setup in agora.setup.db file.  After you make that
+change, you may search by the user fields if you so desire. 
+
+You can put your c_shirt_cw_a style category coding inside user-defined
+field 5, for example, and then do the search as user5=_shirt_ to search
+for shirts.
+
+I hope this helps somebody!

@@ -1,0 +1,68 @@
+How to do Multiple Gateways
+===========================
+October 27, 2001
+
+First, there is this information from the CHANGES.txt file:
+
+==== 
+
+You may now change settings other than the "primary" gateway by invoking
+the manager's gateway settings screen with the gateway= parameter using a
+URL such as:
+
+ .../protected/manager.cgi?gateway_screen=yes&gateway=PayPal
+
+(where ... is the rest of the path to your manager's protected directory.)
+
+If you have previously written custom gateway code then you probably
+should add the hidden field "gateway" to both the order form and the
+gateway settings update screen form.
+
+To enable secondary payment gateways:  see the "combo" sample order form
+in the html/main directory, and make the HTML you develop follow that
+format.  It is OK to use image buttons here if you know how.  The order
+form of your "primary" gateway is the default order form loaded, put your
+"combo" order form HTML code there.  Then place your secondary gateway
+"order" lib file(s) in the store/custom directory so they will be auto-
+loaded.
+
+====
+
+Make sure you turn on multiple gateways in the manager.
+
+At this point, it might be easier to NOT make the 'main' order form a
+combo form.  Try just leaving the standard order forms alone, then have
+the 'order form' links throughout the store go to a link like this:
+
+http://.../store/agora.cgi?order_form_button=1&ofn=combosample
+
+and let the combosample (or whatever) form make the decision.  It turns
+out that the three gateways on the combosample form take the same fields
+to do their work, so that form will just make agora send the info to the
+correct gateway.  This is NOT true of all multi gateway setups, for
+example Offline for checks and PayPal for CC are two totally different
+setups.  In that case the first 'order' form cannot be an order form,
+instead it must be a page containing buttons to set the order_form
+variable to display the desired order form.
+
+Another thing you can do if you do not want to change all the codings is
+to tell agora to load your combo choice form if no specific gateway is
+found in the submited order form.  Put this perl code in the 'free form
+logic' portion of the manager:
+
+  &add_codehook("order_form_entry","x_force_check");
+  sub x_force_check {
+   if ($form_data{'order_form'} eq "") {
+     $form_data{'order_form'} = 'combosample';
+    }
+   }
+
+In the combosample (change the name to whatever you like of course as long
+as the code above and the file in the html/main directory match up) you
+can set the buttons to be called order_form with a value of the gateway,
+or have the buttons be 'href'-ed to things of the form:
+
+http://.../store/agora.cgi?order_form_button=1&ofn=<mygatewayname>
+
+FYI: The ofn= and order_form= both do the same thing, ofn= is the short 
+form (and overrides order_form= if, for some reason, both are specified.)

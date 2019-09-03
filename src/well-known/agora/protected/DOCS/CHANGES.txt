@@ -1,0 +1,464 @@
+AGORACART History Log  (Newest to oldest - see CHANGES_old.txt for Pre- 3.3 version changes)
+
+***************************************************************************
+Version 4.0K2 Standard
+(06-MAR-2003)
+
+added password manager
+
+minor edits to manager.cgi so custom manager libs load after standard items
+
+updated index.html (main store page) so that headers and footers are updated
+automatically using the basica store header/footer editor.  Also added links to
+various resources on this page as well.
+
+Authorize.net SIM intergration completed
+
+***************************************************************************
+Version 4.0K Standard
+(20-NOV-2002)
+
+Second version produced under the K-Factor Technologies, Inc. distributions.
+standard name evolving to AgoraCart.  Version 4.0J was too buggy for release.
+
+Money symbols and placement management added to main settings screen.
+
+Frontpage.html file renamed index.html and moved from html/main
+sub directory up to the html sub-directory (bascially moved up one level).
+
+ability to add about us, contact us, warranty, privacy policy html pages
+to the html directory and have it indexed with agorascript in agora parsed
+pages.  "_" characters are taken out for auto generated names used in the
+link names so that a file named "About_Us.html" will show a link name of
+"About Us" yet still have the correct file name in the URL link.  Only html
+and htm files are displayed.  Hard coded flinks can be done with the
+cartlink=pagename.html added to the URL.
+
+"main" directory renamed to forms.  Only order forms are in this directory now.
+
+Distribution copies split into developer and Standard versions.  developer
+versions available with comments and notes and only available in the Pro
+and Developer user forums/areas.
+
+Distributions also split into two main versions: standard based on version
+4.0H and SSI based on 4.0i pre-release.
+
+DOCS directory moved to a sub-directory of protected area.
+
+Changes.txt file moved to the DOCS directory and split into two portions.
+
+WRAPPER directory moved to a sub-directory of protected area.
+
+"Handling Charge added to to order if shipping total is zero" variable defined
+in the shipping settings manager (formerly in the agora.setup.db file). 
+basically, if shipping is $0, do you want to add the handling fee anyway?
+Now in the shipping manager area.  Default is "no"
+
+Ability to send orders to two email addresses added to the main settings
+area.  NOTE: some hosting services may require both email addresses to
+be to the same domain for security and anti-spamming purposes.  If this
+is the case, setup a forwarding address on the same domain name to
+forward orders to the email address you need to use.
+
+Ability to set variable for generated database based html product pages.
+Default is "maybe" which allows you to generate database product pages
+unless a specific ppinc page is specified.  "No" will allow you to only
+generate pages from database entries.  Say "yes" if running an
+HTML-based store and you never want to use database generated
+product pages.
+
+Ability to set a variable if you want the customer to view the cart contents
+after adding an item to the cart. Default is "no" which takes the customer
+back to the database generated product page they were originally at with
+a thank you message generated towards the top of the page. Say "yes" if
+running an HTML-based store and you DO NOT want to the customer to
+go to a database generated product page.
+
+(Pro Version only) 5 extra User Defined Database Fields.  "User10" will be
+dedicated to the Inventory Control add-on, but only if you use the IC
+add-on.  Otherwise you can use the User10 field for whatever you wish.
+Database manager automatically detects a previous commercecgi and
+agora 3.x thru 4.0i standard data.file as well as "standard 4.0j" distributions
+and allows you to convert it by a
+click of the database link.  After the database has been updated, the
+regular database manager link shows up on the manager menus.
+NOTE: Public release remains 5 user fields at this time.
+
+Ability to convert Web Store 1.02 database files removed from SSI versions
+
+Moved many layout items to the store manager.  New manager called
+Layout Manager created. Layout Manager is plugNplay like other managers.
+
+Added fixed link to DOCS directory
+
+Step one of Check Out Process can now be defined in the main settings area
+of the store manager.  This will allow you to view the check out forms in
+SSL mode.  If not using SSL, leave the field blank.  Supports SSL on your
+domain name and on Shared SSL as long as ownership remains the same.
+
+(Public Release Only) Debug Mode setting removed from store manager.
+Must be manually set now.  (Pro versions: still enabled in store manager)
+
+Fixed Netscape 4.x problems at check out with some forms not showing (from version i).
+
+fixed minor multiple gateway problems.
+
+fixed order number differences in the emails and the ones shown on the confirmation
+page of the offline processing areas - the same number shows up in all the places needed.
+
+sample city tax logic included in custom tax logic area.
+
+Header and Footer editor added for the basic design included in the distribution.
+
+Length of image info expanded in product editors within the store manager area.
+
+Fixed bug in Offline, AgoraPay, and iTransact ordering processes.
+
+***************************************************************************
+Version 4.0i-pre#2
+(02-Apr-2002)
+
+Starting to deal with SSI type store issues a bit more extensively.
+
+***************************************************************************
+Version 4.0h
+(01-Feb-2002)
+
+Updated error logging code in agora, added &update_error_log routine to
+the manager (somehow it was totally missing!)
+
+The security filtering was updated.  Versions 4.0d through 4.0g can become 
+'fully operational' by using security_10242002.pl and the manager.cgi file 
+from this distribution, no need for a full upgrade, minimal changes!
+
+***************************************************************************
+Version 4.0g
+(29-Jan-2002)
+
+Turned off 'versions' command for stores not in debug mode.
+
+***************************************************************************
+Version 4.0f
+(27-Jan-2002)
+
+Updated meta character filtering.  With the variations on agorascript that
+any site might implement, this pre-filtering helps make sites safer.  
+This pre-filtering is also implemented in secutity_01242002.pl and the
+ashim40update.pl files.
+
+***************************************************************************
+Version 4.0e
+(25-Jan-2002)
+
+Added error checking and recovery code for < and > on input from the 
+browser.  Escapes the < and > for display of cart_id changes in debug 
+mode to the screen.  
+
+***************************************************************************
+Version 4.0d
+(01-Jan-2002)
+
+Created the %%Load_Option_File <filename>%% tag.
+
+Turned off the cart id tracking by default, some stores in development
+have problems with it.
+
+***************************************************************************
+Version 4.0c
+(27-Dec-2001)
+
+Removed the 'ZCODE' from the cart, some older versions of perl had trouble
+with too many eval statements (running the same eval a second time often
+worked, so it was definitely a perl problem.)  It did speed up the cart 
+but made it less stable on some platforms, so it had to go.
+
+Add the %%QtyBox%% token, moved the loading of the option file to the
+productPage.inc file to before the agorascript-pre is run.  Added optional
+modifier tags to %%QtyBox%%, %%prodID%% and %%itemID%% tokens.
+
+***************************************************************************
+Version 4.0b
+(16-Dec-2001)
+
+Updated the ragora.cgi program.
+
+Updated the picserve.cgi to use binmode for pictures to support running 
+on win/dos servers.
+
+Added special variable options processing, the cart user1 field is now 
+dedicated to this purpose.  Set $sc_disable_variable_options='yes' to 
+disable this option.  The first item in each of the sample store 
+categories uses a variable discount option file.
+
+Modified the referring validation to allow it to be disabled.
+
+Updated the add to cart philosophy to re-enable the ability to add 
+multiple items at a time that was accidently removed with 4.0's "add only 
+one of anything to the cart" philosophy.
+
+***************************************************************************
+Version 4.0a
+(7-Dec-2001)
+
+Changed logging access to the store such that each unique shopping session
+is logged instead of just when shopping cart id cookies are initially
+assigned.
+
+The AgoraPay gateway is included in the base distribution.
+
+Added routines for the order libraries to add to top/bottom of emails.
+
+New code for the 'agora' hash added for server-side cookies of sorts, 
+sees the DOCS directory for specifics on how to use them for 
+compatability with past and future versions of the shopping cart.
+
+The '_TRANSLOG' files are no longer used, instead info is kept as a string
+in the '_COOKIES' file so the disk IO is similar to before the addition 
+of the cookies file.
+
+Free form logic 'ext' file has been updated, now there are two places 
+where the logic is run.
+
+Added variable $sc_add_handling_cost_if_shipping_is_zero, set to 'yes' if 
+need to add handling cost if shipping is zero.
+
+Added provisions for displaying the cart table using the 'verified' values 
+instead of having to recalculate them (useful for display of everything on 
+a post-order confirmation page, used in current Offline order library.)
+
+Fixed the manager cookies (domain definition and cookie expiration were 
+incorrect.)
+
+***************************************************************************
+Version 4.0 
+(10-Nov-2001)
+
+Changes to manager database import/export routines and updates to the 
+agora flatfile database library.
+
+Added the 'relay' form item check to enhance ragora.cgi wrapper 
+alternative program.
+
+Fixed the agora order lib to display names on text of cart properly.
+
+Changed the major gateway order libs so the email return address for
+'admin' emails is the 'site admin' email (to hopefully make mailing the
+actual order to multiple emails work better.)
+
+Moved a few procedures out of agora.cgi and into the order lib.  Changed
+much of the code so that is is only compiled on demand, and if the code
+generates a compilation error then it is logged with agora instead of just
+in the 'server logs'.
+
+Added a new email library that uses the more modern "Mail::Sendmail" perl
+module that may be optionally used in the event that sendmail is not 
+available on your system.
+
+Cart now only adds 'one' of anything, if a second addition is made then 
+the quantity is adjusted.  Also, the cart is now sorted when written to 
+disk (and thus when displayed) by the cart row fields between the quantity 
+and unique identifier.
+
+Updated load_cart_copy routine and added save_cart_copy routine.
+
+Shims have been updated for use of 4.0 routines and libraries.
+
+All manager 'ext' files should be compatable with 3.3j or earlier with the
+proper shim(s) loaded.
+
+***************************************************************************
+Version 3.3j
+(18-Sep-2001)
+
+Changes to sample store -- search in header now searches on word 
+boundaries using exact_match=on, and the category agorascript on the 
+frontpage uses it as well (xm= same as exact_match.) 
+
+Updated Offline gateway to fix check processing.
+
+Added manager support for large databases.  Flatfile database library 
+updated to sort results of searches by key id.  
+
+Gateway management removed from inside the manager code and agora.cgi
+itself, execution is now via code hooks.  Upgrades to gateways are 
+simplified.  Also, many manager functions are now in extension files.
+
+A 'shim' is being made available to pro forum members to bring 3.3d-3.3i
+managers up to 3.3j specs if someone does not want to simply update the
+entire manager.  New manager extensions will operate on the older managers
+with the shim loaded.  A shim for the main program is also available to
+pro forum members. 
+
+Item options are now shown in a sorted order on the screen, and are
+placed in the cart that way.  If you have more than 9 options, consider 
+using numbers with leading zero(s) and a fixed length (say 2 characters) 
+so the sort order will be preserved.
+
+The value of each box in the SBW module is now tracked in the 'shipping
+thing' string.
+
+Added %%eval()%% to html pages.
+
+There are now 'virtual fields' routines!  They are used for display of
+shopping cart items in email and the web, but can be used in other places
+as well.
+
+Added @db and @cart arrays that describe the data field names, similar to 
+the %db and %cart variables.
+
+***************************************************************************
+Version 3.3i (h,g were pre-release test versions)
+(23-APR-2001)
+
+Updated manager to default to single login mode if cookies are not enabled
+in the manager.cgi program or the cookie settings are incorrect.
+
+Scrambling of the CC info on local disk is now configureable from the
+manager (Offline lib is the only standard lib that uses it at this time).
+
+Added umask 0077 code to upgrade security on files being written to by the
+cart and manager, force umask 0022 for writing of .htaccess and
+manager.access files.
+
+Fixed the manager bug whereby the '*' was accidently incorporated into new
+products.
+
+***************************************************************************
+Version 3.3f 
+(20-JAN-2001)
+
+Manager was updated to allow multiple simultaneous users from different IP
+addresses.  The "*" char is now used to denote that a record ID should
+determined once editing has been submitted byt the web browser.  This is
+used for "add" as well as "edit" of product database records.  The "*" can
+be used by itself as the only part of the ID, or at the end of the ID. 
+Clearing the order log does not check for simultaneous persons viewing and
+clearing the log, be careful! 
+
+Various speed enhancements, no bug fixes from 3.3e. Some routines were
+moved into the order lib from the html lib so that the cart runs faster.
+
+***************************************************************************
+Version 3.3e
+(08-JAN-2001)
+
+Added IP tracking and "reload protection" on order forms.
+
+***************************************************************************
+Version 3.3d
+(07-JAN-2001)
+
+Added the %%eval()%% token for product page inc files.
+
+Changed the manager so that the agora_user_lib.pl has sections to it.  The
+old cart and pgp user libs are no longer required as separate files.  It
+is now much easier to manage smaller sections of the configuration, and
+there is less startup IO with less files.
+
+To add a custom, user managed settings section in the agora_user_lib.pl
+file you should name your section starting with the letter X and put it at
+the bottom of the file just above the 1; part.  For example, until the
+manager handles custom taxes you may want to edit them yourself:
+
+#:#:#: start XCUSTOM_TAX settings
+ $sc_extra_tax1_logic='(0.04)*$subtotal';
+ $sc_extra_tax1_name='Philly Tax';
+#:#:#: end XCUSTOM_TAX settings
+1;
+
+Each time the agora_user_lib.pl file is updated by the manager the section
+names will be "upcased" and sorted in alphabetical order. 
+
+Added verification to the option files.
+
+Added ability to view the order log in the manager.  If an order comes in
+after "view order log" but before "clear order log", then the new order
+will still be in the log. 
+
+***************************************************************************
+Version 3.3c
+(19-DEC-2000)
+
+Added the $eform_xxx and $eform{xxx} style vales to complement the
+$vform_xxx and $vform{xxx} vars (xxx is any form data variable).  The
+eform vars have single and double quotes escaped to &quot; for display on
+web pages.  The vform vars should always be used for data processing.
+
+Updated the agorascript processing.  Cart footers processing updated.
+
+Added 5 new fields to the cart itself (i.e. old carts in the shopping
+carts directory are obsolete!)  The numbers of the options ordered are 
+maintained, and there are three user fields in the cart itself.  There
+is also a flag that can be used for special shipping calculations,
+eventually it will be integrated with the SBW module.
+
+Fixed pad length in the manager.  Set it to 4 for 1000-9999 products in
+the catalog, or 5 for 10000 to 99999 products, etc.  A safe number is
+probably 4 or 5.  Set it to 0 to not pad the product id #'s with leading
+zeros.
+
+Removed support for PayPal.  Their support and interface were too
+unreliable for inclusion here.  There are plenty of hacks out there for
+use with PayPal, check commerce.cgi support forum in addition to the
+commerce.cgi and agoracgi.com mailing list archives.
+
+Added the ability to clear the order form _VERIFY file and re-display a
+blank order form.  Upon a "reload" of an order form page the CC info is
+now blanked out. 
+
+Added serveral more code hooks for optional modules or custom libraries.
+
+Added another DOC on having taxes computed for only selected items in the
+catalog. 
+
+***************************************************************************
+Version 3.3b
+(13-DEC-2000)
+
+Added a few touches to the options agorascript, added a few more code
+hooks for use with the cart's construction.  After items are added to the
+cart then a custom library and/or agorascript within the option(s) 
+file(s) can be used to change the cart navigation, handle inventory
+control, or perform other functions.
+
+For options files, in addition to the standard "pre" and "post"
+agorascript, you may also choose "add-to-cart" (if that item is added to
+the cart it is activated) or "add-to-cart-opt-#" (if option number # was
+selected the agorascript code is run.)
+
+***************************************************************************
+Version 3.3a
+(08-DEC-2000)
+
+Changes to the order libraries, and the database library.  Minor bug
+fixes to Offline library, additional security features installed.
+
+Added "pickup" setting for UPS in the manager instead of forcing folks
+to modify the script directly.  (Note: UPS code still does not add extra
+insurance for expensive packages.)
+
+Any fields on the order form that have _XCOMMENT_ as part of the name,
+such as 
+
+  Ecom_XCOMMENT_Special_Notes
+
+will be included at the bottom of the emails.  The field name part after 
+_XCOMMENT_ is parsed such that the appropriate section of the email will
+be marked as "Special Notes".  To ensure that the come out in the order
+since they are sorted you could call them things like:
+
+  Ecom_a_XCOMMENT_Special_Notes
+  Ecom_b_XCOMMENT_Gift_Card_Note
+
+And the first one, Ecom_a_XCOMMENT_Special_Notes, would come out first
+since it will sort first.
+
+Added a new kind of agorascript for the order forms.  Before the order
+form has any processing done at all, the agorascript of type "orderform"
+can be used (in addition to the usual "pre" and "post" style), as in:
+
+	<!--agorascript-orderform 
+	  (your statements go here!) 
+	-->
+
+Agorascript has also been added for options files.

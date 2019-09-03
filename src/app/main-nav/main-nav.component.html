@@ -1,0 +1,63 @@
+<header class="h-100"> 
+    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg grey lighten-5 scrolling-navbar" [containerInside]="false">
+        <mdb-navbar-brand>
+            <a href="home" class="pull-left"><img src="../../assets/images/logo.jpg"></a> 
+        </mdb-navbar-brand>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link waves-light" mdbWavesEffect href="contact"><mdb-icon fas icon="envelope"></mdb-icon> Contact<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="crop-alt"></mdb-icon>Join/Renew</a>
+            <!-- <a mdbWavesEffect href="https://www.apgen.org/"><img src="../../assets/images/apglogotrans.gif" title="apg" alt="apg"></a> -->
+          </li>
+          <li class="nav-item">
+                <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="calendar-alt"></mdb-icon>Meetings and Events</a>
+                <!-- <a mdbWavesEffect href="https://www.apgen.org/"><img src="../../assets/images/apglogotrans.gif" title="apg" alt="apg"></a> -->
+              </li>
+              <li class="nav-item">
+                    <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="cog"></mdb-icon>APG</a>
+                    <!-- <a mdbWavesEffect href="https://www.apgen.org/"><img src="../../assets/images/apglogotrans.gif" title="apg" alt="apg"></a> -->
+                  </li>
+    
+          <!-- Dropdown -->
+          <li class="nav-item dropdown" dropdown>
+            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              <mdb-icon fas icon="external-link-alt"></mdb-icon> Links<span class="caret"></span></a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+            </div>
+          </li>
+    
+        </ul>
+    </mdb-navbar>
+    <!-- Main -->
+    
+    <!-- /.Main -->
+  </header>
+
+  <div class="sidenav grey lighten-5 ">
+    <a href="bylaws">Chapter Bylaws</a>
+    <a href="#services">Code Of Ethics</a>
+    <a href="#clients">Hiring A Proffesional</a>
+    <a href="#contact">Becoming a Professional</a>
+  </div>
+  <!--Main Layout-->
+  <main class="text-center py-5">
+  
+    <router-outlet></router-outlet>
+  
+  </main>
+  <!--Main Layout-->
+<!-- Footer -->
+<footer class="page-footer font-small fixed-bottom red darken-4">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">Copyright &copy; 2018:
+        <a href="home"> Lone Star Chapter, APG, All Rights Reserved.</a><br />
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->

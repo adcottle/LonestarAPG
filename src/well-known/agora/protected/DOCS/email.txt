@@ -1,0 +1,30 @@
+Using the send-mail-lib.pl file
+-------------------------------
+Sept 30, 2001
+
+
+Sometimes the sendmail program is not available on your unix host, in that 
+case there are two other mail libraries.
+
+The first is 'smtpmail-lib.pl', which has the drawback that it will not 
+work in 100% of the cases.  It is included here for historical purposes.
+
+The other one is send-mail-lib.pl, written to use the perl module 
+Mail::Sendmail, and requires two setup varaibles.  First, in the 
+agora.setup.db file, find the line:
+
+  $sc_mail_lib_path = "$sc_lib_dir/mail-lib.pl";
+
+Change it to point to the send-mail-lib.pl library, and also add a line to 
+set the name of the smtp host if 'localhost' will not work for you, as in: 
+
+  $sc_mail_lib_path = "$sc_lib_dir/send-mail-lib.pl";
+  $smtp_host = "my.host.here.com";
+
+(These variable can also be set using the 'free form logic' option.) 
+
+This library requires the MIME and Mail modules be installed at your web 
+hosting company, but if they are not some backup versions are included 
+with the standard distribution in the store/library/additions directory, 
+where agora.cgi 4.0 will find it automatically if your perl installation 
+does not already have it.

@@ -1,0 +1,16 @@
+February 7, 2000
+README for the protected/images directory
+Steve Kneizys
+
+This directory, protected/images, is a secondary images directory.  It is
+used for two major purposes.
+
+1) The manager.cgi program needs to know where it's images are, so they
+are placed here and the code self-serves them.
+
+2) For commerce.cgi secure pages, images for buttons are more easily
+self-served by placing them here rather than setting variables for a
+secure server directory or hard-coding things in various locations.  
+
+The images in this directory may be displayed in either secure or normal 
+mode.

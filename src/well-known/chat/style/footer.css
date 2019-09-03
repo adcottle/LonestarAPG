@@ -1,0 +1,21 @@
+/* --- FOOTER --- */
+div.footer {
+  position: relative;
+  text-align: center;
+  background-color: #65AB9F;
+  color: #FFF;
+  border-top: 1px #65AB9F solid;
+  border-bottom: 1px #65AB9F solid;
+  font-size: 80%;
+  clear: both;
+  padding-left: 12em;
+}
+div.footer div.valid {
+  display: inline;
+  float: right;
+}
+div.footer div.rss {
+  position: absolute;
+  left: 5px;
+  float: left;
+}

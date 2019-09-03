@@ -1,0 +1,4 @@
+AuthName "membership"
+AuthUserFile "/home/lones6/.htpasswds/public_html/membersonly/pswd_prot/passwd"
+AuthType Basic
+require valid-user

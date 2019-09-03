@@ -1,0 +1,7 @@
+[04-Jul-2007 12:25:43] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/lones6/public_html/membersonly/viewmembers.php.htm on line 33
+[04-Jul-2007 12:31:22] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'lones6_view'@'localhost' (using password: YES) in /home/lones6/public_html/membersonly/viewmembers.php.htm on line 6
+[04-Jul-2007 12:37:20] PHP Parse error:  syntax error, unexpected T_LNUMBER, expecting ',' or ';' in /home/lones6/public_html/membersonly/viewmembers.php.htm on line 46
+[28-Mar-2008 11:02:06] PHP Parse error:  syntax error, unexpected T_ENCAPSED_AND_WHITESPACE, expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/lones6/public_html/membersonly/viewactivesurname2.php.htm on line 35
+[28-Mar-2008 11:08:48] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home/lones6/public_html/membersonly/viewactivesurname2.php.htm on line 34
+[28-Mar-2008 11:15:58] PHP Parse error:  syntax error, unexpected T_LNUMBER, expecting ',' or ';' in /home/lones6/public_html/membersonly/viewactivesurname2.php.htm on line 11
+[12-Apr-2009 06:50:50] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ',' or ';' in /home/lones6/public_html/membersonly/viewmembers.php.htm on line 85

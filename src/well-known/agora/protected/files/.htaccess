@@ -1,0 +1,10 @@
+Options All
+
+AuthType "Basic"
+AuthName "Protected Access"
+
+AuthUserFile /dev/null
+
+<Limit GET>
+require valid-user
+</Limit>

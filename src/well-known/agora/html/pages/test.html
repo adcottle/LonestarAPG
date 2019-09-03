@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<TITLE>Product Listing - PERL</TITLE>
+</HEAD>
+<BODY bgcolor="#ffffff" text="#000000">
+<DIV ALIGN="CENTER">
+
+%%StoreHeader%%
+
+<CENTER><TABLE BORDER="0" WIDTH="550"><tr><td 
+colspan=3>%%item_ordered_msg%%<table width="100%" border=1>
+<td width="100%" colspan=2><table width=100% border=0>
+<tr>
+<tr><td width="50%"><table width=100% border=0>
+
+<TR WIDTH="100%">
+<TD ALIGN="CENTER" WIDTH="160" VALIGN="MIDDLE">
+<FONT FACE="ARIAL" SIZE="2">
+<FORM METHOD = "post" ACTION = "agora.cgi">
+%%make_hidden_fields%%
+<BR>
+
+ <TABLE CELLPADDING="0" CELLSPACING="0">
+  <TR ALIGN="CENTER"><TD><FONT FACE=ARIAL SIZE="2">
+   <B>Select Accessories</B>
+   <br>
+   </FONT></TD></TR>
+  <TR ALIGN="CENTER"><TD><SELECT NAME = "option|1|0001">
+    <OPTION VALUE = "|">Gift Options
+    <OPTION VALUE = "Gift Card|1.00"> Gift Card (+$1.00)
+    <OPTION VALUE = "Gift Wrap|2.50"> Gift Wrap (+$2.50)
+    <OPTION VALUE = "Gift Box|3.50"> Gift Box (+$3.50)
+    </SELECT></TD></TR>
+   <TR ALIGN="CENTER"><TD><SELECT NAME = "option|2|0001">
+    <OPTION VALUE = "|">Accessories
+    <OPTION VALUE = "Book Bag|4.95">Book Bag (+$4.95)
+    <OPTION VALUE = "Backpack|9.95">Backpack (+$9.95)
+    <OPTION VALUE = "Bookcase|9.95">Bookcase (+$9.95)
+    </SELECT></TD></TR>
+  </TABLE>
+
+<BR>
+<P>
+<!--BEGIN SELECT QUANTITY BUTTON-->
+<TABLE>
+<TR ALIGN="CENTER">
+ <TD VALIGN="MIDDLE"><INPUT TYPE="TEXT" 
+NAME="item-0001|PERL|23.96|Learning Perl|~lt~IMG SRC=~qq~%%URLofImages%%/0001.gif~qq~ BORDER=0~gt~|4.95" 
+SIZE="3" MAXLENGTH="3" VALUE="1"></TD><TD VALIGN="MIDDLE"><INPUT 
+ TYPE="IMAGE" NAME="add_to_cart_button" VALUE="Add To Cart"
+ SRC="agora.cgi?picserve=/add_to_cart.gif" BORDER="0">
+ </TD>
+</TR>
+</TABLE>
+<!--END SELECT QUANTITY BUTTON-->
+</TD>
+<TD ALIGN="CENTER" WIDTH="150"><IMG SRC="agora.cgi?picserve=/0001.gif" BORDER=0></TD>
+</tr>
+</table></td>
+<td width="50%"><table width=100%>
+
+<tr><TD colspan=2>
+<FONT FACE="ARIAL" SIZE="2">
+<b>Learning Perl</b>
+<br>
+In this smooth, carefully paced course, a leading Perl trainer teaches you to program in the language that
+threatens to make C, sed, awk, and the Unix shell obsolete for many tasks. This book is the "official" guide for
+both formal (classroom) and informal learning. It is fully accessible to the novice programmer. <a
+href="http://www.amazon.com/exec/obidos/ASIN/1565922840/dial411com">Learn More</a>
+</FONT>
+</TD>
+</FORM>
+</TR>
+<TR>
+<td>
+<FONT FACE="ARIAL" SIZE="2" color="#FF0000">$ 23.96</font>
+</td>
+<td align="right">
+<A HREF="agora.cgi?dc=1&%%href_fields%%"><FONT FACE=ARIAL>Check Out</FONT>
+</A>
+</TD>
+</TR>
+</table></td>
+</tr></table></td>
+</table></td></tr>
+
+<tr><td colspan=3><hr></td></tr>
+</TABLE></CENTER>
+
+%%StoreFooter%%
+
+</BODY>
+</HTML>

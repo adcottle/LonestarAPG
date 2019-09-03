@@ -1,0 +1,74 @@
+Applying Tax on only certain items
+==================================
+Steve Kneizys
+12/18/00
+
+Taxing only certain items isn't too hard.  Say your database user5 field
+has "exempt" if tax exempt, and nothing if you need to charge the tax in
+that state.  Then you'd have to loop through each of the items in the cart
+and read the database entry for each to calculate the tax. 
+
+Another way to do it is add a new field to the cart, and as each item is
+loaded into the cart add what the tax would be if you are charging tax,
+then decide if that value is valid at the end and loop through.  (On cart
+versions 3.3c and above their are user fields to do this.) 
+
+The easiest would be the first.  It should work on old and new versions of
+agora.cgi and commerce.cgi.  In the sub calculate_sales_tax there is this
+logic: 
+
+                # A match results in the sales tax
+                # being calculated.
+
+if ($sc_sales_tax_form_variable ne "") {
+  foreach $value (@sc_sales_tax_form_values) {
+    if (($value =~
+      /^$form_data{$sc_sales_tax_form_variable}$/i) &&
+    ($form_data{$sc_sales_tax_form_variable} ne ""))  {
+        $sales_tax = $subtotal * $sc_sales_tax;
+      }
+    }
+
+At the top of that sub, after the last local statment, add:
+local ($inx,$product_id,$my_subtotal,$temp);
+local (@my_cart_fields,@my_db_row);
+if (!($sc_db_lib_was_loaded =~ /yes/i)) {
+  &require_supporting_libraries (__FILE__, __LINE__,    "$sc_db_lib_path");
+ }
+
+Those statements setup variables and load the database library if
+it is not already loaded.  Then change the line in the above logic
+
+  $sales_tax = $subtotal * $sc_sales_tax;
+
+(actually there are two lines like that, go ahead and change both if you 
+need to) to be this series of lines like this:
+
+  open (CART, "$sc_cart_path") || &file_open_error("$sc_cart_path", 
+	"calculate tax",__FILE__, __LINE__); 
+
+   while (<CART>) {
+     chop;
+     $temp = $_;
+     @my_cart_fields = split (/\|/, $temp);
+     $inx = $cart{"price_after_options"};
+     $my_subtotal = $my_cart_fields[$inx];
+     $inx = $cart{"product_id"};
+     $product_id = $my_cart_fields[$inx];
+     &check_db_with_product_id($product_id,*my_db_row);
+     $testval = $my_db_row[$db{"user5"}];
+     if (!($testval =~ /exempt/i)) {
+       $sales_tax = $sales_tax + $my_subtotal
+        * $sc_sales_tax;
+      }
+    }
+  close(CART);
+
+Those loop through the cart and assign tax only if user5 field does
+not have the word "exempt" in it.  If you need other flags in other
+parts of the code, such as shipping, discounts, etc., you may want
+to use logic similar to the above.  Having user5 be something like
+"exempt nodiscount" could flag two different things.
+
+Enjoy!
+

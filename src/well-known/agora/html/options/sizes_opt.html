@@ -1,0 +1,35 @@
+<HTML><TITLE>Variable Option/QTY boxes</TITLE><BODY>
+<PRE>
+Example of a 'variable option' that depends on a quantity box,
+useful for ordering different numbers of different sizes.  We
+suppress the normal qty box, and create our own that are associated
+with specific options, in this case product sizes.
+
+The all have the same option number, but the are associated with
+'different' products, the thing in quotes (sm,md or lg) is tacked
+on to product id number in the browser text (putting the contents of 
+the global variable $sc_web_pid_sep_char in between.)
+</PRE>
+
+<h3>--cut here--</h3>
+<!--agorascript-pre # needs to be inside the cut-here tags to be run!
+$suppress_qty_box = "yes"; # we make our own boxes
+return "";
+-->
+
+<table width='100%' cellspacing=0 cellpadding=0><tr>
+<td colspan=2>Available sizes:</td>
+</tr><tr>
+<td align=left><INPUT TYPE=HIDDEN NAME = "option|005|%%prodID-sm%%" 
+VALUE='Small|0.00'>%%QtyBox-sm,%%</td><td>Small (No extra charge)</td>
+</tr><tr>
+<td align=left><INPUT TYPE=HIDDEN NAME = "option|005|%%prodID-md%%" 
+VALUE='Medium|1.00'>%%QtyBox-md,%%</td><td>Medium $ 1.00</td>
+</tr><tr>
+<td align=left><INPUT TYPE=HIDDEN NAME = "option|005|%%prodID-lg%%" 
+VALUE='Large|2.00'>%%QtyBox-lg,%%</td><td>Large $ 2.00</td>
+</tr></table>
+<h3>--cut here--</h3>
+
+</BODY>
+</HTML>

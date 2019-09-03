@@ -1,0 +1,44 @@
+<HTML>
+<TITLE>Extended Warranty Option</TITLE>
+<BODY>
+ <pre>
+this part never gets displayed, it is above the cut here tag.
+This allows the software to be more easily edited by
+html editors or commented well. :)
+
+This example of an option file sets the price of the extended warranty 
+as a percentage of the original price using the %%eval()%% mechanism. 
+ </pre>
+
+ <h3>--cut here--</h3>
+<!--agorascript-post &parse_options_to_verify(q^ AGSC-->
+ <TABLE CELLPADDING="0" CELLSPACING="0">
+  <TR ALIGN="CENTER"><TD><FONT FACE=ARIAL SIZE="2">
+   <B>Choose your Warranty %%cost%%</B>
+   <br>
+   </FONT></TD></TR>
+  <TR ALIGN="CENTER"><TD>
+  <SELECT NAME = "option|003|%%PRODUCT_ID%%">
+    <OPTION VALUE = "90 Day Warr.|0">90 Day Warranty
+    <OPTION 
+VALUE = "1 Yr Ext. Warr.|%%eval(&format_price(0.1*%%cost%%))%%"
+>1 Year (+%%eval(&display_price_nospaces($myans))%%)
+    <OPTION 
+VALUE = "3 Yr Ext. Warr.|%%eval(&format_price(0.25*%%cost%%))%%"
+>3 Years (+%%eval(&display_price_nospaces($myans))%%)
+  </SELECT></TD></TR>
+  </TABLE>
+<!--AGSC ^); -->
+<!--agorascript-post {
+ my $inx,$out;
+ $out="<table border=1 width=150><tr><td>opt
+key</td><td>value</td></tr>\n";
+ foreach $inx (keys %item_opt_verify) {
+  $out .= "<tr><td>$inx</td><td>$item_opt_verify{$inx}</td></tr>\n";
+ }
+ return $out . "</table>\n";}  -->
+  <h3>--cut here--</h3>
+  more junk here that is discarded.
+</BODY>
+</HTML>
+

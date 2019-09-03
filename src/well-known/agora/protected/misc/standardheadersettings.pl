@@ -1,0 +1,1 @@
+Powered by AgoraCart - AgoraCart.com|#ffffff|+1|Thanks for Visiting our Store!|yellow|+1|#680098|#cccccc|steelgrey.jpg|arial,verdana|2|red|yes|Shopping Categories|yes|Look For Gifts under this Price|yes|Company Info|yes|#cccccc|steelgrey.jpg|arial,verdana|#000000|#0000ff|#cccccc|steelgrey.jpg

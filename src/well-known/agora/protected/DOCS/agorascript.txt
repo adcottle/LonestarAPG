@@ -1,0 +1,195 @@
+AGORASCRIPT
+
+Steve Kneizys & Mister Ed at AgoraCart.com
+(Copyright 1999-2003)
+20-FEB-2000
+15-JUL-2000 update
+
+Use PERL script right in your productPage.inc and HTML files! 
+------------------------------------------------------------- 
+
+Implementation: Store Headers, Footers, productPage files, and full
+HTML pages loaded from the html directory tree.
+
+The use of such code does represent a few risks if you choose to use it. 
+Although it is not much more dangerous than altering the code in the
+libraries, you should keep in mind that if you change a global variable
+value in the script then it is changed for the main program as well! 
+Using local variables is easy to do as required.  Code is executed using
+Perl's "eval" mechanism. 
+
+Pages are read in from your html directory tree, then parsed for code.
+This parsed code is the un-tainted, and sent to the "eval" command.  This
+code will stop executing if there is an error, write a message to the
+error log with which script died (starting at zero), if it was "pre"
+or "post", the page it came from, and the $@ error returned by eval.
+
+One advantage of using this scripting option is that if you choose to use
+this for your customizations, you may not have to plug them back in for
+upgrades of agora.cgi.  By virtue of them being in the script .inc and
+/forms and /page pages, they will remain where you put them with your 
+customized HTML. 
+
+Here is how it works.  There are two types of scripts, pre- and
+postsubstitution scripts.  You must decide if you want the script to run
+before the %% tokens are substituted, or after.  Any "print" statements
+will be executed immediately, and any value returned from a script will be
+placed in the page at the place the script was found.  Unless you really,
+really know what you are doing, use of the "print" statement is not
+recommended!  Intead, just keep accumulating what you want to be displayed
+inside a string, and use that variable to return the value back to the
+software.
+
+Consider this sample script:
+
+<!--agorascript-pre
+   $test_val = 99; #changes the global value of $test_val 
+   $my_string = "%%cart_id%%";
+   $my_string; # returns the value in the string  
+--> 
+
+In that script, the string returned is the token %%cart_id%%, not its
+value, because it was executed before the substitutions were made (the
+-pre part of the script header specifies that.)  However, after the script
+has run, the token %%cart_id%% is not embedded in the working version of
+the HTML.  The token will be substituted for it's actual value for display
+purposes in the next step of processing.  So, if need the value of the
+cart, product number, category, etc. inside the script, you would want to
+run the script after the substitution.  Also, the global values of
+$my_string and $test_val were altered.  To have your own local variables,
+it is easy enough to declare them as local.
+
+Now consider this example:
+
+<!--agorascript-post
+   $test_val = 99; #changes the global value of $test_val 
+   {
+    local ($my_string);
+    $my_string = "%%cart_id%%"; # local value only!
+    $my_string; # return this value, it is the last statement executed  
+   }
+--> 
+
+The -post part of the script header tells AgoraCart to run it after
+substitution of %% tokens.  This script will return the value of the
+$my_string, which is the actual value of the cart_id for this session.  Of
+course this is a lot of work to get just the cart_id, but the
+possibilities for customization are almost unlimited. 
+
+For safety, if you need global variables to store information between
+invocations of such scripts, it is suggested that you use variables that 
+begin with $ags_ (such as $ags_been_here) simply because no variables 
+appear in the agora.cgi package that begin that way.
+
+There is an agorascript example in the hmtl-templates directory called
+productPage-agorascript_example.inc and displays the database contents in
+a somewhat raw form. To see it work in the sample store, type in:
+
+agoracgi?keywords=html&ppinc=agorascript_example
+
+The contents of productPage-agorascript_example.inc are:
+
+  <TR> 
+  <TD COLSPAN = "3"><HR></TD>
+  </TR>
+  <TR WIDTH="550"> 
+  <td colspan=3><!--agorascript-pre
+    { local ($str)=""; local ($inx,@fnames);
+     foreach $inx (keys(%db)){#get field names from %db array
+       $fnames[$db{$inx}] = $inx;
+      }
+     $str .=  "<table width=100% cellpadding=0 cellspacing=0 border=1>\n";
+     $str .=  "<tr><TD>index</td><td>name</td><td>value</td></tr>\n";
+     for ($inx=0; $inx <= 12; $inx++){
+       $str .=  "<tr><TD>$inx</td>" .
+           "<td>$fnames[$inx]</td>" . 
+           "<td>$database_fields[$inx]</td></tr>\n";
+      }
+     $str .= "</table>";
+     return $str;# this places $str in the HTML where this script used to be
+    }
+  --></td>
+  </TR>
+
+Notice the PERL is enclosed in the "<!--agorascript-pre" and "-->"
+delimiters.  The value of $str is incorporated into the HTML in place of
+the script at run time.  
+
+There is a way to capture all the print statements to a file, then read
+that file back to obtain the contents.  There are two built-in subroutines
+to help with this.  Consider this snippet of code:
+
+     <!--agorascript-pre
+       # My PERL code goes here!
+       &capture_STDOUT; #captures STDOUT to a special file
+
+       print "I am printing this stuff right now<br>\n";
+       print "but it is being captured first to a file<br>\n";
+
+       &uncapture_STDOUT; #uncaptures, returns the text to be included in HTML
+     -->
+
+If capturing STDOUT, you MUST REMEMBER to place &uncapture_STDOUT at the
+end!  Since agorascript is now recursive there may be multiple nested
+levels of capturing and it should hopefully work just fine.
+
+You do not have to use this capture_STDOUT feature, but it is very
+convenient when you need it!
+
+What Happens in the event of error?
+-----------------------------------
+
+There is a string, $on_agorascript_error, that controls what happens if
+something goes wrong.  By default, each time an agorascript begins it is
+set to:
+
+     $on_agorascript_error = "warn exit";
+
+This means an error is printed to the log file and the program exits with
+the standard "generic" agora.cgi error message to the screen.  There are
+several values that you can place inside this string within your
+agorascript to modify what happens. Perhaps it is just a banner ad, and
+you desire to just forget about the script results and move on.  Perhaps
+you are debbugging, ad desire errors to be printed to the screen.  Here
+are the options, use as few or as many as you desire: 
+
+ token      meaning
+---------  ------------------------------------------
+ warn       print message to the error log
+ screen     print message to the screen
+ discard    discard any results from the agorascript
+ exit       print standard (generic) error message to screen and exit program
+
+Here is an example of how to use it:
+
+     <!--agorascript-pre
+       # My PERL code goes here!
+       $on_agorascript_error = "screen discard";
+       &capture_STDOUT; #captures STDOUT to a special file
+
+       { local ($myvar)=0;# lets divide by zero to see what happens! 
+         $myvar = 1.0/$myvar; 
+       }
+
+       &uncapture_STDOUT; #uncaptures, returns the text to be included in HTML
+     -->
+
+Sometimes, because of the nature of HTML, it is printed to STDOUT but it
+is not visible in the browser window because all the HTML tags were not
+properly closed out.  Check the page source on the browser to see if it is
+visible there.  If not, log it to the disk and check for it there. 
+
+The first instance of a script in HTML is numbered zero, and the first
+line as far as PERL is concerned is the <!--agorascript tag line.
+Numbering for each script type, -pre and -post, is seperate, so if you
+have one of each they are both script number zero.
+
+NOTE to all those "crazy" enough to run agorascript recursively:
+----------------------------------------------------------------
+Tracking agorascript errors can be tricky, especially if you use
+"recursive" agorascript, so be careful!  It will run all scripts of type
+-pre recursively, then do the substitution of the %% tokens, then run all
+scripts of type -post recursively.  If a -post script loads a -pre script,
+it will not run the -pre script!  It is suggested that all recursion be
+done in the -pre script mode so that all scripts will run and all
+substitutions will be made properly. 

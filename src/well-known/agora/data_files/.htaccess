@@ -1,0 +1,6 @@
+Options None
+
+AuthType "Basic"
+AuthName "Access Denied"
+
+#AuthUserFile /dev/null

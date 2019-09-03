@@ -1,0 +1,66 @@
+Writing Custom Manager Extensions
+---------------------------------
+Sept 25, 2001
+
+
+The normal way to add an extension to the manager for 3.3j/4.0 is to
+create an 'ext' function.  This is a library that will reside in the
+store/protected directory and has the naming convention:
+
+<modname>-ext_lib.pl
+
+where <modname> is the name of the module.  I won't start module names
+with the letter 'X' so it is a good idea to start your modules and the
+subroutines contained within with an 'X' or 'x'.  Let's make a header
+block for a ficticious module called 'xpert':
+
+$versions{'xpert'} = "20010925";
+{
+local ($modname) = 'xpert';
+&register_extension($modname,"Expert Settings",$versions{$modname});
+&register_menu('xpert_screen',"xpert_settings_screen",
+   $modname,"Display Special Store Settings for Experts");
+&register_menu('xpert_update',"xpert_save_settings",
+   $modname,"Write Special Store Settings");
+&add_item_to_manager_menu("Expert","xpert_settings_screen=yes","");
+&add_settings_choice("Expert Settings"," Expert Settings ",
+   "xpert_settings_screen");
+}
+
+The first line sets the versions hash variable to the name/date pair. 
+The call to register_extension registers it in the manager, saving its
+name, description, and version number.
+
+The calls to register_menu tie specific subroutine calls to form
+URL/variables.  If you want a certain subroutine to be invoked when a form
+variable is present, this is how you make the like.  So if the manager is
+called with something like "manager?xpert_screen=yes" and you want to
+execute the subroutine called "xpert_settings_screen" that performs the
+task "Display Special Store Settings for Experts" in module 'xpert' the
+the call would be something like:
+
+&register_menu('xpert_screen',"xpert_settings_screen",
+   'xpert',"Display Special Store Settings for Experts");
+
+It is called register menu because all buttons/menus have to be executed
+via subroutines registered with this subroutine.
+
+If you desire to add an item to the top menu bar in the manager, use the
+sub add_item_to_manager_menu and send it the name to be dispplayed, the
+URL query part, and an option sort name to change it's order of display,
+such as:
+
+&add_item_to_manager_menu("Expert","xpert_settings_screen=yes","");
+
+To add a button on the store settings screen to run your module's screen,
+use a call to sub add_settings_choice sending the sort name, the name to
+display in the button, and the subroutine to be called if that button is
+pressed, such as:
+
+&add_settings_choice("Expert Settings"," Expert Settings ",
+   "xpert_settings_screen");
+
+Take a look at the extensions currently in place to see it in action. Be
+sure to observe the pages generated and how the links to procedures
+happen.  This is the basic design from pre-agora days, just setup in a
+more formal way.

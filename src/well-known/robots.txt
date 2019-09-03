@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /membersonly
+Disallow: /forum
+Disallow: /forms
+Disallow: /agora
+Disallow: /cgi-bin

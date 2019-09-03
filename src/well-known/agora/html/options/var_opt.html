@@ -1,0 +1,58 @@
+<HTML><TITLE>Variable Option - QTY Disc.</TITLE><BODY>
+<PRE>
+Example of a 'variable option' that depends on a quantity of 
+things with a single product id number regardless of the 
+options selected with it.  
+
+The token %%prodID-*%% is a wildcard, the modifier * means match 
+all product ids no matter what the modifier.  If combined with 
+the modifier style variable options then it will match up with
+all of them when added to the cart.  
+
+Similar to the 004_var_opt.html file.
+
+</PRE>
+<h3>--cut here--</h3>
+<!--agorascript-add-to-cart-opt-005 { 
+# enable variable option code unconditionally
+# first thing is this option file name, next is the agorascript to run
+$item_user1 .= "var_opt_wild.html,variable-option-005;";}
+-->
+
+<INPUT TYPE=HIDDEN NAME = "option|005|%%prodID-*%%" VALUE='Var005'>
+<TABLE WIDTH=45 CELLSPACING=0 CELLPADDING=0 BORDER=1>
+<TR><TH>Quantity</TH><TH>Discount</TH></TR>
+<TR><TD>100+</TD>  <TD>20%</TD></TR>
+<TR><TD>50-99</TD> <TD>15%</TD></TR>
+<TR><TD>25-49</TD> <TD>10%</TD></TR>
+<TR><TD>10-24</TD> <TD>5%</TD></TR>
+</TABLE>
+<h3>--cut here--</h3>
+<!--agorascript-variable-option-005 {
+local ($qty) = $cart_row[$cart{'quantity'}];
+local ($price) = $cart_row[$cart{'price'}];
+local ($myopt) = '';undef($cart_row_options{'005'});
+if ($var_opt_action eq 'reset') {
+  # So that cart sorting can take place, reset the name
+  # MUST BE exactly the same name as the hidden var above
+  $myopt = 'Var005';
+ } else {
+# For the calc function, we have the cart copy loaded, find qty
+# for all products with same id, not just those of this opt #
+# or those with the same options (sort of a mix n match).
+$qty = 0;
+local ($xqty,$xpid,$junk);
+foreach $inx (keys(%cart_copy)) {
+  ($xqty,$xpid,$junk) = split(/\|/,$cart_copy{$inx},3);
+  if ($xpid == $cart_row[$cart{'product_id'}]) {$qty = $qty + $xqty;}
+ }
+   if ($qty > 99) {$myopt = '20% Qty Disc.|' . ((-0.20)*$price);}
+elsif ($qty > 49) {$myopt = '15% Qty Disc.|' . ((-0.15)*$price);}
+elsif ($qty > 24) {$myopt = '10% Qty Disc.|' . ((-0.10)*$price);}
+elsif ($qty > 9)  {$myopt = ' 5% Qty Disc.|' . ((-0.05)*$price);}
+}
+if ($myopt ne '') {$cart_row_options{'005'} = $myopt;}
+} -->
+
+</BODY>
+</HTML>

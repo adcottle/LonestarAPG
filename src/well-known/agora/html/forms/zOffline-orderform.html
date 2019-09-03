@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<TITLE>Secure Order Form</TITLE>
+</HEAD>
+<BODY>
+
+<FORM action="agora.cgi" method="POST">
+<H2>CART CONTENTS HERE</H2>
+</FORM>
+
+<CENTER>
+<TABLE WIDTH="550" BORDER="0" CELLPADDING="0">
+<TR>
+<TD COLSPAN="2" ALIGN="CENTER"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN="2" ALIGN="CENTER"><FONT face=arial SIZE="2"><B>What method 
+would you like to use to pay for your order?</B></FONT></TD>
+</TR>
+<TR>
+<TD width="50%" align="center">
+<FORM action="agora.cgi" method="POST">
+<INPUT TYPE=HIDDEN NAME = "ofn" VALUE = "Offline">
+<INPUT TYPE=HIDDEN NAME = "submit" VALUE = "Next">
+<INPUT TYPE=HIDDEN NAME="order_form_button" VALUE="1">
+<INPUT TYPE="IMAGE" NAME="Pay By Credit Card" VALUE="1"
+SRC="agora.cgi?secpicserve=visamas1.gif" border=0></FORM><BR><font face=arial size=2>Pay with Your Visa or MasterCard<BR><BR></font></TD>
+<TD width="50%" align="center">
+<FORM action="agora.cgi" method="POST">
+<INPUT TYPE=HIDDEN NAME = "ofn" VALUE = "PayPal">
+<INPUT TYPE=HIDDEN NAME = "submit" VALUE = "Next">
+<INPUT TYPE=HIDDEN NAME="order_form_button" VALUE="1">
+<INPUT TYPE="IMAGE" NAME="Pay By Check" VALUE="1"
+SRC="agora.cgi?secpicserve=logo-xclick.gif" border=0></FORM><BR><BR><font face=arial size=2>Use the secure PayPal system for Visa, MasterCard, American Express, Discover and Check Payments</font></TD>
+</TR>
+</TABLE>
+</CENTER>
+</FORM>
+</BODY>
+</HTML>

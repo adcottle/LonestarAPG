@@ -1,0 +1,404 @@
+#######################################################################
+$versions{'agora.setup.db'} = "20021020";
+
+$sc_sales_tax_form_variable = "Ecom_ShipTo_Postal_StateProv";
+# Use a line like this to set a custom library search path 
+# to look for things like the LWP library (you must uncomment 
+# it and set the path for your server!)
+#unshift(@INC,"/usr/local/perl5/site_perl");
+$sc_browser_header = "Content-type: text/html\n\n";
+$sc_store_url2b = "?cart_id=";
+$sc_store_url2a = $sc_store_url . $sc_store_url2b;
+$sc_qty_box_on_cart_display = "yes";
+$sc_default_qty_to_display = 1; # becomes %%qty%% in html below
+$sc_default_qty_box_html = 
+'<INPUT TYPE=TEXT NAME="%%itemID%%" SIZE=3 MAXLENGTH=3 VALUE="%%qty%%">';
+# add javascript or other items for header tags here
+$sc_standard_head_info = '';
+$cart_item_def = 'ALIGN="CENTER"';
+$order_item_def = 'ALIGN="RIGHT"';
+$offline_ver_tbldef = 'width="500" bgcolor="#E8E0E0" cellpadding="2" ' .
+    'cellspacing="0" border="0" ';
+$offline_ver_tbldef2 = 'width="500" bgcolor="#F8F8C8" cellpadding="2" ' .
+    'cellspacing="0" border="1" ';
+$sc_search_nav_font = "COLOR=\"#000000\"";
+$sc_search_nav_bgcolor = "\"#f0f0f0\"";
+$sc_search_nav_width = "526";
+$sc_replace_orderform_form_tags = "yes";
+$sc_image_string_template =  '<IMG SRC="%%URLofImages%%/%%image%%" BORDER=0>';
+$sc_admin_dir = "./admin_files";
+$sc_data_file_dir = "./data_files";
+$sc_html_dir = "./html";
+$sc_lib_dir = "./library";
+$sc_logs_dir = "./log_files";
+$sc_templates_dir = "$sc_html_dir/html-templates"; # removed / at end 4.0c
+$sc_user_carts_directory_path = "./shopping_carts";
+$sc_cgi_lib_path = "$sc_lib_dir/cgi-lib.pl";
+$sc_mail_lib_path = "$sc_lib_dir/mail-lib.pl";
+$sc_ship_lib_path = "$sc_lib_dir/shipping_lib.pl";
+$sc_html_setup_file_path = "$sc_lib_dir/agora_html_lib.pl";
+$sc_process_order_lib_path = "$sc_lib_dir/$sc_gateway_name-order_lib.pl";
+$sc_cookie_lib = "$sc_lib_dir/cookie-lib.pl";
+$sc_store_header_file = "$sc_templates_dir/store_header.inc";
+$sc_store_footer_file = "$sc_templates_dir/store_footer.inc";
+$sc_secure_store_header_file = "$sc_templates_dir/secure_store_header.inc";
+$sc_secure_store_footer_file = "$sc_templates_dir/secure_store_footer.inc";
+if ($sc_database_lib eq "") {
+  $sc_database_lib="agora_db_lib.pl";
+ }
+$sc_db_lib_path = "$sc_lib_dir/$sc_database_lib";
+$sc_order_lib_path = "$sc_lib_dir/agora_order_lib.pl";
+$sc_pgp_lib_path = "$sc_lib_dir/pgp-lib.pl";
+$sc_data_file_path = "$sc_data_file_dir/data.file";
+$sc_options_directory_path = "$sc_html_dir/options";
+$sc_generic_directory_path = "$sc_html_dir/files";
+$sc_html_product_directory_path = "$sc_html_dir/pages";
+$sc_form_dir_path = "$sc_html_dir/forms";
+$sc_html_order_form_path = "$sc_form_dir_path/$sc_gateway_name-orderform.html";
+$sc_store_front_path = "$sc_html_dir/index.html";
+$sc_counter_file_path = "$sc_admin_dir/counter.file";
+$sc_cart_user_lib_path = "$sc_admin_dir/cart_user_lib.pl";
+$sc_error_log_path = "$sc_logs_dir/error.log";
+$sc_access_log_path = "$sc_logs_dir/access.log";
+$sc_order_log_directory_path = "$sc_logs_dir/orders";
+$sc_use_category_name_as_ppinc_root = "yes";
+$error_page = "$sc_html_dir/error.html";
+$sc_grep = "grep";
+$sc_main_script_url = "agora.cgi";
+$sc_secpicserver_url = "agora.cgi";
+if ($sc_stepone_order_script_url eq "") { 
+  $sc_stepone_order_script_url = $sc_store_url;
+ }
+$sc_debug_mode = "no";
+$sc_debug_track_cartid = 'no';
+$sc_cookie_days = 90; # cookie lifetime, not cart lifetime
+$sc_number_days_keep_old_carts = 0.5; # cart lifetime in days
+$sc_allow_location_redirect = "yes"; # helpful for cookies
+$sc_test_for_store_cart_change_repeats = 1; # test for reloaded pages
+$sc_use_agorascript = "yes";
+
+# if this var is "" then it won't convert the underlines
+$sc_convert_product_token_underlines = " "; #convert to what char
+
+# if this var is "" then it won't process multiple instances of the
+# same product id number on a single web page.
+$sc_web_pid_sep_char = "~~"; 
+$mc_allow_multiple_options = 'yes';
+
+#######################################################################
+#                Database Definition Variables                        #
+#######################################################################
+
+$sc_db_flatfile_caching_ok = "yes"; 
+$VF_DEF{"PRODUCT"} = "db";
+
+$db[ 0]="product_id";
+$db[ 1]="product";
+$db[ 2]="price";
+$db[ 3]="name";
+$db[ 4]="image_url";
+$db[ 5]="description";
+$db[ 6]="shipping";
+$db[ 7]="user1";
+$db[ 8]="user2";
+$db[ 9]="user3";
+$db[10]="user4";
+$db[11]="user5";
+$db[12]="options";
+
+{ my $inx=-1; 
+  my $txt;
+  foreach $txt (@db) {
+    $inx++;
+    $db{$txt}=$inx;
+   }
+}
+
+@sc_db_display_fields = ("Product");
+
+@sc_db_index_for_display = ($db{"image_url"},
+                            $db{"name"},
+                            $db{"description"},
+                            $db{"options"},
+                            $db{"price"},
+                            $db{"shipping"},
+                            $db{"user1"},
+                            $db{"user2"},
+                            $db{"user3"},
+                            $db{"user4"},
+                            $db{"user5"});
+
+@sc_db_index_for_defining_item_id =
+($db{"product_id"},
+ $db{"product"},
+ $db{"price"},
+ $db{"name"},
+ $db{"image_url"},
+ $db{"shipping"});
+
+$sc_db_index_of_product_id = $db{"product_id"};
+$sc_db_index_of_product    = $db{"product"};
+
+# These two can be changed if need be, they are used to get the db price
+# for verification when adding to the cart.
+# could use a virtual field
+$sc_db_price_field_name	   = "price";
+$sc_db_index_of_price      = $db{$sc_db_price_field_name};
+
+@sc_db_query_criteria = ("product_id|0|=|string",
+                         "p_id|0|=|string",
+                         "product|1|=|string", 
+                         "user1|$db{'user1'}|=|string",
+                         "user2|$db{'user2'}|=|string",
+                         "user3|$db{'user3'}|=|string",
+                         "user4|$db{'user4'}|=|string",
+                         "user5|$db{'user5'}|=|string",
+                         "keywords|0,1,3,5|=|string",
+                         "lopr|2|<=|number",
+                         "hipr|2|>=|number",
+                         "query_price_low_range|2|<=|number",
+                         "query_price_high_range|2|>=|number");  
+
+#######################################################################
+#                    Cart Definition Variables                        #
+#######################################################################
+$sc_opt_sep_marker = '{';
+$VF_DEF{"CART"} = "cart";
+
+$cart[ 0]="quantity";
+$cart[ 1]="product_id";
+$cart[ 2]="product";
+$cart[ 3]="price";
+$cart[ 4]="name";
+$cart[ 5]="image";
+$cart[ 6]="shipping";
+$cart[ 7]="shipping_calc_flag";
+$cart[ 8]="options_ids";
+$cart[ 9]="user1";
+$cart[10]="user2";
+$cart[11]="user3";
+$cart[12]="options";
+$cart[13]="price_after_options";
+$cart[14]="unique_cart_line_id";
+#
+{ my $inx=-1; 
+  my $txt;
+  foreach $txt (@cart) {
+    $inx++;
+    $cart{$txt}=$inx;
+   }
+}
+
+$cart{"db_description"}      = -5;
+$cart{"db_price"}            = -2;
+$cart{"db_shipping"}         = -6;
+$cart{"db_user1"}            = -7;
+$cart{"db_user2"}            = -8;
+$cart{"db_user3"}            = -9;
+$cart{"db_user4"}            = -10;
+$cart{"db_user5"}            = -11;
+
+$cart{"web_options"}    = '* $ans=&cart_web_options(&vf_eval("options"));';
+$cart{"email_options"}  = '* $ans=&cart_email_options(&vf_eval("options"));';
+
+$sc_opt_web_strip_part_number = "yes";
+$sc_opt_email_leading_spaces = 15;
+#########
+$sc_cart_index_of_price = $cart{"price"};
+$sc_cart_index_of_image = $cart{"image"};
+$sc_cart_index_of_price_after_options = $cart{"price_after_options"};
+$sc_cart_index_of_measured_value = $cart{"shipping"};
+$sc_cart_index_of_item_id = $cart{"product_id"};
+$sc_cart_index_of_quantity = $cart{"quantity"};
+$sc_order_with_hidden_fields = "yes";
+$sc_max_final_values_loops = 3; # hard coded to do a min of 3 anyway!
+$sc_calculate_discount_at_display_form = 1;
+$sc_calculate_discount_at_process_form = 1;
+
+if ($sc_calculate_shipping_loop eq "" ||  
+    $sc_calculate_shipping_loop < 0   ||  
+    $sc_calculate_shipping_loop > 3   ) { 
+  $sc_calculate_shipping_loop = 3;  # set the loop value to default
+ }
+
+if ($sc_use_SBW =~ /yes/i) { # need ZIP before we can determine
+ $sc_calculate_shipping_at_display_form = 0;
+} else { #we can display, value is actual ship price
+ $sc_calculate_shipping_at_display_form = $sc_calculate_shipping_loop; #3
+}
+
+$sc_calculate_shipping_at_process_form = $sc_calculate_shipping_loop; #3
+
+$sc_calculate_sales_tax_at_display_form = 3;
+$sc_calculate_sales_tax_at_process_form = 3;
+
+$sc_calculate_extra_tax1_at_display_form = 3;
+$sc_calculate_extra_tax1_at_process_form = 3;
+
+$sc_calculate_extra_tax2_at_display_form = 3;
+$sc_calculate_extra_tax2_at_process_form = 3;
+
+$sc_calculate_extra_tax3_at_display_form = 3;
+$sc_calculate_extra_tax3_at_process_form = 3;
+#
+
+# This may be used in Custom Shipping Logic, can be reset there
+# to anything else if need be
+@sc_order_form_shipping_related_fields = ('Ecom_ShipTo_Method');
+@sc_order_form_discount_related_fields = ();
+
+# Discount logic is the same as shipping logic except
+# that whatever value is calculated for the discount will
+# be subtracted rather than added to the grand total.
+
+@sc_discount_logic  = ();
+ 
+# Do we use PGP Encryption -- WARNING: This is a difficult
+# option to setup. You must go into the pgp-lib.pl file
+# and edit the pgp variables in the header for your specific
+# setup.
+#
+# UPDATE: Now PGP setup is found in manager.cgi, just set 
+#         temp variable here.  [SPK 1/18/2000] 
+
+$sc_pgp_temp_file_path = "./shopping_carts";
+
+#######################################################################
+#                     Store Option Variables                          #
+#######################################################################
+$sc_repeat_fake_it = "yes"; # attempt to answer well on reload of "cart change"
+# For Static HTML pages, if telling them item added ok used to sneak in msg,
+# use the %%item_ordered_msg%% token instead! Can enable if needed though:
+$sc_allow_sneak_in_message = "no"; 
+# this is for the %%item_ordered_msg%%
+$sc_item_ordered_msg_token = "<FONT FACE=ARIAL SIZE=2 COLOR=BLUE>Thank 
+you, your selection has been added to your order.</FONT>";
+$sc_return_to_frontpage_after_empty_cart = ""; # 'yes' or '' here only!
+$sc_shall_i_log_errors = "yes"; 
+$sc_shall_i_log_accesses = "yes";
+$sc_shall_i_email_if_error = "no";
+$sc_shall_i_let_client_know_item_added = "yes";
+#######################################################################
+#                    HTML Search Variables                            #  
+#######################################################################
+@sc_unwanted_files = ('*.cgi');
+#######################################################################
+#                  Error Message Variables                            #
+#######################################################################
+$sc_page_load_security_warning = 
+    "I am sorry, but you may only use this program to view HTML pages.";
+
+$sc_randomizer_error_message = "
+There must be something wrong with your local
+rand function because I cannot get a unique, random number for
+your shopping cart. Please check the call to rand in the Assign a
+Shopping Cart routine.
+";
+
+#######################################################################
+#                  Miscellaneous Variables                            #
+#######################################################################
+$sc_processing_order="no"; # init this
+@acceptable_file_extensions_to_display = (".html", ".htm");
+$sc_money_symbol_spaces = ' ';
+@sc_sales_tax_form_values = ("$sc_sales_tax_state");
+$sc_no_frames_button = qq!
+<INPUT TYPE = "submit" NAME = "return_to_frontpage_button" 
+ VALUE = "Return to Frontpage">
+!;
+$sc_product_display_title = "Product Listing";
+$sc_product_display_footer_helper = "<tr><td colspan=3><hr></td></tr>";
+$sc_product_display_footer = qq!</TABLE></CENTER>!;
+#######################################################################
+#                     Various Message Variables                       #
+#######################################################################
+#
+# format is $messages{'mod_num'}='the message';
+#
+
+#used if not "faking it" on a page reload, displays this msg & cart contents
+$messages{'chkref_01'} =  
+  "<center><table width=500><tr><td>The " .
+  "cart system has detected a possible page-reload  " .
+  "attempt on a page that may have previously changed the " .
+  "cart contents. &nbsp;The current cart contents are displayed below." .
+  "&nbsp; </td></tr></table></center>"; 
+
+#comes up with "manual" changes to the URL in GET method
+$messages{'chkref_02'} =  
+  "<center><table width=500><tr><td>Sorry, " .
+  "all requests involving the cart need to come " .
+  " from the site's pages directly.&nbsp; This " . 
+  "prevents accidental changes to cart contents.<br><br>" .
+  "This error may have occured if you are running Norton Internet Security and the settings on this program are not configured correctly. " .
+  "To fix this so you can add items to your shopping cart, please follow these 3 simple steps.<br>1.) Open Norton Internet Security.<br>" . 
+  "2.) Click on the Advanced Settings Tab.<br>3.) Look at the Browsing Privacy. Referer is set to block. Set this to permit and " .
+  "you should be able to add items to your shopping cart.<br><br>" . 
+  " The current cart contents are displayed below." .
+  "&nbsp; </td></tr></table></center>"; 
+
+$messages{'chkref_03'} =  
+  "Refering Site Authentication Failed!<br>\n";
+
+#see also messages ordcnf_07,08,09
+$messages{'ordcnf_01'} = 
+  "<P>&nbsp;</P>\n" . 
+  "Thank you for shopping with us.&nbsp; Your order has been \n" .
+  "received and will be shipped as soon as possible.&nbsp; Please \n" .
+  "visit us again soon!<br><P>&nbsp;</P>";
+
+#example of where used is below "Thank You" for an order
+$messages{'ordcnf_02'} = 
+  "<a href=$sc_store_url2a>Return to the Store Front</a>\n" . 
+  "<P>&nbsp;</P>\n" . 
+  "<P>&nbsp;</P>";
+
+#Happens if they "submit" the order a second time accidently
+$messages{'ordcnf_03'} = 
+  "<P>&nbsp;</P>\n" . 
+  "We do not seem to have an order verification file for this \n" .
+  "shopping cart!&nbsp; Is it possible your order was already \n" .
+  "processed?  &nbsp;If you are having trouble completing your \n" .
+  "order, please contact us at <a href=\"mailto:$sc_admin_email\">\n" .
+  "$sc_admin_email</a>. <br><br>Thank you for shopping with us!\n" . 
+  "<P>&nbsp;</P>\n";
+
+$messages{'ordcnf_04'} = 
+  "Please verify the following information.&nbsp;\n" . 
+  "When you are confident that it is correct, click the \n" .
+  "'Submit Order For Processing' button below.\n";
+  
+$messages{'ordcnf_05'} = 
+  "There was a problem processing this order:";
+
+$messages{'ordcnf_06'} = 
+  "Please verify the above information.&nbsp;\n" . 
+  "When you are confident that it is correct, click the \n" .
+  "'Secure Orderform' button to enter your payment information.\n";
+
+#see also message ordcnf_01
+$messages{'ordcnf_07'} = 
+  "Thank you for your order. We appreciate your business and will " .
+  "do everything we can to meet your expectations. Please visit us " .
+  "again soon!\n\n";
+
+$messages{'ordcnf_08'} = "Thank you for your order";
+  
+# Used in Offline for the confirmation table after order is processed
+$messages{'ordcnf_09'} = 
+  "<CENTER><TABLE WIDTH=500 CELLPADDING=0 CELLSPACING=0><TR><TD><br>" .
+  "Thank you for shopping with us.&nbsp; Your order has been \n" .
+  "received and will be shipped as soon as possible.&nbsp; \n" .
+  "You will receive an email confirmation shortly.  Please \n" .
+  "print this confirmation page for your records.<br>\n" .
+  "</TD></TR></TABLE></CENTER>\n";
+$messages{'ordcnf_10'} =  '<br><br>Order Confirmation:';
+eval('$messages{"ordcnf_10"} =  &get_date . $messages{"ordcnf_10"};');
+
+$messages{'ordprc_01'} = qq~I'm sorry, but there seems to 
+be a problem with your order.&nbsp Please
+check the order form, verify your information, and 
+try submitting the order again.~;
+
+#########################################################################
+1; # We are a library

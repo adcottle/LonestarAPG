@@ -1,0 +1,274 @@
+AgoraCart OPTIONS files
+-----------------------
+December 28, 2001
+
+
+Here is a sample OPTIONS file that contains two options:
+
+<HTML>
+<TITLE>Gift Option</TITLE>
+<BODY>
+ junk this is ... it never gets displayed.
+ This allows the software to be more easily edited by
+ html editors or commented well. :)
+ <h3>--cut here--</h3>
+ <TABLE CELLPADDING="0" CELLSPACING="0">
+  <TR ALIGN="CENTER"><TD><FONT FACE=ARIAL SIZE="2">
+   <B>Select Accessories</B>
+   <br>
+   </FONT></TD></TR>
+  <TR ALIGN="CENTER"><TD><SELECT NAME = "option|1|%%PRODUCT_ID%%">
+    <OPTION VALUE = "|">Gift Options
+    <OPTION VALUE = "Gift Card|1.00"> Gift Card (+$1.00)
+    <OPTION VALUE = "Gift Wrap|2.50"> Gift Wrap (+$2.50)
+    <OPTION VALUE = "Gift Box|3.50"> Gift Box (+$3.50)
+    </SELECT></TD></TR>
+   <TR ALIGN="CENTER"><TD><SELECT NAME = "option|2|%%PRODUCT_ID%%">
+    <OPTION VALUE = "|">Accessories
+    <OPTION VALUE = "Book Bag|4.95">Book Bag (+$4.95)
+    <OPTION VALUE = "Backpack|9.95">Backpack (+$9.95)
+    <OPTION VALUE = "Bookcase|9.95">Bookcase (+$9.95)
+    </SELECT></TD></TR>
+  </TABLE>
+  <h3>--cut here--</h3>
+  more junk here that is discarded.
+</BODY>
+</HTML>
+
+Everything outside of the <h3>--cut here--</h3> tags is discarded, it they
+are present, for display on the web browser (but any agorascript there is
+saved for possible execution.) These cut tags are NOT required, if they
+are not present then the entire file is displayed.  But remember without
+the <h3>--cut here--</h3> tags you should only have the contents of the
+<TABLE> you are using to describe you option.  Note that in the form on
+which the client chooses options, each option is denoted with the form:
+	
+	            NAME = "a|b|c" VALUE = "d|e|f"
+	
+	 where
+	
+	a is the option marker "option"
+	b is the option number (you might have multiple options
+		which all modify the same item.  Option number
+		identifies each option uniquely.  If using more that
+		9 options, use a leading zero so that they will sort
+		correctly when added to the cart.)
+	c is the option item number (the unique item id number
+		which the option modifies)
+	d is the option name (the descriptive name of the
+		option)
+	e is the option price.
+	f is the shipping weight or price, depending whether UPS or 
+		fixed-rate shipping is being used.
+	
+For example, consider this option from the default Vowels.html file which
+modifies item number 0001: 
+	
+	      <INPUT TYPE = "radio" NAME = "option|2|0001"
+	             VALUE = "Red|0.00|0.00" CHECKED>Red<BR>
+	
+This is the second option modifying item number 0001 (you should use the
+%%PRODUCT_ID%% token (or %%PRODUCTID%%) as a placeholder here when you
+make your options files).  When displayed in the display cart screen, it
+will read "Red 0.00", and will not affect the cost of the item. The second
+0.00 means that the shipping weight is not affected either. 
+
+
+Virtual Fields
+--------------
+
+The virtual fields pre-installed with agora allow the options to be
+displayed one way on the web browser, and another in the emails.  In the
+"cart display" option of the manager then web_options and email_options
+choices should be used for this purpose.
+
+Another benefit of these virtual fields is that they allow for the use of
+numbers to identify options in the option descriptions.   
+
+In the option name, if it starts with the # character, everything up to
+the first blank is ignored for web display of the cart, but included in
+the emails.
+
+
+Options Security
+----------------
+
+It is possible, although highly unlikely, for someone to fake their
+"http referer" response and put in bogus options.  These options
+could be "real" options with fake costs that would lower the cost, or
+they could be non-existant options.
+
+If you are worried about options security, there are a couple methods
+available to prevent options fraud on agora.cgi version 3.3d and higher.  
+It is recommended you use add-to-cart type agorascript to set the actual 
+values, however there is an older method listed below.
+
+For add-to-cart options security, you set the value of the option in the
+add-to-cart agorascript so no matter what the browser returns, you control
+what values are used. This add-to-cart option agorascript gets run at the
+time they add things to the cart.  
+
+Take this example for an option number 15 (your number here should match
+exactly, so if you use 01 in your option, use that below were 15 is!):
+
+<!--agorascript-add-to-cart-opt-15
+# This runs only when an item with option 15 is added to the cart
+# global var $option_item_number is the 'product id' number 
+local ($option_name,$option_price,$option_shipping);
+# split out what we were sent
+($option_name,$option_price,$option_shipping) =
+   split(/\|/,$form_data{$option});
+# if the $option_name blank, then set it to our default by setting
+# the $form_data{$option} variable here
+# be careful, do not accidently change the advertised prices!!
+  if ($option_name eq "") {
+    $option_name = "My Default";
+    $option_price = "4.95";
+    $option_shipping = "";
+    $form_data{$option} =
+"$option_name|$option_price|$option_shipping";
+   }
+  return ""; # is ignored anyway on the type of agorascript
+-->
+
+This agorascript should be placed in the option file above or below the
+'cut' tags if using them so they don't go out to the web browser.
+
+
+Older-style Options Security
+----------------------------
+
+Inside the options file you will need to use agorascript to set the 
+$item_opt_verify{} values for your options.  One way to do it is manually,
+as in:
+
+<!--agorascript-post 
+#example of how to use option cost verifications, if they are turned on
+ $item_opt_verify{"option|3|%%PRODUCT_ID%%|1 Yr Ext. Warr."} =
+	"%%eval(&format_price(0.1*%%cost%%))%%";
+ return "";
+-->
+
+An easier method is shown below, it has only been tested for a limited
+number of options files but should work so long as the name= part precedes
+any value= parts in the HTML.  Various %% token substitutions and evals
+are completed, then the result is evaluated by agorascript running a
+special routine where it is parsed for the values that will be displayed
+on the browser for options.  
+
+The parsing is activated by
+
+<!--agorascript-post &parse_options_to_verify(q^ AGSC-->
+
+and is closed by
+
+<!--AGSC ^); -->
+
+Notice the use of <!--AGSC and AGSC--> helper tags, which are deleted at
+run-time to re-glue the agorascript.  They allow the use of an HTML editor
+to initially generate the options, without those helper tags the HTML
+editor will think your options are comments!
+
+<h3>--cut here--</h3>
+<!--agorascript-post &parse_options_to_verify(q^ AGSC-->
+ <TABLE CELLPADDING="0" CELLSPACING="0">
+  <TR ALIGN="CENTER"><TD><FONT FACE=ARIAL SIZE="2">
+   <B>Choose your Warranty %%cost%%</B>
+   <br>
+   </FONT></TD></TR>
+  <TR ALIGN="CENTER"><TD>
+  <SELECT NAME = "option|3|%%PRODUCT_ID%%">
+    <OPTION VALUE = "90 Day Warr.|0">90 Day Warranty
+    <OPTION 
+VALUE = "1 Yr Ext. Warr.|%%eval(&format_price(0.1*%%cost%%))%%"
+>1 Year (+%%eval(&display_price_nospaces($myans))%%)
+    <OPTION 
+VALUE = "3 Yr Ext. Warr.|%%eval(&format_price(0.25*%%cost%%))%%"
+>3 Years (+%%eval(&display_price_nospaces($myans))%%)
+  </SELECT></TD></TR>
+  </TABLE>
+<!--AGSC ^); -->
+<h3>--cut here--</h3>
+
+
+Last thing is that you would need to turn on options security by setting
+
+$sc_use_verified_opt_values = "yes"; 
+
+in the agora.setup.db file or in freeform logic (unless your manager
+allows this option to be set directly.)  Once this is set then NO options
+will be available unless they have the special options verification, so do
+not set it if you do not have all your "verified" options files working
+perfectly!
+
+One way to debug while enabling options security is to add the following
+code to the bottom of your options file or your product page inc file:
+
+<!--agorascript-post {
+ my $inx,$out;
+ $out="<table border=1><tr><td>opt key</td><td>value</td></tr>\n";
+ foreach $inx (keys %item_opt_verify) {
+  $out .= "<tr><td>$inx</td><td>$item_opt_verify{$inx}</td></tr>\n";
+ }
+ return $out . "</table>\n";} -->
+
+It will print out a table of the options verification information that
+agora has in the verifcation table.  If you are displaying more than one
+item, all the info in the table is displayed so be careful what you are
+doing! 
+
+
+A little more about Option Agorascript
+--------------------------------------
+
+Option agorascripts can be used at the time the option is displayed and
+when items are ordered, as seen above.  It can also be used to make
+changes to what options are selected 'on-the-fly', also shown above. 
+
+The variable options are another way to use the options agorascript to 
+change prices on-the-fly.  The best use of this might be a quantity 
+discount that changes as they change the quantity in the cart.  See the 
+variable options help file in the DOCS directory for more information.
+
+
+Multiple Options Files for a single product
+-------------------------------------------
+
+On version 4.0d and higher, you can load option files within option files.  
+If you have an option that is contained in several option files and you
+don't want to maintain it in several locations, you can simply reference
+it inside another option file.  An example of this is in the
+gift_option.html option file, which has two options, the backpack and the
+gift wrap.  Sometimes you'll want to combine them as an option, but
+sometimes you will only want to use one or two of the options.
+
+
+Possible Naming Conventions
+---------------------------
+(Useful if you have a lot of options files to keep track of.)
+
+For the sake of clarity and to avoid conflicts with possible mix-and-match 
+nature of options, it is suggested that each option have a unique number 
+assigned to it.  To have up to 1000 options, you only need three digits, 
+so start your numbers at 001, 002, etc., the leading zeros helping to set 
+the sort order of the options on a product loaded to the cart.  You may 
+want to use the opt number as part of the file name, such as:
+ 
+ 001_giftwrapbox.html
+ 002_backpack.html
+
+Another possibility to to end them with the number as the file extension, 
+such as:
+
+ giftwrapbox.001
+ backpack.002
+
+You could get a unix directory listing sorted by the extension with a 
+command like 'ls -al -X' (see you man pages for more info.) 
+
+These are just suggestions.  If you will have not more than one option
+file per product (and not loading options files within options files),
+then this is not a worry, as you can easily maintain the numbers within a
+single file.  You could also keep track of them separately on a
+spreadsheet.
+

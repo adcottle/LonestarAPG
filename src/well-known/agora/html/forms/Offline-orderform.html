@@ -1,0 +1,718 @@
+<HTML>
+<HEAD>
+<TITLE>Step One</TITLE>
+</HEAD>
+<!--agorascript-orderform
+ &Offline_order_form_prep;
+-->
+<BODY>
+
+<FORM METHOD="POST" ACTION="agora.cgi">
+
+<H2>CART CONTENTS HERE</H2>
+
+<CENTER>
+
+<TABLE WIDTH="550" BORDER="0" CELLPADDING="0">
+<!--agorascript-pre
+if ("$sc_offline_top_message" ne "") { return 
+q~<TR>
+<TD COLSPAN="2"><br><blockquote>$sc_offline_top_message</blockquote><br></TD>
+</TR>~
+;}
+-->
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+
+<TR BGCOLOR="#C0EFFF">
+<TD COLSPAN="2"><FONT SIZE="+1" COLOR=BLACK>
+    &nbsp;Payment Information (Name, Address, and
+Payment Method):</FONT></TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><HR></FONT></TD>
+</TR>
+
+<TR>
+<TD WIDTH=100>First Name</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_BillTo_Postal_Name_First" 
+VALUE="$eform_Ecom_BillTo_Postal_Name_First" 
+SIZE="30" MAXLENGTH="30"></TD>
+</TR>
+      
+<TR>
+<TD>Last Name</TD>
+<TD><INPUT TYPE="text" 
+NAME="Ecom_BillTo_Postal_Name_Last" 
+VALUE="$eform_Ecom_BillTo_Postal_Name_Last" 
+SIZE="30" MAXLENGTH="30"></TD>
+</TR>
+
+<TR>
+<TD WIDTH=100>Street:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_BillTo_Postal_Street_Line1" 
+VALUE="$eform_Ecom_BillTo_Postal_Street_Line1" 
+SIZE="30"></TD>
+</TR>
+      
+<TR>
+<TD WIDTH=100>City:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_BillTo_Postal_City" 
+VALUE="$eform_Ecom_BillTo_Postal_City" 
+SIZE="30"> 
+</TR>
+
+<TR>
+<TD WIDTH=100>State:</TD>
+<TD WIDTH=450>
+<SELECT NAME="Ecom_BillTo_Postal_StateProv">
+<OPTION VALUE="$eform_Ecom_BillTo_Postal_StateProv"
+>$eform_Ecom_BillTo_Postal_StateProv &nbsp;</OPTION>
+<OPTION>---USA---</OPTION>
+<OPTION>AK</OPTION>
+<OPTION>AL</OPTION> 
+<OPTION>AR</OPTION>
+<OPTION>AZ</OPTION> 
+<OPTION>CA</OPTION> 
+<OPTION>CO</OPTION> 
+<OPTION>CT</OPTION> 
+<OPTION>DC</OPTION>
+<OPTION>DE</OPTION> 
+<OPTION>FL</OPTION> 
+<OPTION>GA</OPTION> 
+<OPTION>GU</OPTION> 
+<OPTION>HI</OPTION> 
+<OPTION>IA</OPTION>
+<OPTION>ID</OPTION> 
+<OPTION>IL</OPTION> 
+<OPTION>IN</OPTION> 
+<OPTION>KS</OPTION> 
+<OPTION>KY</OPTION> 
+<OPTION>LA</OPTION> 
+<OPTION>MA</OPTION> 
+<OPTION>MD</OPTION>
+<OPTION>ME</OPTION> 
+<OPTION>MI</OPTION> 
+<OPTION>MN</OPTION> 
+<OPTION>MO</OPTION>
+<OPTION>MS</OPTION> 
+<OPTION>MT</OPTION> 
+<OPTION>NC</OPTION> 
+<OPTION>ND</OPTION> 
+<OPTION>NE</OPTION> 
+<OPTION>NH</OPTION> 
+<OPTION>NJ</OPTION> 
+<OPTION>NM</OPTION> 
+<OPTION>NV</OPTION> 
+<OPTION>NY</OPTION> 
+<OPTION>OH</OPTION> 
+<OPTION>OK</OPTION> 
+<OPTION>OR</OPTION> 
+<OPTION>PA</OPTION> 
+<OPTION>PR</OPTION> 
+<OPTION>RI</OPTION> 
+<OPTION>SC</OPTION> 
+<OPTION>SD</OPTION> 
+<OPTION>TN</OPTION> 
+<OPTION>TX</OPTION> 
+<OPTION>UT</OPTION> 
+<OPTION>VA</OPTION>
+<OPTION>VI</OPTION> 
+<OPTION>VT</OPTION> 
+<OPTION>WA</OPTION> 
+<OPTION>WI</OPTION>
+<OPTION>WV</OPTION> 
+<OPTION>WY</OPTION>
+<OPTION value=""></OPTION>
+<OPTION value="">--AUSTRALIA--</OPTION>
+<OPTION value="ACT">ACT</OPTION>
+<OPTION value="NSW">NSW</OPTION>
+<OPTION value="NT">NT</OPTION>
+<OPTION value="QLD">QLD</OPTION>
+<OPTION value="SA">SA</OPTION>
+<OPTION value="TAS">TAS</OPTION>
+<OPTION value="VIC">VIC</OPTION>
+<OPTION value="WA">WA</OPTION>
+<OPTION value=""></OPTION>
+<OPTION value="">--CANADA--</OPTION>
+<OPTION value="AB">AB</OPTION>
+<OPTION value="BC">BC</OPTION>
+<OPTION value="MB">MB</OPTION>
+<OPTION value="NB">NB</OPTION>
+<OPTION value="NFLD">NFLD</OPTION>
+<OPTION value="NWT">NWT</OPTION>
+<OPTION value="NS">NS</OPTION>
+<OPTION value="ON">ON</OPTION>
+<OPTION value="PEI">PEI</OPTION>
+<OPTION value="PQ">PQ</OPTION>
+<OPTION value="SK">SK</OPTION>
+<OPTION value="YK">YK</OPTION>
+</SELECT>
+</TR>
+
+<TR>
+<TD WIDTH=100>Zip:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_BillTo_PostalCode" 
+VALUE="$eform_Ecom_BillTo_PostalCode" 
+SIZE="11" MAXLENGTH="11"></TD>
+</TR>
+
+
+<TR>
+<TD WIDTH=100>Country:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_BillTo_Postal_CountryCode"
+VALUE="$eform_Ecom_BillTo_Postal_CountryCode"
+ SIZE="11" MAXLENGTH="11"></TD>
+</TR>
+ 
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+
+<!--agorascript-pre 
+if ("$sc_allow_pay_by_PO" =~ /yes/i) {
+return q~
+<TR>
+<TD COLSPAN="2">Puchase Order:<INPUT TYPE="radio" 
+NAME="Ecom_Payment_Card_Type" ~ .
+
+&vform_check("Ecom_Payment_Pay_Type","PO","Checked") .
+
+q~ VALUE="PO">
+&nbsp;&nbsp;&nbsp; PO Number:<INPUT TYPE="text" 
+NAME="Ecom_Payment_PO_Number"  
+VALUE="$vform_Ecom_Payment_PO_Number"  
+size="40" MAXLENGTH="40"></TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>~;
+} else {return '';}
+-->
+
+<!--agorascript-pre
+
+if ("$sc_allow_pay_by_check" =~ /yes/i) {
+return q~
+<TR>
+<TD COLSPAN="2">Check:<INPUT TYPE="radio" 
+NAME="Ecom_Payment_Card_Type" ~ .
+
+&vform_check("Ecom_Payment_Pay_Type","CHECK","Checked") .
+
+q~ VALUE="Check">
+&nbsp;&nbsp;&nbsp; Bank Name:<INPUT TYPE="text" 
+NAME="Ecom_Payment_Bank_Name"  
+VALUE="$vform_Ecom_Payment_Bank_Name"  
+size="40" MAXLENGTH="40"></TD>
+</tr>
+
+<TR>
+<TD COLSPAN="2"><TABLE WIDTH="100%" BORDER="0">
+<TR>
+<TD>Bank Routing Number<br>
+<INPUT TYPE="text" 
+NAME="Ecom_Payment_BankRoute_Number" 
+VALUE="$vform_Ecom_Payment_BankRoute_Number" 
+MAXLENGTH="20" SIZE=18>
+</TD>
+<TD>Account Number<BR>
+<INPUT TYPE="text" 
+NAME="Ecom_Payment_BankAcct_Number" 
+VALUE="$vform_Ecom_Payment_BankAcct_Number" 
+MAXLENGTH="20" SIZE=18>
+</TD>
+<TD>Check Number<BR>
+<INPUT TYPE="text" 
+NAME="Ecom_Payment_BankCheck_Number" 
+VALUE="$vform_Ecom_Payment_BankCheck_Number" 
+MAXLENGTH="20" SIZE=18>
+</TD>
+</TR></TABLE>
+</TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>~; 
+} else {return '';}
+-->
+
+<TR>
+<TD COLSPAN="2">Credit Card:
+<INPUT TYPE="radio" NAME="Ecom_Payment_Card_Type" 
+<!--agorascript-pre 
+&vform_check("Ecom_Payment_Card_Type","Visa","Checked");
+--> VALUE="Visa">Visa
+<INPUT TYPE="radio" NAME="Ecom_Payment_Card_Type" 
+<!--agorascript-pre 
+&vform_check("Ecom_Payment_Card_Type","MasterCard","Checked");
+--> VALUE="MasterCard">Mastercard
+<!--agorascript-pre 
+if ("$sc_take_discover" =~ /yes/i) { 
+return q~<INPUT TYPE="radio" NAME="Ecom_Payment_Card_Type" ~ .
+&vform_check("Ecom_Payment_Card_Type","Discover","Checked") . 
+q~  VALUE="Discover">Discover ~;
+} 
+-->
+<!--agorascript-pre 
+if ("$sc_take_amex" =~ /yes/i) { 
+return q~<INPUT TYPE="radio" NAME="Ecom_Payment_Card_Type" ~ .
+&vform_check("Ecom_Payment_Card_Type","American Express","Checked") . 
+q~ VALUE="American Express">American Express ~;
+}
+-->
+
+
+</TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1">&nbsp;</FONT></TD>
+</TR>
+
+<!--agorascript-orderform
+if ($vform_Ecom_Payment_Pay_Type eq 'CC') {
+  $ags_Ecom_Payment_Card_Number=$vform_Ecom_Payment_Card_Number;
+ } else {
+  $ags_Ecom_Payment_Card_Number='';
+ }
+return '';
+-->
+<TR>
+<TD WIDTH=100>Number:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_Payment_Card_Number"
+VALUE="$ags_Ecom_Payment_Card_Number"
+MAXLENGTH="20"></TD>
+</TR>
+ 
+<TR>
+<TD WIDTH=100>Exp. Date:</TD>
+<TD WIDTH=450>
+
+<SELECT NAME="Ecom_Payment_Card_ExpDate_Month">
+<OPTION value="$vform_Ecom_Payment_Card_ExpDate_Month"><!--agorascript-pre 
+ if ("$vform_Ecom_Payment_Card_ExpDate_Month" eq "") {
+   return "Month";
+  } else {
+   return "$vform_Ecom_Payment_Card_ExpDate_Month";
+  }
+--></OPTION>
+<OPTION>1</OPTION>
+<OPTION>2</OPTION>
+<OPTION>3</OPTION>
+<OPTION>4</OPTION>
+<OPTION>5</OPTION>
+<OPTION>6</OPTION>
+<OPTION>7</OPTION>
+<OPTION>8</OPTION>
+<OPTION>9</OPTION>
+<OPTION>10</OPTION>
+<OPTION>11</OPTION>
+<OPTION>12</OPTION>
+</SELECT>
+
+<SELECT NAME="Ecom_Payment_Card_ExpDate_Day">
+<OPTION value="$vform_Ecom_Payment_Card_ExpDate_Day"><!--agorascript-pre 
+ if ("$vform_Ecom_Payment_Card_ExpDate_Day" eq "") {
+   return " Day ";
+  } else {
+   return "$vform_Ecom_Payment_Card_ExpDate_Day";
+  }
+--></OPTION>
+<OPTION> 1 </OPTION>
+<OPTION> 2 </OPTION>
+<OPTION> 3 </OPTION>
+<OPTION> 4 </OPTION>
+<OPTION> 5 </OPTION>
+<OPTION> 6 </OPTION>
+<OPTION> 7 </OPTION>
+<OPTION> 8 </OPTION>
+<OPTION> 9 </OPTION>
+<OPTION> 10 </OPTION>
+<OPTION> 11 </OPTION>
+<OPTION> 12 </OPTION>
+<OPTION> 13 </OPTION>
+<OPTION> 14 </OPTION>
+<OPTION> 15 </OPTION>
+<OPTION> 16 </OPTION>
+<OPTION> 17 </OPTION>
+<OPTION> 18 </OPTION>
+<OPTION> 19 </OPTION>
+<OPTION> 20 </OPTION>
+<OPTION> 21 </OPTION>
+<OPTION> 22 </OPTION>
+<OPTION> 23 </OPTION>
+<OPTION> 24 </OPTION>
+<OPTION> 25 </OPTION>
+<OPTION> 26 </OPTION>
+<OPTION> 27 </OPTION>
+<OPTION> 28 </OPTION>
+<OPTION> 29 </OPTION>
+<OPTION> 30 </OPTION>
+<OPTION> 31 </OPTION>
+</SELECT>
+
+<SELECT NAME="Ecom_Payment_Card_ExpDate_Year">
+<OPTION value="$vform_Ecom_Payment_Card_ExpDate_Year"><!--agorascript-pre 
+ if ("$vform_Ecom_Payment_Card_ExpDate_Year" eq "") {
+   return " Year ";
+  } else {
+   return "$vform_Ecom_Payment_Card_ExpDate_Year";
+  }
+--></OPTION>
+<OPTION> 2003</OPTION>
+<OPTION> 2004</OPTION>
+<OPTION> 2005</OPTION>
+<OPTION> 2006</OPTION>
+<OPTION> 2007</OPTION>
+<OPTION> 2008</OPTION>
+<OPTION> 2009</OPTION>
+<OPTION> 2010</OPTION>
+<OPTION> 2011</OPTION>
+<OPTION> 2012</OPTION>
+</SELECT>
+
+</TD>
+</TR>
+
+<TR>
+<TD WIDTH=100>CVV2:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_Payment_Card_CVV" 
+VALUE="$eform_Ecom_Payment_Card_CVV" 
+MAXLENGTH="5"> &nbsp;&nbsp; <a href="#" 
+onClick="MyWindow=window.open('agora.cgi?page=cvv2.html','MyWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=275,height=290'); return false;" target="_new"><font size=-1>what is this?</font></a>
+</TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+
+<TR BGCOLOR="#C0EFFF">
+<TD COLSPAN=2><FONT SIZE="+1" COLOR=BLACK>
+    &nbsp;Shipping Information: (if different from above)</FONT></TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+<!--agorascript-pre
+if ("$sc_offline_shipping_message" ne "") { return 
+q~<TR>
+<TD COLSPAN="2"><blockquote>$sc_offline_shipping_message</blockquote></TD>
+</TR>~
+;}
+-->
+<tr>
+   <td WIDTH="100">Method:</td>
+   <td width="450">
+<SELECT NAME="Ecom_ShipTo_Method">
+
+
+<!--agorascript-pre
+if ("$sc_upsgroundres" =~ /yes/i) { return 
+q~<OPTION VALUE="UPS Ground Residential(GNDRES)">UPS Ground Residential</OPTION>~
+;}
+-->
+<!--agorascript-pre
+if ("$sc_upsgroundcomm" =~ /yes/i) { return 
+q~<OPTION VALUE="UPS Ground Commercial (GNDCOM)">
+UPS Ground Commercial</OPTION>~;
+} else {return '';}
+-->
+<!--agorascript-pre
+if ("$sc_ups2da" =~ /yes/i) { return 
+q~<OPTION VALUE="UPS 2nd Day (2DA)">
+UPS 2nd Day</OPTION>~;
+} else {return '';}
+-->
+<!--agorascript-pre
+if ("$sc_ups1da" =~ /yes/i) { return 
+q~<OPTION VALUE="UPS Next Day (1DA)">
+UPS Next Day</OPTION>~;
+} else {return '';}
+-->
+<!--agorascript-pre
+if ("$sc_fedexprioiryovernight" =~ /yes/i) { return 
+q~<OPTION VALUE="FEDEX Priority Overnight (Express,Priority Overnight)">
+FedEx Priority Overnight</OPTION>~;
+}
+-->
+<!--agorascript-pre
+if ("$sc_fedexexpress" =~ /yes/i) { return 
+q~<OPTION VALUE="FEDEX Express (Express,Express Saver)">
+FedEx Express Saver</OPTION>~;
+}
+-->
+<!--agorascript-pre
+if ("$sc_fedexground" =~ /yes/i) { return 
+q~<OPTION VALUE="FEDEX Ground (Ground,Ground)">
+FedEx Ground</OPTION>~;
+}
+-->
+<!--agorascript-pre
+if ("$sc_fedexhome" =~ /yes/i) { return 
+q~<OPTION VALUE="FEDEX Home Delivery (Home,Home)">
+FedEx Home Delivery</OPTION>~;
+} else {return '';}
+-->
+<!--agorascript-pre
+if ("$sc_uspsparcelpost" =~ /yes/i) { return 
+q~<OPTION VALUE="USPS Parcel Post (Parcel)">
+USPS Parcel Post</OPTION>~;
+} else {return '';}
+-->
+<!--agorascript-pre
+if ("$sc_uspsprioritymail" =~ /yes/i) { return 
+q~<OPTION VALUE="USPS Priority Mail (Priority)">
+USPS Priority Mail</OPTION>~;
+} else {return '';}
+-->
+<!--agorascript-pre
+if ("$sc_uspsexpressmail" =~ /yes/i) { return 
+q~<OPTION VALUE="USPS Express Mail (Express)">
+USPS Express Mail</OPTION>~;
+} else {return '';}
+-->
+</SELECT>
+</TD>
+</tr>
+      
+<TR>
+<TD WIDTH=100>First Name</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_ShipTo_Postal_Name_First" 
+VALUE="$eform_Ecom_ShipTo_Postal_Name_First" 
+SIZE="30" MAXLENGTH="30"></TD>
+</TR>
+      
+<TR>
+<TD>Last Name</TD>
+<TD><INPUT TYPE="text" 
+NAME="Ecom_ShipTo_Postal_Name_Last" 
+VALUE="$eform_Ecom_ShipTo_Postal_Name_Last" 
+SIZE="30" MAXLENGTH="30"></TD>
+</TR>
+
+<TR>
+<TD WIDTH=100>Street:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_ShipTo_Postal_Street_Line1" 
+VALUE="$eform_Ecom_ShipTo_Postal_Street_Line1" 
+SIZE="30"></TD>
+</TR>
+      
+<TR>
+<TD WIDTH=100>City:</TD> 
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_ShipTo_Postal_City" 
+VALUE="$eform_Ecom_ShipTo_Postal_City" 
+SIZE="30"></TD>
+</TR>
+
+<TR>
+<TD WIDTH=100>State:</TD>
+<TD WIDTH=450>
+<SELECT NAME="Ecom_ShipTo_Postal_StateProv">
+<OPTION VALUE="$vform_Ecom_ShipTo_Postal_StateProv"
+>$vform_Ecom_ShipTo_Postal_StateProv &nbsp;</OPTION>
+<OPTION>---USA---</OPTION>
+<OPTION>AK</OPTION>
+<OPTION>AL</OPTION> 
+<OPTION>AR</OPTION>
+<OPTION>AZ</OPTION> 
+<OPTION>CA</OPTION> 
+<OPTION>CO</OPTION> 
+<OPTION>CT</OPTION> 
+<OPTION>DC</OPTION>
+<OPTION>DE</OPTION> 
+<OPTION>FL</OPTION> 
+<OPTION>GA</OPTION> 
+<OPTION>GU</OPTION> 
+<OPTION>HI</OPTION> 
+<OPTION>IA</OPTION>
+<OPTION>ID</OPTION> 
+<OPTION>IL</OPTION> 
+<OPTION>IN</OPTION> 
+<OPTION>KS</OPTION> 
+<OPTION>KY</OPTION> 
+<OPTION>LA</OPTION> 
+<OPTION>MA</OPTION> 
+<OPTION>MD</OPTION>
+<OPTION>ME</OPTION> 
+<OPTION>MI</OPTION> 
+<OPTION>MN</OPTION> 
+<OPTION>MO</OPTION>
+<OPTION>MS</OPTION> 
+<OPTION>MT</OPTION> 
+<OPTION>NC</OPTION> 
+<OPTION>ND</OPTION> 
+<OPTION>NE</OPTION> 
+<OPTION>NH</OPTION> 
+<OPTION>NJ</OPTION> 
+<OPTION>NM</OPTION> 
+<OPTION>NV</OPTION> 
+<OPTION>NY</OPTION> 
+<OPTION>OH</OPTION> 
+<OPTION>OK</OPTION> 
+<OPTION>OR</OPTION> 
+<OPTION>PA</OPTION> 
+<OPTION>PR</OPTION> 
+<OPTION>RI</OPTION> 
+<OPTION>SC</OPTION> 
+<OPTION>SD</OPTION> 
+<OPTION>TN</OPTION> 
+<OPTION>TX</OPTION> 
+<OPTION>UT</OPTION> 
+<OPTION>VA</OPTION>
+<OPTION>VI</OPTION> 
+<OPTION>VT</OPTION> 
+<OPTION>WA</OPTION> 
+<OPTION>WI</OPTION>
+<OPTION>WV</OPTION> 
+<OPTION>WY</OPTION>
+<OPTION value=""></OPTION>
+<OPTION value="">--AUSTRALIA--</OPTION>
+<OPTION value="ACT">ACT</OPTION>
+<OPTION value="NSW">NSW</OPTION>
+<OPTION value="NT">NT</OPTION>
+<OPTION value="QLD">QLD</OPTION>
+<OPTION value="SA">SA</OPTION>
+<OPTION value="TAS">TAS</OPTION>
+<OPTION value="VIC">VIC</OPTION>
+<OPTION value="WA">WA</OPTION>
+<OPTION value=""></OPTION>
+<OPTION value="">--CANADA--</OPTION>
+<OPTION value="AB">AB</OPTION>
+<OPTION value="BC">BC</OPTION>
+<OPTION value="MB">MB</OPTION>
+<OPTION value="NB">NB</OPTION>
+<OPTION value="NFLD">NFLD</OPTION>
+<OPTION value="NWT">NWT</OPTION>
+<OPTION value="NS">NS</OPTION>
+<OPTION value="ON">ON</OPTION>
+<OPTION value="PEI">PEI</OPTION>
+<OPTION value="PQ">PQ</OPTION>
+<OPTION value="SK">SK</OPTION>
+<OPTION value="YK">YK</OPTION>
+</SELECT></TD>
+</TR>
+
+<TR>
+<TD WIDTH=100>Zip:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_ShipTo_Postal_PostalCode" 
+VALUE="$eform_Ecom_ShipTo_Postal_PostalCode" 
+SIZE="11" MAXLENGTH="11"></TD>
+</TR>
+
+<TR>
+<TD WIDTH=100>Country:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_ShipTo_Postal_CountryCode" 
+VALUE="$eform_Ecom_ShipTo_Postal_CountryCode" 
+SIZE="11" MAXLENGTH="11"></TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+
+<TR BGCOLOR="#C0EFFF">
+<TD COLSPAN="2"><FONT SIZE="+1" COLOR=BLACK>
+       &nbsp;Phone/Email</FONT></TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+
+
+<TR>
+<TD WIDTH=100>Phone:</TD> 
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_BillTo_Telecom_Phone_Number" 
+VALUE="$eform_Ecom_BillTo_Telecom_Phone_Number" 
+SIZE="15" MAXLENGTH="15"></TD>
+</TR> 
+
+<TR>
+<TD WIDTH=100>E-Mail:</TD>
+<TD WIDTH=450><INPUT TYPE="text" 
+NAME="Ecom_BillTo_Online_Email" 
+VALUE="$eform_Ecom_BillTo_Online_Email" 
+MAXLENGTH="30"></TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+<TR>
+
+<!--agorascript-pre
+if ("$sc_offline_special_message" ne "") { return 
+q~<TR>
+<TD COLSPAN="2"><blockquote>$sc_offline_special_message</blockquote></TD>
+</TR>~
+;}
+-->
+
+<TR>
+<TD WIDTH=100>Special Notes:</TD>
+<TD WIDTH=450><TEXTAREA 
+NAME="Ecom_XCOMMENT_Special_Notes" 
+COLS="50" ROWS="5" 
+WRAP="SOFT">$eform_Ecom_XCOMMENT_Special_Notes</TEXTAREA></TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><FONT SIZE="-1"><hr></FONT></TD>
+</TR>
+
+</TABLE>
+</CENTER>
+<CENTER>
+<P>
+<P>
+<FONT FACE=ARIAL SIZE=2>
+<CENTER>
+<TABLE WIDTH=400>
+<TR>
+<TD WIDTH=400>
+<FONT FACE=ARIAL SIZE=2>
+Only one more step! Please click the <strong>Verify Order</strong> 
+button below. This will give you the chance to examine your order one last time 
+before you actually submit it to be processed.
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+</font>
+<P>
+
+<INPUT TYPE=HIDDEN NAME="gateway" VALUE="Offline">
+<INPUT TYPE=HIDDEN NAME="order_form" VALUE="Offline">
+<INPUT TYPE=reset NAME= "  &nbsp; Undo Edits &nbsp;  " 
+value = "  &nbsp; Undo Edits &nbsp;  ">&nbsp; 
+<INPUT TYPE=submit 
+NAME = "clear_order_form_button"  
+VALUE = " Clear Order Form "> &nbsp; <INPUT TYPE=submit 
+NAME = "submit_order_form_button"  VALUE = " Verify Order ">
+<BR>
+</CENTER>
+</FORM>
+</BODY>
+</HTML>

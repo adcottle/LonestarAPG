@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>AgoraCart ERROR Page</TITLE>
+
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+<DIV ALIGN="CENTER">
+<!--agorascript-post 
+&capture_STDOUT; 
+&StoreHeader;
+return &uncapture_STDOUT;  --><br>
+<center>
+<!--agorascript-pre 
+&capture_STDOUT; 
+&cartlinks;
+  print "<font face=\"Arial\" size=\"3\">";
+# take make links underlined
+# $cartlinks =~ s/style=\"text-decoration: none\"//ig;
+# to layout horizontally with 3 spaces
+# $cartlinks =~ s/<br>/&nbsp;&nbsp;&nbsp;/ig;
+# to layout horizontally with | dividers spaces
+$cartlinks =~ s/<br>/&nbsp;&nbsp;|&nbsp;&nbsp;/ig;
+print $cartlinks;
+  print "</font>";
+&uncapture_STDOUT;  --></center>
+<br><br>
+
+<table WIDTH="530" BGCOLOR="#FFFFFF" BORDER="0" CELLPADDING="0"
+CELLSPACING="0">
+<tr><td>
+<br><br><br>
+We're sorry, an error has occured.  Please hit the browser back
+button, change what was done in error, and try again.
+</td></tr>
+</table>
+</div>
+
+<br><br><br>
+<hr width=550>
+<center>
+<!--agorascript-post 
+&capture_STDOUT; 
+&StoreFooter;
+return &uncapture_STDOUT;  -->
+</center>
+</body>
+</html>

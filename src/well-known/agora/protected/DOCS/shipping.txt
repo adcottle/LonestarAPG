@@ -1,0 +1,117 @@
+Custom Shipping Logic now setup in Store Manager!
+-------------------------------------------------
+April 30, 2000
+
+[NOTE:  The sample order forms have SBW (Ship By Weight) options in them,
+but tbe sure to take a look at the Offline Order Form even if you do not
+use it.  It tends to have the most recent and relevant examples.]
+
+For UPS shipping, see the UPS documentation.
+
+For custom shipping logic, the sky is the limit!  Whatever code you
+want to install, it is up to you, you may interface with anything
+or calculate anything.  A sample of custom shipping code that makes the
+shipping price 12% of the order (assuming no handling charge is included)
+is:
+
+  #
+  #This simulates the old logic of a percentage (12%)  of the order:
+  $shipping_price = int($subtotal*12 + 0.5) / 100;
+  #
+
+For a handling charge, you may add it above or use the handling charge in
+the Program Settings, but don't set both!
+
+For complicated code, setup a custom library and simply call the correct
+subroutine in the custom code.
+
+In version 3.0u and higher you can force the shipping module to exit
+after your code is finished by setting:
+
+  $shipping_logic_done = "yes";
+
+If this variable is set, then the handling charge and UPS code will NOT be
+run, even if these variables were set in the Program Settings.  Unless you
+have a specific reason to do this, don't!  One reason to set this varialbe
+would be if you wrote code that shipped via UPS but added a handling
+charge per box instead of per order and therefore have no need to run
+the standard UPS code.
+
+The main advantage of using the custom code interface instead of modifying
+the library is that it is easier to upgrade to the latest version of
+agora.cgi.  You can use the older 'calculate shipping' routine as weel 
+(see below.)
+
+Basics of basing shipping on Form Variable 'the old way'
+--------------------------------------------------------
+
+Before the SBW feature was added, shipping was determined by a field on 
+the orderform and an array of custom logic.  
+
+First, you have to set the form variable you will be using:
+
+  @sc_order_form_shipping_related_fields = ("Ecom_ShipTo_Method");
+
+There are five fields in the shipping variable logic array, and
+the are separated by the 'pipe' character:
+ shipping related field|subtotal price|quantity|measured value|what to charge
+
+Here is one example that assigns a cost based on quantities from
+1 to infinity, and sets it as a percentage of the subtotal:
+@sc_shipping_logic = (
+"usps||1-||5%", 
+"ups||1-||10%", 
+"fedex||1-||20%"); 
+
+Instead of percents, you can assign fixed amounts, say $5 to $20 for 1-10
+items, free otherwise:
+
+@sc_shipping_logic = (
+"usps||1-10||5.00", 
+"ups||1-10||10.00", 
+"fedex||1-10||20.00"); 
+
+Instead of quantity, we could base it on cost, say 0-$30 cost they
+are charged, otherwise shipping is free or usps but 1/2 cost for 
+others:
+@sc_shipping_logic = (
+"usps|0-30|||5.00", 
+"ups|0-30|||10.00", 
+"ups|30.01-|||5.00", 
+"fedex|0-30|||20.00",
+"fedex|30.01-|||10.00");
+
+To implement it, you will need to define the logic array and call the 
+subroutine in the custom shipping logic.  Here is an example:
+
+======================================================================
+# Custom Shipping Logic Example
+# Ship based on the total order.  
+# $1-$29.99 is 3.95, $30-59.99 is 4.95, etc.:
+@sc_shipping_logic = 
+  ("|1-29.99|||3.95", 
+  "|30-59.99|||4.95", 
+  "|60-89.99|||6.95", 
+  "|90-119.99|||10.95", 
+  "|120-|||0.00"); 
+$shipping_price = &calculate_shipping($temp_total, 
+                  $total_quantity, $total_measured_quantity); 
+$shipping_logic_done = "yes"; # forces exit, no handling charge added
+======================================================================
+
+Another custom example is shown below.  Instead of using fixed amounts
+based on the order subtotal, percentages based on that amount are applied:
+
+======================================================================
+# In this example Shipping Cost is based on the total order.  
+# $1-$29.99 is 10%, $30-$59.99 is 7.5%, etc. (TURN OFF UPS!)
+# Code does not force exit, so handling charge will be added!
+@sc_shipping_logic = ( "|1-29.99|||10.0%", 
+                       "|30-59.99|||7.5%", 
+                       "|60-89.99|||5.0%", 
+                       "|90-119.99|||2.5%",
+                       "|120-|||0.00"); 
+#
+$shipping_price = &calculate_shipping($temp_total, 
+                  $total_quantity, $total_measured_quantity);
+======================================================================

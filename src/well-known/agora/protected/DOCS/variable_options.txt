@@ -1,0 +1,181 @@
+Variable Options
+----------------
+December 27, 2001
+
+(Requires 4.0c or the latest ashim40update.pl installed.)
+
+There are two styles of variable options, those that use agorascript to 
+set the option and those that use the token modifiers.
+
+The variable options with agorascript allow you to program the option 
+value at the time it is loaded to the cart, as well as set options that 
+can change value as the quantity changes.
+
+Token modifiers allow multiple instances of the same product id number 
+withing the same html <FORM...>...</FORM> tag block.  In a productpage.inc 
+file the %%prodID%% token would get substituted to the product database id 
+number, and would match up to a %%itemID%% tag in a quantity box.  In 
+cases where you need quantity boxes with individual options then the token 
+modifiers are quite useful.
+
+
+Variable options with Token Modifiers
+-------------------------------------
+
+With token modifiers it is easy to have multiple instances of a product
+generated with one productPage.inc file.  Different mutually exclusive
+options can be chosen with different quantities simultaneously.  
+Different sizes, colors, languages, etc. of the same product can now
+appear together, yet be added as distinct items to the cart.  This is done
+by adding a modifier in either options files and/or the productPage.inc
+files.  The simple example here is where a standard productPage.inc file
+is used with an options file that does all the 'work'.
+
+See the new %%QtyBox%% token in the productPage.inc file in the
+html-templates directory.  This allows for a quantity box that can be
+changed or suppressed as needed using agorascript.
+
+New global variables by default are set to be:
+
+  $sc_default_qty_to_display = 1; # becomes %%qty%% in html below
+  $sc_default_qty_box_html =
+'<INPUT TYPE=TEXT NAME="%%itemID%%" SIZE=3 MAXLENGTH=3 VALUE="%%qty%%">';
+
+In the event you need to change the look and feel of the quantity box, 
+hey should only be changed globally, such as in the free form logic.
+If you want to temporarily change them in agorascript for display of 
+one product only then use these variables instead:  
+
+  $qty 
+  $qty_box_html 
+
+The token %%QtyBox%% can take two optional arguments, a modifier and
+a default quantity, such as %%QtyBox-sm,1%% or %%QtyBox-a,%%.  The
+modifier is whatever text(numbers and letters) you desire and the
+quantity (a positive integer or nothing) is after the comma.  To use 
+the default quatity and only add a modifier, do no use a comma, just 
+add the modifier, as in %%QtyBox-sm%%.  
+
+This example illustrates the use of the token modifier to associate a 
+quantity box to a specific option:
+
+  <INPUT TYPE=HIDDEN NAME = "option|004|%%prodID-sm%%" 
+  VALUE='Small|0.00'>%%QtyBox-sm,%% Small (No extra charge)
+
+The option is has a -sm in the %%prodID%% token, as does the %%QtyBox%%
+token, so they will be matched up properly upon clicking the add-to-cart
+button.  The %%prodID-<modifier>%% and %%itemID-<modifier>%% tokens are
+the functional equivalents of the standard %%productID%% and %%itemID%%
+tokens.  See the variable_option_2.html file in the html/options directory
+to see it in use.  Notice that the %%QtyBox%% with no modifiers is turned
+off in that option file with the agorascript:
+
+  <!--agorascript-pre # needs to be inside the cut-here tags to be run!
+  $suppress_qty_box = "yes"; # we make our own boxes
+  return "";
+  -->
+
+
+Variable options with Agorascript
+---------------------------------
+
+Sometimes you desire to have a quantity discount or other option that 
+depends on other things, things that can change, and therefore need to be 
+calculated/recalculated periodically.  With variable options this can be 
+done fairly easily.
+
+The basic flow is this:
+
+1) When an item is added to the cart, a hidden field adds the text VarXXX 
+   where XX is the option number.
+2) Once the item is added to the cart, the option agorascript will 
+   calculate to actual value based on whatever you decide.  The value
+   is actually the text that you normally specify in a static options
+   file.
+3) Anytime a subsequent addition of the exact same item is added, or any 
+   item in fact, the options code will be re-run.  Same is true for a 
+   change in quantity.
+
+The cart user1 field is now dedicated to the use of variable options, but 
+this can be disabled by setting $sc_disable_variable_options='yes' in the 
+free form logic.
+
+Agora 4.0b and higher automatically handles special variable options.  
+Each time the cart is changed the cart contents are looped through one by
+one.  If the cart user1 field is not null, then it is assumed to be a list
+of "option file name, agorascript type;" specifications.  Each of those
+options files will be loaded, and the appropriate agorascript will be
+executed.  The array cart_row holds the row contents, any changes to the
+contents of that array will be written to the cart. The exception is with
+the options, as they will be constructed from the contents of the hash
+%cart_row_options (generated from the cart_row field "options_ids").  The
+shipping and unit prices will be re-calculated based on changes to the
+options, so do not adjust them in the options agorascript since it will
+double adjust them!
+
+
+How to use Variable Options
+---------------------------
+
+Variable options are handled by a combination of agorascript in the
+options file and the built-in processing code of agora version 4.0b and
+higher. The add-to-cart agorascript must put certain information in the
+cart user1 field for variable options to work.  Specifically, the options
+file name and agorascript type must be comma separated, terminated by a
+semicolon in cart user field one, and the corresponding agorascript must
+exist in the specified options file to actually perform the work.  It is
+suggested that the agorascript name be "agorascript-variable-options-nn",
+where nn is option number, so the user field one in the cart would be:
+  <option file name>,variable-options-nn;
+
+That agorascript must also be in that file (or a different file if you 
+want it to be, in must be the <option file name> you specifiy above.)  
+That agorascript is what generates that particular options text value. 
+
+Here is a sample of the three things to put in the options file for an 
+example variable option numbered 003:
+
+First, put in a hidden field that will add the option if the item is
+ordered, an optional table describing the option (in this case a 
+quantity discount) is also shown:
+ <h3>--cut here--</h3>
+ <INPUT TYPE=HIDDEN NAME = "option|003|%%PRODUCT_ID%%" VALUE='Var003'>
+ <TABLE WIDTH=45 CELLSPACING=0 CELLPADDING=0 BORDER=1>
+ <TR><TH>Quantity</TH><TH>Discount</TH></TR>
+ <TR><TD>100+</TD>  <TD>20%</TD></TR>
+ <TR><TD>50-99</TD> <TD>15%</TD></TR>
+ <TR><TD>25-49</TD> <TD>10%</TD></TR>
+ <TR><TD>10-24</TD> <TD>5%</TD></TR>
+ </TABLE>
+ <h3>--cut here--</h3>
+
+Also, when the item is added, a special tag is placed in the cart's 
+user1 field that this library will use to call another piece of 
+agorascript that will specify the actual option value.  The first part 
+is the option file's name, second is the 'type' of agorascript to 
+execute:
+  <!--agorascript-add-to-cart-opt-003 { 
+  # enable variable option code unconditionally for option 003
+  # first thing in quotes is the option file name!
+  $item_user1 .= "gift_option.html,variable-option-003;";}
+  -->
+
+Here is the actual agorascript executed for the variable option 003 that 
+specifies the equivalent of what is found in a normal 'static' option file 
+(or the special reset value needed before adding to the cart):
+  <!--agorascript-variable-option-003 {
+  local ($qty) = $cart_row[$cart{'quantity'}];
+  local ($price) = $cart_row[$cart{'price'}];
+  local ($myopt) = '';undef($cart_row_options{'003'});
+  if ($var_opt_action eq 'reset') {
+    # So that cart sorting can take place, reset the name
+    # MUST BE exactly the same name as the hidden var above
+    $myopt = 'Var003';
+   }
+  elsif ($qty > 99) {$myopt = '20% Quantity Discount|' . ((-0.20)*$price);}
+  elsif ($qty > 49) {$myopt = '15% Quantity Discount|' . ((-0.15)*$price);}
+  elsif ($qty > 24) {$myopt = '10% Quantity Discount|' . ((-0.10)*$price);} 
+  elsif ($qty > 9)  {$myopt = ' 5% Quantity Discount|' . ((-0.05)*$price);}
+  if ($myopt ne '') {$cart_row_options{'003'} = $myopt;}
+  } -->
+

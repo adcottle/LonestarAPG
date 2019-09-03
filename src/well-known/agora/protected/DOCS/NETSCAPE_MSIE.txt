@@ -1,0 +1,31 @@
+Why does it look fine on one browser and not another???
+-------------------------------------------------------
+
+Sometimes there are real differences between browsers, one may look fine,
+the other "off" just a little.  This happens sometimes, and you will need
+to tweek the HTML a bit for different possible browsers.
+
+Sometimes, though, NETSCAPE may simply present a blank page.  It really
+isn't blank, it is just that there were so many HTML errors it gave up
+trying to display anything.  If that happens, then take a look at the page
+source in the browser.  Often, you can obviously see that the headers or
+footers do not have their complete HTML being displayed.  A table or form
+is not clodes out, etc.  Often it is a direct result of not including the
+entire code in the .inc file.
+
+This is one reason the <h3>--cut here--<\/h3> tokens have been
+implemented.  instead of cutting up your HTML files after editing them
+with an HTML editor, you may place that token just above and below what
+you believe to be the start and end of the code you desire agora.cgi to
+use.  There is an example of how to do this in the DOC/options_files.txt
+document.  Currently, for header, footer, productPage.inc and options
+files have this is implemented.  
+
+If you observe your code behaving strangely dpending on the browser, you
+may just need to adjust the locations of the <h3>--cut here--<\/h3>
+tokens.  Make sure you close out all tables and forms, HTML needs
+beginning and ending tags!  If there is a <TABLE> tag, there must also be
+a </TABLE> tag to close it out. 
+
+Good Luck!
+

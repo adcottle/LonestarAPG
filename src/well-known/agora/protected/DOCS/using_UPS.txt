@@ -1,0 +1,69 @@
+Using the UPS part of the Ship By Weight (SBW) module
+=====================================================
+Last updated Oct 5, 2001
+Steve Kneizys
+
+The major settings for the UPS module are contained on the screen "Program
+Settings" in the store manager.  Once the settings there are done, you may
+begin using the module.  Because this module contacts UPS over the
+Internet, there is (hopefully!) no need to update tables or perl for new
+features or rate charts.  To customize the order form for other UPS
+products, you simply add or change the ones provided to correspond to the
+products you desire to offer. 
+
+For example, to create a radio button that is called "Real FAST" and is
+actually next day service, you could install a button as such: 
+
+    <input TYPE="radio" NAME="Ecom_ShipTo_Method"
+     VALUE="UPS Real FAST (1DA)" >Real FAST 
+
+The text at the end, "Real FAST", is what is displayed on the screen.  On
+the confirmation emails and order log, what is shown is the actual value
+of the button, in this case "UPS Real FAST (1DA)".  The product code for
+UPS is in parentheses, in this case 1DA.  Earlier versions did not require
+UPS to be the first part of the name in the VALUE= part, but with the
+addition of USPS and FEDEX to the SBW module that has changed. 
+
+This syntax allows you great flexibility in defining your options
+as well using any products that UPS offers.
+
+The box packing algorithm included is very simple.  It takes each item, as
+found in order on the shopping cart, and tries to add it to the current
+box.  If adding that item will exceed the maximum weight set in the store
+manager, then the current box is closed and that item is added to a new
+box.  Once a box is 'closed' the software does not reopen it.  This means
+it is possible for an item to be an 'orphan' at the end that could have
+easily been fit into a previous box.  If it is desired to place each item
+in it's own box, that is accomplished by settion the max weight per box to
+zero. 
+
+If you have options that affect the shipping, whether using the UPS module
+or using the "shipping" field in the standard way, in agora.cgi it is
+possible to program this into the options file.  Historically an option's
+value fields were "name|price", but agora uses "name|price|shipping".  The 
+option is assumed to not change the shipping if this field is not included.
+
+Here is a list of known Product Codes for UPS: 
+
+       1DM           Next Day Air Early AM
+       1DML          Next Day Air Early AM Letter
+       1DA           Next Day Air
+       1DAL          Next Day Air Letter
+       1DP           Next Day Air Saver
+       1DPL          Next Day Air Saver Letter
+       2DM           2nd Day Air A.M.
+       2DA           2nd Day Air
+       2DML          2nd Day Air A.M. Letter
+       2DAL          2nd Day Air Letter
+       3DS           3 Day Select
+       GNDCOM        Ground Commercial
+       GNDRES        Ground Residential
+       XPR           Worldwide Express
+       XDM           Worldwide Express Plus
+       XPRL          Worldwide Express Letter
+       XDML          Worldwide Express Plus Letter
+       XPD           Worldwide Expedited
+
+Note:  These codes have changed over time, but GNDCOM and GNDRES are 
+supported by the shipping library for backwards compatability.  Other 
+codes may be found/verified by using the documentation at the UPS site.

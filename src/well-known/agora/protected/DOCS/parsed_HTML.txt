@@ -1,0 +1,267 @@
+Parsed HTML and .inc files -- How AgoraCart displays things
+-----------------------------------------------------------
+Steve Kneizys & Mister Ed
+(Copyright 2000)
+20-FEB-2000
+06-JAN-2001 updated
+13-JUL-2001 updated
+26-JAN-2002 updated
+08-MAY-2003 updated
+See the variable options file in the DOCS directory or the variable options
+page in the online manual at AgoraCart.com as well!
+
+
+Having AgoraCart display items for you:  productPage.inc files:
+---------------------------------------------------------------
+
+You can run agorascript from inside productPage.inc files, as well header
+and footer files.  See the agorascript.txt file in the DOCS directory or the agorascript
+page in the online manual at AgoraCart.com for more information.
+
+The productPage.inc files determine how AgoraCart presents the data when
+it does a database lookup.  There are a few different productPage.inc
+files that are shipped with AgoraCart that you may use as a starting point
+for your store, should you decide to do a database-driven store.  see the
+00ReadMe.txt file in the html/templates sub directory or the html-templates page
+in the online manual at AgoraCart.com.
+
+On the sample store, if you click on the category PERL, it browses the
+items in the category PERL.  It uses the default productPage.inc file
+found in the html/html-templates directory, displaying the possible
+options, qty field, add-to-cart button, picture, name, price, and
+description.  However, if you do a search, it displays things in a much
+simpler fashion, giving the user the option to display each item or its
+category in a fashion almost identical to clicking on a category link.  It
+is able to use a different productPage.inc file by including the hidden
+field "ppinc" in the form used for the search.  
+
+Here is how "On-The-Fly Page Generation" works.  If there is a field named
+"ppinc", then the value is used to search for the proper productPage.inc
+file.  If the syntax used is: 
+
+ <A HREF="agora.cgi?cart_id=%%cart_id%%&xm=on&p_id=0010&ppinc=spec>
+ Spec Sheet</a>
+
+Then item 0010 is looked up (exact_match=on is the same as xm=on), 
+and the productPage.inc file used is actually:
+
+       productPage-spec.inc 
+
+The program inserts a dash, followed by the name given in the ppinc=
+argument, and places that in the name just before the ".inc" part.  If 
+that files is not found, the default file productPage.inc is used.
+
+Also, you may override the value of $sc_max_db_rows_returned that is set
+in the manager program under "Program Settings" by using the field name
+"maxp".  For example: 
+
+ <A HREF="agora.cgi?cart_id=%%cart_id%%&xm=on&keywords=memory&maxp=30>
+ Show Me the word memory in the database with max 30 records</a>
+
+Shows items in the database with the word "memory" in them, 30 records
+at a time.
+
+It is not required to use multiple productPage.inc files.  If only
+one productPage.inc file is there it will be used for everything.  
+However, having multiple files adds great flexibility to the display
+of your pages.
+
+At runtime, various variables are substituted into the productPage.inc
+file.  The list of possible %% tokens is:
+
+Meta-information:
+  %%URLofImages%% 
+  %%scriptURL%%
+  %%cart_id%%
+  %%agoracgi_ver%%
+
+Used to preserve "state" of AgoraCart, preserving page displayed, cart_id, 
+product, exact case/match, etc.:
+  %%make_hidden_fields%% for FORMS
+  %%href_fields%% for creating URL's
+
+Taken from the form data submitted to AgoraCart to search for/lookup
+items from the database:
+  %%ppinc%% 
+  %%maxp%%
+  %%product%% (not the same as the database value, this is a category
+               or partial category name)
+  %%p_id%%    (not the same as the database value, this is the partial
+               or exact product ID you are looking up)
+  %%keywords%%
+  %%next%%
+  %%exact_match%% exact_match=on means it matches on word boundaries 
+  %%exact_case%% exact_case=on means it matches the case of the word 
+  %%form_user1%% similar to keywords, search the user field 1 with user1=
+  %%form_user2%% ditto, field 2
+  %%form_user3%%   "     "    3
+  %%form_user4%%   "     "    4
+  %%form_user5%%   "     "    5
+
+Database fields for display of the database item:
+  %%prodID%% (%%ProductID%% or %%Product_ID%% work too!)
+  %%CategoryID%%
+  %%price%% (with the currency symbol)
+  %%cost%% (without the currency symbol)
+  %%name%%
+  %%image%%
+  %%description%%
+  %%shippingPrice%%,%%shipping%%,%%shippingWeight%% (are all the same thing)
+  %%userFieldOne%%
+  %%userFieldTwo%%
+  %%userFieldThree%%
+  %%userFieldFour%%
+  %%userFieldFive%%
+  %%optionFile%% (parsed and prepared OPTIONS file contents)
+  %%itemID%%/ (special "parsed" and "prepared" variable, placed into cart
+
+Tokens to help generate options on automatically generated pages:
+  %%AutoOptionNo%% -- generates opt # at the time the product is displayed
+                      (not recommended to mix with ones that have numbers,
+                      and you cannot use with variable options that rely 
+                      on agorascript.)
+
+  %%Load_Option_File <comma sep list of options files>%% -- can be used 
+                      inside options files too.
+
+There is another %% token, the %%eval()%% token, that adds a math function
+(actually a perl eval function, can be things other than math!) to product
+page inc files.  After the other %% tokens are substituted, the %%eval()%%
+function will be executed.  If you insert a complex token such as:
+
+%%eval(%%cost%% * 5)%%
+
+first it will substitute the price, then evaluate the expression.  
+If the price is 3.00, then the entire expression is evaluated internally
+first to be
+
+%%eval(3.00 * 5)%%
+
+then the answer when the math is actually done is
+
+15
+
+and that is what will be displayed on the web browser.  You may 
+also use these tokens within options HTML code, so the cost of
+the option depends on the price of the item.
+
+You can re-use the last value calculated, so that if you calculate
+the cost of an option then desire to display it, you do not have 
+to do the calculation twice.  Here is an example that sets a option
+cost based on the actual price:
+
+  <SELECT NAME = "option|%%AutoOptionNo%%|%%PRODUCT_ID%%">
+    <OPTION VALUE = "|">Extended Warranty
+    <OPTION 
+VALUE = "1 Yr Ext. Warr.|%%eval(&format_price(0.1*%%cost%%))%%"
+>1 Year (%%eval(&display_price($myans))%%)
+    <OPTION 
+VALUE = "3 Yr Ext. Warr.|%%eval(&format_price(0.25*%%cost%%))%%"
+>3 Years (%%eval(&display_price($myans))%%)
+  </SELECT>
+
+Notice that the $myans variable holds the result of the previous
+calculation, and you can then use that value in the next eval, in
+this example we turn it into a display price.  When putting something like
+this in an options file, the actual math will be done at the time the
+product page inc file is generating the browser HTML.
+
+The %%eval()%% token has it's limitations.  More complex evaluations
+should be done with agorascript. 
+
+
+Parsed HTML pages and Header and Footer .inc files:
+---------------------------------------------------
+When running AgoraCart with a simple URL like:
+
+  http://www.yourdomain.com/cgi-bin/store/agora.cgi
+
+the program starts by displaying the file index.html in the /html
+directory.  All of the pages in the /html and /html/pages directories
+should only be displayed throught the AgoraCart program, never displayed
+to the customer directly.  The files in the /html/pages directory may be displayed using the
+syntax:
+
+  http://www.yourdomain.com/cgi-bin/store/agora.cgi?page=License.html
+
+The files in the /html directory may be displayed using the
+syntax:
+
+  http://www.yourdomain.com/cgi-bin/store/agora.cgi?cartlink=About_Us.html
+
+(Note: agorascript routines are available to display files within the
+/html directory, building links automatically.  Files here should use underscores
+to separate words as they will be removed when the links are built by the agorascript
+sections.  All .htm and .html files within the store's /html directory will be shown on
+a link list built by the agorascript code ... except index.html, frontpage.html, and error.html files.
+This makes a great directory to place warranty, about us, and company oriented pages that
+you wish to have autmatic links built to.  Links are added and deleted as files are added to
+/html the directory)
+
+When AgoraCart parses the page, it looks for several things.  One thing is
+it looks for <!--agorascript tags.  If it finds them and you have
+turned on agorascript in the manager program then it will execute the
+script either before or after replacement of %%tokens%% found on the page,
+depending on if the agorascript tag ends in -pre or -post.  (For more
+information on agorascript, see the agorascript.txt file in the DOCS
+directory.)  Some things, such as "cart_id=", do not need a %%CartID%%
+token after them, as the script will place the cart id after it without
+the token (but you can place it there if you desire.)  The %%tokens%% are
+replaced with the runtime values. Things such as the cart_id, your
+script's URL, and the path to your images can be substituted for the %%
+tokens.  Here is a list of the tokens that are substituted for pages
+displayed (many have already been defined above): 
+
+   %%cart_id%%         The $cart_id which identifies the shopping cart   
+   %%date%%           The cuurent date
+   %%page%%          The name of the page being displayed
+   %%URLofImages%%  The URL of Images as set in the manager.cgi program
+   %%agoracgi_ver%%   Which version of the script you are running
+   %%StoreHeader%%   adds store_header.inc file to maintain store look and design
+   %%StoreFooter%%   adds store_footer.inc file to maintain store look and design
+   %%scriptURL%%
+   %%href_fields%%
+   %%make_hidden_fields%%
+   %%ppinc%%
+   %%maxp%%
+   %%product%%
+   %%p_id%%
+   %%keywords%%
+   %%next%% 
+   %%exact_match%%
+   %%exact_case%%
+
+
+Using productPage.inc files in Static Pages
+-------------------------------------------
+
+Sometimes you want to use a certain ppinc file to display a few
+items from the product database, such as specials or items from
+a certain category, and desire to do it on a static page.  The 
+best way to do this is to 'hard code' your query in agorascript.
+Here is an example that will run on the sample store:
+
+  <table width="100%" cellspacing=0 cellpadding=0 border=0>
+  <tr><td>
+  <!--agorascript-pre
+  { local (%save_data) = %form_data;
+  local($body_html,$prod_message,$status,$total_row_count);
+  { local (%form_data);
+  local($main_program_running)='no';
+  undef(%form_data);
+  # search criteria and other specs go here
+  $form_data{'maxp'}=4;
+  $form_data{'ppinc'}='4a';
+  $form_data{'p'}='html';
+  &alias_and_override;
+  ($body_html,$prod_message,$status,$total_row_count) = 
+        &create_html_page_from_db_body;
+  } 
+  %form_data = %save_data; 
+  return "$body_html";
+  } -->
+  </td></tr></table>
+
+If you are flaging specials in user fields, for example, just change
+the $form-data{'p'} line to specify a user field and what to expect
+to see there.  

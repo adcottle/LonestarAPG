@@ -1,0 +1,34 @@
+$sc_auth_top_message = qq'put something here or leave blank';
+$sc_gateway_username = 'your_ID_here';
+$txnkey = "Your_Key_Here";
+$tstamp = time;
+$tstamp3 = "time";
+$sc_order_script_url = "https://secure.authorize.net/gateway/transact.dll";
+$sc_auth_upsgroundres = "yes";
+$sc_auth_upsgroundcomm = "yes";
+$sc_auth_ups2da = "yes";
+$sc_auth_ups1da = "yes";
+$sc_auth_fedexprioiryovernight = "yes";
+$sc_auth_fedexexpress = "yes";
+$sc_auth_fedexground = "yes";
+$sc_auth_fedexhome = "yes";
+$sc_auth_uspsparcelpost = "yes";
+$sc_auth_uspsprioritymail = "yes";
+$sc_auth_uspsexpressmail = "yes";
+$x_Logo_URL = "";
+$x_Color_Background = "#FFFFFF";
+$x_Color_Link = "#0000FF";
+$x_Color_Text = "#000000";
+$x_Description = "Online Order at www.mydomain.com";
+$x_Header_Html_Payment_Form = "<!--agorascript-pre
+  return \$anet_cart_table;
+-->";
+$x_Footer_Html_Payment_Form = "Bottom of the orderform text goes here";
+$x_Header_Html_Receipt = "Top of the receipt text goes here";
+$x_Footer_Html_Receipt = "";
+$x_Header_Email_Receipt = "top of e-mail";
+$x_Footer_Email_Receipt = "<!--agorascript-pre
+ return \$anet_prod_in_cart;
+-->";
+$merchant_live_mode = "no";
+1;

@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "LSCAPG_chat"
+AuthUserFile "/home/lones6/.htpasswds/public_html/chat/passwd"
+require valid-user
