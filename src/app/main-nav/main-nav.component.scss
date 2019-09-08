@@ -44,3 +44,22 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
+  .myNav{
+    font-weight: 500 !important;
+    color: black !important;
+    font-size: medium !important;
+    font-family: Georgia, serif !important; 
+  }
+
+  .navLogo {
+    height: 105px;
+    width: 155px;
+    opacity: .2;
+  }
+
+.content-bottom {
+    position: absolute;    
+    bottom: 0; /*This is the part that glues it to the bottom*/
+    padding-bottom:  50px;
+}

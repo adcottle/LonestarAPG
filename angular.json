@@ -29,6 +29,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss",
               "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
               "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
@@ -39,7 +40,7 @@
               "node_modules/animate.css/animate.css",
               "src/assets/leaflet/leaflet.css",
               "./node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css"
-                      ],
+            ],
             "scripts": [
               "src/assets/leaflet/leaflet.js",
               "node_modules/chart.js/dist/Chart.js",
@@ -107,6 +108,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -138,6 +140,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "apg"
 }
