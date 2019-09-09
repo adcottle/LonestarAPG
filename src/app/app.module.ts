@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MaterialModule } from './material.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from '@angular/cdk/layout';
 
 //app pages
 import { MainNavComponent } from './main-nav/main-nav.component';
@@ -29,6 +30,7 @@ import { OfficersComponent } from './pages/officers/officers.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
+    LayoutModule,
     MaterialModule
   ],
   providers: [],
