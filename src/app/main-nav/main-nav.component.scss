@@ -49,7 +49,7 @@
     font-weight: 500 !important;
     color: black !important;
     font-size: medium !important;
-    font-family: Georgia, serif !important; 
+    // font-family: DejaVu Sans Mono, monospace !important; 
   }
 
   .navLogo {
@@ -59,7 +59,11 @@
   }
 
 .content-bottom {
-    position: absolute;    
-    bottom: 0; /*This is the part that glues it to the bottom*/
-    padding-bottom:  50px;
+  position: absolute;    
+  bottom: 0; /*This is the part that glues it to the bottom*/
+  padding-bottom:  50px;
+}
+
+.sidenav {
+  width: 200px !important;
 }
