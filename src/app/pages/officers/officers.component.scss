@@ -12,7 +12,7 @@
 .generic {
     border-radius: 50%;
     height: 205px;
-    width: 156px;
+    width: 175px;
 }
 
 .aligned-with-icon-relative{
@@ -26,7 +26,8 @@
 }
 
 .turn {
-    color: #b71c1c !important;    
+    color: #b71c1c !important;
+    cursor: pointer;    
 }
 
 
@@ -117,7 +118,7 @@
 
 
 
-//take 2
+//part 2
 .tp-wrapper {
     -webkit-perspective: 800px;
             perspective: 800px;

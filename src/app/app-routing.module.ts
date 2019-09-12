@@ -8,6 +8,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { MembershipComponent } from './pages/membership/membership.component';
 import { ProfessionalComponent } from './pages/professional/professional.component';
 import { EthicsComponent } from './pages/ethics/ethics.component';
+import { AdministrativeComponent } from './pages/administrative/administrative.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'membership', component: MembershipComponent },
   { path: 'professional', component: ProfessionalComponent },
+  { path: 'administrative', component: AdministrativeComponent },
   { path: 'ethics', component: EthicsComponent },
   // otherwise redirect to home
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
