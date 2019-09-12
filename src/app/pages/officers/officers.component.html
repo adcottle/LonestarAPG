@@ -1,155 +1,253 @@
 <div class="pagediv">
-    <div class="section group">
-            <div class="col span_1_of_3">
-                    <mat-card class="example-card">
-                            <mat-card-header>
-                                <h5 class="title">Cari Taplin</h5>
-                            </mat-card-header>
-                            <mat-card-content>
-                                <mat-divider></mat-divider>
-                                <hr>
-                                <img class="generic" src="../../../assets/images/genericUser.png">
-                            </mat-card-content>
-                            <mat-divider></mat-divider>
-                            <mat-card-actions>
-                                <h6>President, Chapter Representative</h6>
-                                <p><i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">cari@mail.com</a></span></p>
-                                <mat-icon class="turn" style="float:right">flip_camera_android</mat-icon>
-                                <span class="aligned-with-icon-relative"></span>                        
-                            </mat-card-actions>
-                            <mat-card-footer>
-                                <!-- <mat-icon class="turn" style="float: right;">flip_camera_android</mat-icon> -->
-                            </mat-card-footer>
-                        </mat-card>
-            </div>
-            <div class="col span_1_of_3">
-                    <img class="navLogo" src="../../assets/images/sLogo.jpg">
-            </div>
-            <div class="col span_1_of_3">
-                    <mat-card class="example-card">
-                            <mat-card-header>
-                                <h5 class="title">Melissa Corn Finlay</h5>
-                            </mat-card-header>
-                            <mat-card-content>
-                                <mat-divider></mat-divider>
-                                <hr>
-                                <img class="generic" src="../../../assets/images/genericUser.png">
-                            </mat-card-content>
-                            <mat-divider></mat-divider>
-                            <mat-card-actions>
-                                <h6>Vice President, Membership</h6>
-                                <p><i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">melissa@mail.com</a></span></p>
-                                <mat-icon class="turn" style="float:right">flip_camera_android</mat-icon>
-                                <span class="aligned-with-icon-relative"></span>                        
-                            </mat-card-actions>
-                            <mat-card-footer>
-                                <!-- <mat-icon class="turn" style="float: right;">flip_camera_android</mat-icon> -->
-                            </mat-card-footer>
-                        </mat-card>
-            </div>
+        <div class="section group">
+           <div class="col span_1_of_3">
+                <div class='card-container'>
+                        <div class='flippable-card'[@flipState]="flip" >
+              <mat-card class="example-card">
+                 <mat-card-header>
+                    <h5 class="title">Cari Taplin</h5>
+                 </mat-card-header>
+                 <mat-card-content>
+                    <mat-divider></mat-divider>
+                    <hr>
+                    <img class="generic" src="../../../assets/images/genericUser.png">
+                 </mat-card-content>
+                 <mat-divider></mat-divider>
+                 <mat-card-actions>
+                    <h6>President, Chapter Representative</h6>
+                    <p><i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">cari@mail.com</a></span></p>
+                    <mat-icon class="turn" style="float:right" (click)="toggleFlip()">flip_camera_android</mat-icon>
+                    <span class="aligned-with-icon-relative"></span>                        
+                 </mat-card-actions>
+                 <mat-card-footer>
+                 </mat-card-footer>
+              </mat-card>
+              <mat-card class='back'>
+                    <mat-card-header>
+                       <h5 class="title">Cari Taplin</h5>
+                    </mat-card-header>
+                    <mat-card-content>
+                       <mat-divider></mat-divider>
+                       <h4>A Brief BIO here</h4>
+                       <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. 
+                       </p>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                    <mat-card-actions>
+                       <mat-icon class="turn" style="float:right" (click)="toggleFlip()">flip_camera_android</mat-icon>
+                       <span class="aligned-with-icon-relative"></span>                        
+                    </mat-card-actions>
+                    <mat-card-footer>
+                    </mat-card-footer>
+                    <!-- </mat-card> -->
+                 </mat-card>
+              </div>
+           </div>
+           </div>
+
+           <div class="col span_1_of_3">
+              <img class="navLogo" src="../../assets/images/sLogo.jpg">
+
+           </div>
+           <div class="col span_1_of_3">
+                <div class='card-container'>
+                        <div class='flippable-card' [@flipState]="flip2" >
+                           <mat-card class="example-card">
+                              <mat-card-header>
+                                 <h5 class="title">Melissa Corn Finlay</h5>
+                              </mat-card-header>
+                              <mat-card-content>
+                                 <mat-divider></mat-divider>
+                                 <hr>
+                                 <img class="generic" src="../../../assets/images/genericUser.png">
+                              </mat-card-content>
+                              <mat-divider></mat-divider>
+                              <mat-card-actions>
+                                 <h6>Vice President, Membership</h6>
+                                 <p><i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">melissa@mail.com</a></span></p>
+                                 <mat-icon class="turn" style="float:right" (click)="toggleFlip2()" >flip_camera_android</mat-icon>
+                                 <span class="aligned-with-icon-relative"></span>                        
+                              </mat-card-actions>
+                              <mat-card-footer>
+                              </mat-card-footer>
+                           </mat-card>
+                           <mat-card class='back'>
+                              <!-- <mat-card class="example-card"> -->
+                              <mat-card-header>
+                                 <h5 class="title">Melissa Corn Finlay</h5>
+                              </mat-card-header>
+                              <mat-card-content>
+                                 <mat-divider></mat-divider>
+                                 <h4>A Brief BIO here</h4>
+                                 <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. 
+                                 </p>
+                              </mat-card-content>
+                              <mat-divider></mat-divider>
+                              <mat-card-actions>
+                                 <mat-icon class="turn" style="float:right" (click)="toggleFlip2()">flip_camera_android</mat-icon>
+                                 <span class="aligned-with-icon-relative"></span>                        
+                              </mat-card-actions>
+                              <mat-card-footer>
+                              </mat-card-footer>
+                              <!-- </mat-card> -->
+                           </mat-card>
+                        </div>
+                     </div>
+           </div>
+        </div>       
+        <div class="section group">
+           <div class="col span_1_of_3">
+                &nbsp; 
+           </div>
+           <div class="col span_1_of_3">
+                &nbsp; 
+           </div>
+           <div class="col span_1_of_3">
+                &nbsp; 
+           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <table style="width: 95%;" cellpadding="10">
-        <tbody>
-            
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>              
-            </tr>
-            <tr>
-                <td>
-                <mat-card class="example-card">
+        <div class="section group">
+           <div class="col span_1_of_3">
+                <div class='card-container'>
+                        <div class='flippable-card' [@flipState]="flip3" >
+              <mat-card class="example-card">
+                 <mat-card-header>
+                    <h5 class="title">Dana Leeds</h5>
+                 </mat-card-header>
+                 <mat-card-content>
+                    <mat-divider></mat-divider>
+                    <hr>
+                    <img class="generic" src="../../../assets/images/genericUser.png">
+                 </mat-card-content>
+                 <mat-divider></mat-divider>
+                 <mat-card-actions>
+                    <h6>Secretary</h6>
+                    <p><i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">dana@mail.com</a></span></p>
+                    <mat-icon class="turn" style="float:right" (click)="toggleFlip3()">flip_camera_android</mat-icon>
+                    <span class="aligned-with-icon-relative"></span>                        
+                 </mat-card-actions>
+                 <mat-card-footer>
+                 </mat-card-footer>
+              </mat-card>
+              <mat-card class='back'>
+                    <!-- <mat-card class="example-card"> -->
                     <mat-card-header>
-                        <h5 class="title">Dana Leeds</h5>
+                       <h5 class="title">Dana Leeds</h5>
                     </mat-card-header>
                     <mat-card-content>
-                        <mat-divider></mat-divider>
-                        <hr>
-                        <img class="generic" src="../../../assets/images/genericUser.png">
+                       <mat-divider></mat-divider>
+                       <h4>A Brief BIO here</h4>
+                       <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. 
+                       </p>
                     </mat-card-content>
                     <mat-divider></mat-divider>
                     <mat-card-actions>
-                        <h6>Secretary</h6>
-                        <p><i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">dana@mail.com</a></span></p>
-                        <mat-icon class="turn" style="float:right">flip_camera_android</mat-icon>
-                        <span class="aligned-with-icon-relative"></span>                        
+                       <mat-icon class="turn" style="float:right" (click)="toggleFlip3()">flip_camera_android</mat-icon>
+                       <span class="aligned-with-icon-relative"></span>                        
                     </mat-card-actions>
                     <mat-card-footer>
-                        <!-- <mat-icon class="turn" style="float: right;">flip_camera_android</mat-icon> -->
                     </mat-card-footer>
-                </mat-card>
-                </td>
-                <td>
-                <mat-card class="example-card">
+                    <!-- </mat-card> -->
+                 </mat-card>
+              </div>
+           </div>
+           </div>
+           <div class="col span_1_of_3">
+                <div class='card-container'>
+                        <div class='flippable-card' [@flipState]="flip4" >
+              <mat-card class="example-card">
+                 <mat-card-header>
+                    <h5 class="title">Teresa Devine</h5>
+                 </mat-card-header>
+                 <mat-card-content>
+                    <mat-divider></mat-divider>
+                    <hr>
+                    <img class="photo" src="../../../assets/images/tbdevine.jpg">
+                 </mat-card-content>
+                 <mat-divider></mat-divider>
+                 <mat-card-actions>
+                    <h6>Treasurer</h6>
+                    <p>
+                       <i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">teresa@mail.com</a></span>
+                    </p>
+                    <mat-icon class="turn" style="float:right" (click)="toggleFlip4()">flip_camera_android</mat-icon>
+                    <span class="aligned-with-icon-relative"></span>                        
+                 </mat-card-actions>
+                 <mat-card-footer>
+                 </mat-card-footer>
+              </mat-card>
+              <mat-card class='back'>
+                    <!-- <mat-card class="example-card"> -->
                     <mat-card-header>
-                        <h5 class="title">Teresa Devine</h5>
+                       <h5 class="title">Teresa Devine</h5>
                     </mat-card-header>
                     <mat-card-content>
-                        <mat-divider></mat-divider>
-                        <hr>
-                        <img class="photo" src="../../../assets/images/tbdevine.jpg">
+                       <mat-divider></mat-divider>
+                       <h4>A Brief BIO here</h4>
+                       <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. 
+                       </p>
                     </mat-card-content>
                     <mat-divider></mat-divider>
                     <mat-card-actions>
-                        <h6>Treasurer</h6>
-                        <p>
-                            <i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">teresa@mail.com</a></span>
-                        </p>
-                        <mat-icon class="turn" style="float:right">flip_camera_android</mat-icon>
-                        <span class="aligned-with-icon-relative"></span>                        
+                       <mat-icon class="turn" style="float:right" (click)="toggleFlip4()">flip_camera_android</mat-icon>
+                       <span class="aligned-with-icon-relative"></span>                        
                     </mat-card-actions>
                     <mat-card-footer>
-                        <!-- <mat-icon class="turn" style="float: right;">flip_camera_android</mat-icon> -->
                     </mat-card-footer>
-                </mat-card>
-                </td>
-                <td>
-                <mat-card class="example-card">
+                    <!-- </mat-card> -->
+                 </mat-card>
+              </div>
+           </div>
+           </div>
+           <div class="col span_1_of_3">
+                <div class='card-container'>
+                        <div class='flippable-card' [@flipState]="flip5" >
+              <mat-card class="example-card">
+                 <mat-card-header>
+                    <h5 class="title">Cari Taplin</h5>
+                 </mat-card-header>
+                 <mat-card-content>
+                    <mat-divider></mat-divider>
+                    <hr>
+                    <img class="generic" src="../../../assets/images/genericUser.png">
+                 </mat-card-content>
+                 <mat-divider></mat-divider>
+                 <mat-card-actions>
+                    <h6>Webmaster</h6>
+                    <p><i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">cari@mail.com</a></span></p>
+                    <mat-icon class="turn" style="float:right" (click)="toggleFlip5()">flip_camera_android</mat-icon>
+                    <span class="aligned-with-icon-relative"></span>                        
+                 </mat-card-actions>
+                 <mat-card-footer>
+                 </mat-card-footer>
+              </mat-card>
+              <mat-card class='back'>
+                    <!-- <mat-card class="example-card"> -->
                     <mat-card-header>
-                        <h5 class="title">Cari Taplin</h5>
+                       <h5 class="title">Cari Taplin</h5>
                     </mat-card-header>
                     <mat-card-content>
-                        <mat-divider></mat-divider>
-                        <hr>
-                        <img class="generic" src="../../../assets/images/genericUser.png">
+                       <mat-divider></mat-divider>
+                       <h4>A Brief BIO here</h4>
+                       <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. 
+                       </p>
                     </mat-card-content>
                     <mat-divider></mat-divider>
                     <mat-card-actions>
-                        <h6>Webmaster</h6>
-                        <p><i class="far fa-envelope"></i><span class="aligned-with-icon-relative"><a href="mailto:webmaster@example.com">cari@mail.com</a></span></p>
-                        <mat-icon class="turn" style="float:right">flip_camera_android</mat-icon>
-                        <span class="aligned-with-icon-relative"></span>                        
+                       <mat-icon class="turn" style="float:right" (click)="toggleFlip5()">flip_camera_android</mat-icon>
+                       <span class="aligned-with-icon-relative"></span>                        
                     </mat-card-actions>
                     <mat-card-footer>
-                        <!-- <mat-icon class="turn" style="float: right;">flip_camera_android</mat-icon> -->
                     </mat-card-footer>
-                </mat-card>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
+                    <!-- </mat-card> -->
+                 </mat-card>
+              </div>
+           </div>
+           </div>
+        </div>
+     </div>

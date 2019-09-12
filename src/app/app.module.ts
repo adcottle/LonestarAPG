@@ -15,6 +15,10 @@ import { BylawsComponent } from './pages/bylaws/bylaws.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { HomeComponent } from './pages/home/home.component';
 import { OfficersComponent } from './pages/officers/officers.component';
+import { EventsComponent } from './pages/events/events.component';
+import { MembershipComponent } from './pages/membership/membership.component';
+import { ProfessionalComponent } from './pages/professional/professional.component';
+import { EthicsComponent } from './pages/ethics/ethics.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { OfficersComponent } from './pages/officers/officers.component';
     BylawsComponent,
     ContactComponent,
     HomeComponent,
-    OfficersComponent
+    OfficersComponent,
+    EventsComponent,
+    MembershipComponent,
+    ProfessionalComponent,
+    EthicsComponent
   ],
   imports: [
     BrowserModule,

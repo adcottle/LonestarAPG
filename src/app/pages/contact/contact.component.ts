@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 declare let L;
-// import leaflet plugin
 import '../../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 
 
@@ -37,7 +36,8 @@ export class ContactComponent implements OnInit {
 
         const marker = L.marker([30.354992, -97.755636], this.icon).addTo(map);
         marker.bindPopup("Lone Star Chapter APG").openPopup();
-    }
+  }
+
   
 
 }
