@@ -19,7 +19,6 @@ import { EventsComponent } from './pages/events/events.component';
 import { MembershipComponent } from './pages/membership/membership.component';
 import { ProfessionalComponent } from './pages/professional/professional.component';
 import { EthicsComponent } from './pages/ethics/ethics.component';
-import { AdministrativeComponent } from './pages/administrative/administrative.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +31,7 @@ import { AdministrativeComponent } from './pages/administrative/administrative.c
     EventsComponent,
     MembershipComponent,
     ProfessionalComponent,
-    EthicsComponent,
-    AdministrativeComponent
+    EthicsComponent
   ],
   imports: [
     BrowserModule,

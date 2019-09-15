@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfessionalComponent implements OnInit {
 
+  private selectedTab = 0;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  changeTab() {
+    this.selectedTab += 1;
+    if (this.selectedTab >= 2) this.selectedTab = 0;
   }
 
 }

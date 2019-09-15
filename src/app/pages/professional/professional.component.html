@@ -1,1 +1,89 @@
-<div class="pagediv"><p>professional works!</p></div>
+<div class="pagediv">
+        <mat-tab-group [selectedIndex]="selectedTab" dynamicHeight>
+           <mat-tab label="Tab 1" class="example-large-box mat-elevation-z4" label="Hire A Professional">
+              <div class="example-large-box mat-elevation-z4">
+                 <div class="pHeader">
+                    <span class="firstLetter">W</span>hy Hire a Professional Genealogist?
+                    <mdb-icon class="turn" style="float:right" (click)="changeTab()" far icon="arrow-alt-circle-right"></mdb-icon>
+                    <span class="aligned-with-icon-relative"></span>
+                 </div>
+                 <mat-divider></mat-divider>
+                 <br>
+                 
+                 <div class="profContent">
+                 <ol>
+                    <li>Ask for a letter of agreement between you and the researcher before any money is exchanged or work is performed.</li>
+                    <li>Insist that the letter describe the following points.
+                    <ul>
+                        <li>Scope of work to be performed</li>
+                        <li>Hours to be worked for you with some pro-vision for time extensions under specified circumstances</li>
+                        <li>Fees to be charged for various activities</li>
+                        <li>Explanation of what the retainer covers and how it will be applied toward final payment</li>
+                        <li>Provision for research to extend past terms of initial agreement and how additional authorizations are to be put in writing</li>
+                    </ul>
+                    </li>
+                    <li>The agreement should identify who holds the copyright to the written research reports. Your researcher probably will retain that right. This means you cannot publish the report without the researcher&rsquo;s permission.</li>
+                    <li>If your researcher is a member of the Association of Professional Genealogists and you believe he or she has not worked within the <a href="ethics.htm">Code of Ethics</a>, you can file a grievance with the organization. APG will work with you and the professional to mediate the disagreement.</li>
+                    </ol>
+                            See the <a href="http://www.apgen.org/articles/hire.html" target="_blank">Association of Professional Genealogists website</a> for more details.
+              </div>
+            </div>
+           </mat-tab>
+           <mat-tab label="Tab 2" label="Become a Professional">
+              <div class="example-large-box mat-elevation-z4">
+                 <div id="top" class="pHeader">
+                    <span class="firstLetter">H</span>ow To Become a Professional Genealogist
+                    <mdb-icon (click)="changeTab()" class="turn" style="float:left" far icon="arrow-alt-circle-left"></mdb-icon>
+                    <span class="aligned-with-icon-relative"></span> 
+                 </div>
+                 <mat-divider></mat-divider>
+                 <br>
+                 
+                 <div class="profContent">
+                 <h2 id="top">Reference Material</h2>
+                  
+                    <p>The <a href="http://bcgcertification.org" target="_blank">Board for Certification of Genealogists</a> (BCG) has a <a href="https://bcgcertification.org/learning/" target="_blank">Learning Center</a>&nbsp;that will be useful to anyone wishing to become a professional genealogist.</p>
+                    
+                    <p>The <a href="https://www.icapgen.org" target="_blank">International Commission for the Accreditation of Professional Genealogists</a> (ICAPGEN) offers <a href="https://www.icapgen.org/preparation-resources/" target="_blank">Preparation Resources</a>.</p>
+                    
+                    <h2>The following publications are essential to the library of every professional genealogist:</h2>
+                    
+                    <p>Bettinger, Blaine T., and Debbie Parker Wayne.&nbsp;<a href="https://www.ngsgenealogy.org/genetic-genealogy-in-practice/" rel="noopener" target="_blank"><em>Genetic Genealogy in Practice</em></a><em>.</em>&nbsp;Arlington, VA: National Genealogical Society, 2016.</p>
+                    
+                    <p>Board for Certification of Genealogists<i>.&nbsp;</i><a href="https://bcgcertification.org/product/bcg-genealogy-standards/" target="_blank"><em>Genealogy Standards</em></a><em>.</em>&nbsp;Nashville, TN: Ancestry, 2014.<br />
+                    <br />
+                    Curran, Joan F., Madilyn Coen Crane, and John H. Wray.&nbsp;<a href="https://www.ngsgenealogy.org/numbering-genealogy/" rel="noopener" target="_blank"><em>Numbering Your Genealogy: Basic Systems, Complex Families, and International Kin.</em></a>&nbsp;NGS Special Publication No. 97. Revised edition of Special Publication No. 64. Arlington, VA: National Genealogical Society, 2008.<br />
+                    <br />
+                    Greenwood, Val. D. <a href="https://library.genealogical.com/printpurchase/3napy" target="_blank"><i>The Researcher&#39;s Guide to American Genealogy</i></a>. 4d edition. Baltimore: Genealogical Publishing Company, 2017.</p>
+                    
+                    <p>Mills, Elizabeth Shown.&nbsp;<a href="https://www.amazon.com/Evidence-Explained-History-Artifacts-Cyberspace/dp/0806320400" rel="noopener" target="_blank"><em>Evidence Explained: Citing History Sources from Artifacts to Cyberspace</em></a><em>.&nbsp;</em>3rd edition, revised. Baltimore, Maryland: Genealogical Publishing Company, 2017. Especially note &ldquo;Fundamentals of Citation,&rdquo; Chapter 2. (For continual updates and discussions visit&nbsp;<a href="https://web.archive.org/web/20180603063455/https://www.evidenceexplained.com/" rel="noopener" target="_blank">https://www.evidenceexplained.com/</a>)</p>
+                    
+                    <p>&mdash;&mdash;&mdash;, editor.&nbsp;<a href="https://library.genealogical.com/printpurchase/yqWnX" rel="noopener" target="_blank"><em>Professional Genealogy: A Manual for Researchers, Writers, Teachers, and Librarians.</em></a>&nbsp;Baltimore: Genealogical Publishing Co., 2001.</p>
+                    
+                    <p>&mdash;&mdash;&mdash;, editor.&nbsp;<a href="https://library.genealogical.com/printpurchase/Xeger" rel="noopener" target="_blank"><em>Professional Genealogy: Preparation, Practice &amp; Standards.</em></a>&nbsp;Baltimore: Genealogical Publishing Co., 2018.<br />
+                    &nbsp;</p>
+                    
+                    <h2>Training courses recommended by the Association of Professional Genealogists include:</h2>
+                    
+                    <p>As a member of the Association of Professional Genealogists, you have access to all previously recorded <a href="https://www.apgen.org/webinars/index.html" target="_blank">webinars</a>.</p>
+                    
+                    <p><a href="http://www.gen-fed.org" target="_blank">Genealogical Institute on Federal Records</a> (GenFed)</p>
+                    
+                    <p><a href="http://www.gripitt.org" target="_blank">Genealogical Research Institute of Pittsburgh</a> (GRIP)<br />
+                    <br />
+                    <a href="http://ighr.gagensociety.org" target="_blank">Institute of Genealogy and Historical Research</a>&nbsp;(IGHR)</p>
+                    
+                    <p><a href="http://www.ngsgenealogy.org/" target="_blank">National Genealogical Society</a>&nbsp;offers many&nbsp;<a href="https://www.ngsgenealogy.org/genealogy-courses/" target="_blank">Online Courses</a></p>
+                    
+                    <p><a href="https://ugagenealogy.org/aem.php?eid=36" target="_blank">Salt Lake Institute of Genealogy</a> (SLIG)</p>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <mdb-icon (click)="changeTab()" class="turn" style="float:left" far icon="arrow-alt-circle-left"></mdb-icon>
+                    <br>
+              </div>
+              </div>
+           </mat-tab>
+        </mat-tab-group>
+     </div>
+
+     https://www.familysearch.org/en/home/

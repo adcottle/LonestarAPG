@@ -1,5 +1,5 @@
 .map{
-    height: 600px;
+    height: 450px;
     width: 775px;
     overflow:hidden;
     // padding-bottom:56.25%;
@@ -9,4 +9,13 @@
 .addy {
     padding-left: 60px;
     line-height: .2;
+}
+
+.disHeader {
+    background-color: #fbe9e7;
+}
+
+.disText {
+    font-size: 12px;
+    text-align: left;
 }
