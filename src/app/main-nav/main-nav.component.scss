@@ -1,83 +1,99 @@
-.nav-item {
-    font-size: 14px;
-    color: #b71c1c !important;
-}
-
-.apgLogo {
-  height: 65px;
-  width: 105px;
-}
-
-.ddHeader {
-  font-size: 16px;
-  color: darkslategray;
-  text-align: center;
-  text-decoration: underline;
-  font-weight: bolder;
-}
-
-.pull-left img{
-    height: 76px;
-    width: 478px;
-}
-.sidenav {
-    height: 100%;
-    width: 140px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 120px;
-    -webkit-box-shadow: 8px 0 10px -6px black;
-	   -moz-box-shadow: 8px 0 10px -6px black;
-       box-shadow: 4px 0 10px -6px black;
-}
+/* For width smaller than 400px: */
+.appHeader {
+  content: url('../../assets/images/smallLogo.jpg');
+  background-repeat: no-repeat;
   
-  .sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 12px;
-    color: #818181;
-    display: block;
-  }
-  
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-  
-  .main {
-    margin-left: 160px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-  }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-
-  .myNav{
-    font-weight: 500 !important;
-    color: black !important;
-    font-size: medium !important;
-    // font-family: DejaVu Sans Mono, monospace !important; 
-  }
-
-  .navLogo {
-    height: 105px;
-    width: 155px;
-    opacity: .2;
-  }
-
-.content-bottom {
-  position: absolute;    
-  bottom: 0; /*This is the part that glues it to the bottom*/
-  padding-bottom:  50px;
-  padding-left: 11%;
 }
 
-.sidenav {
-  width: 200px !important;
+/* For width 401px and larger: */
+@media only screen and (min-width: 485px) {
+  .appHeader {
+    content: url('../../assets/images/logo.jpg');
+    height: 100px;
+  }
 }
+
+
+// .nav-item {
+//     font-size: 14px;
+//     color: #b71c1c !important;
+// }
+
+// .apgLogo {
+//   height: 65px;
+//   width: 105px;
+// }
+
+// .ddHeader {
+//   font-size: 16px;
+//   color: darkslategray;
+//   text-align: center;
+//   text-decoration: underline;
+//   font-weight: bolder;
+// }
+
+// .pull-left img{
+//     height: 76px;
+//     width: 478px;
+// }
+// .sidenav {
+//     height: 100%;
+//     width: 140px;
+//     position: fixed;
+//     z-index: 1;
+//     top: 0;
+//     left: 0;
+//     background-color: #111;
+//     overflow-x: hidden;
+//     padding-top: 120px;
+//     -webkit-box-shadow: 8px 0 10px -6px black;
+// 	   -moz-box-shadow: 8px 0 10px -6px black;
+//        box-shadow: 4px 0 10px -6px black;
+// }
+  
+//   .sidenav a {
+//     padding: 6px 8px 6px 16px;
+//     text-decoration: none;
+//     font-size: 12px;
+//     color: #818181;
+//     display: block;
+//   }
+  
+//   .sidenav a:hover {
+//     color: #f1f1f1;
+//   }
+  
+//   .main {
+//     margin-left: 160px; /* Same as the width of the sidenav */
+//     font-size: 28px; /* Increased text to enable scrolling */
+//     padding: 0px 10px;
+//   }
+  
+//   @media screen and (max-height: 450px) {
+//     .sidenav {padding-top: 15px;}
+//     .sidenav a {font-size: 18px;}
+//   }
+
+//   .myNav{
+//     font-weight: 500 !important;
+//     color: black !important;
+//     font-size: medium !important;
+//     // font-family: DejaVu Sans Mono, monospace !important; 
+//   }
+
+//   .navLogo {
+//     height: 105px;
+//     width: 155px;
+//     opacity: .2;
+//   }
+
+// .content-bottom {
+//   position: absolute;    
+//   bottom: 0; /*This is the part that glues it to the bottom*/
+//   padding-bottom:  50px;
+//   padding-left: 11%;
+// }
+
+// .sidenav {
+//   width: 200px !important;
+// }

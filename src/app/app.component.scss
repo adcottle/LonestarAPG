@@ -1,0 +1,14 @@
+
+/* use the following :host ::ng-deep to apply css from this compenent for entire app*/
+
+
+::ng-deep .navCss nav
+{
+  background-color: #b20837; /* For browsers that do not support gradients */
+  background-image: linear-gradient(#b20837, #ce3863, #b20837); /* Standard syntax (must be last) */
+}
+
+::ng-deep .page-footer {
+  background-color: #b20837; /* For browsers that do not support gradients */
+  background-image: linear-gradient(#b20837, #ce3863, #b20837); /* Standard syntax (must be last) */
+}

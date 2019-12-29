@@ -1,4 +1,62 @@
-<header class="h-100">
+<div class="edge header">
+   <div class="appHeader"></div>
+ </div>
+      <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark ie-nav" class="navCss"
+      [containerInside]="false">
+      <mdb-navbar-brand>
+          <a class="logo navbar-brand" href="#"><strong>Lone Star Chapter APG </strong></a>
+      </mdb-navbar-brand>
+      <links>
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active waves-light" mdbWavesEffect>
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item waves-light" mdbWavesEffect>
+                  <a class="nav-link" href="bylaws">Bylaws</a>
+              </li>
+              <li class="nav-item waves-light" mdbWavesEffect>
+                  <a class="nav-link" href="officers">Officers</a>
+              </li>
+              <li class="nav-item waves-light" mdbWavesEffect>
+                  <a class="nav-link">Opinions</a>
+              </li>
+          </ul>
+          <ul class="navbar-nav nav-flex-icons">
+              <li class="nav-item waves-light" mdbWavesEffect>
+                  <a class="nav-link"><mdb-icon fab icon="facebook-f"></mdb-icon></a>
+              </li>
+              <li class="nav-item waves-light" mdbWavesEffect>
+                  <a class="nav-link"><mdb-icon fab icon="twitter"></mdb-icon></a>
+              </li>
+              <li class="nav-item waves-light" mdbWavesEffect>
+                  <a class="nav-link"><mdb-icon fab icon="instagram"></mdb-icon></a>
+              </li>
+          </ul>
+      </links>
+  </mdb-navbar>
+  <!-- Main -->
+  <main>
+      <div class="container">
+        
+      </div>
+  </main>
+  <!-- /.Main -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <header class="h-100">
     <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg grey lighten-5 scrolling-navbar" [containerInside]="false">
        <mdb-navbar-brand>
           <a href="home" class="pull-left"><img src="../../assets/images/logo.jpg"></a> 
@@ -21,9 +79,9 @@
                 <mdb-icon fas icon="calendar-alt"></mdb-icon>
                 Meetings and Events
              </a>
-          </li>
+          </li> -->
           <!-- Dropdown -->
-          <li class="nav-item dropdown" dropdown>
+          <!-- <li class="nav-item dropdown" dropdown>
              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
                 <mdb-icon fas icon="external-link-alt"></mdb-icon>
                 Links<span class="caret"></span>
@@ -45,20 +103,21 @@
              </div>
           </li>
        </ul>
-    </mdb-navbar>
+    </mdb-navbar> -->
     <!-- Main -->
     <!-- /.Main -->
- </header>
+ <!-- </header>
  <div class="sidenav grey lighten-5">
     <a class="myNav" href="bylaws">Chapter Bylaws</a>
     <a class="myNav" href="ethics">Code Of Ethics</a>
-    <a class="myNav" href="professional">Professional Genealogists</a>
+    <a class="myNav" href="professional">Hiring A Profesional</a>
+    <a class="myNav" href="professional">Becoming a Professional</a>
     <a class="myNav" href="officers">Current Officers</a>
     <a href="https://www.apgen.org/" class="nav-link waves-light" mdbWavesEffect><img class="apgLogo" src="../../assets/images/apglogotrans.gif"></a>
-    <!-- <div class="content-bottom"><img class="navLogo" src="../../assets/images/starLogo.jpg"></div> -->
- </div>
+    <div class="content-bottom"><img class="navLogo" src="../../assets/images/starLogo.jpg"></div>
+ </div> -->
  <!--Main Layout-->
- <main class="text-center py-5">
+ <main>
     <router-outlet></router-outlet>
  </main>
  <!--Main Layout-->

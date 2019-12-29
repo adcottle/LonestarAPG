@@ -1,18 +1,75 @@
-.caroContainer {    
-    width: 625px;
-    float: left;
-    height: auto;
-    // max-width: 450px !important;
-    // max-height: 400px !important;
+// .container {
+//     display: flex;
+//   }
+  
+//   .item {
+//     // background-color: black;
+//     box-sizing: border-box;
+//     // padding: 20px;
+//     flex: 2;
+//     color: #fff;
+//   }
+  
+//   .item:nth-child(2) {
+//     // background-color: grey;
+//     color: tan;
+//     flex: 1;
+//   }
+  
+  
+//   @media screen and (max-width:769px) {
+//     .container { flex-wrap: wrap;  }
+//     .item:first-child { flex-basis: 100%; }
+//   }
+
+.container {
+    display: flex;
+  }
+  
+  .item {
+    height: 100px;
+    width: 100px; /* A fixed width as the default */
+  }
+  
+  .item-center { 
+    flex-grow: 1; /* Set the middle element to grow and stretch */
+  }
+  
+  .item + .item { 
+    margin-left: 2%; 
+  }
+
+
+.caroContainer {   
+    align-content: center; 
+    // width: 99.5vw;
+    // max-height: 65vh;
+    // position: absolute;
+    // height: 250px;
+    padding: 10px 10px 10px 10px;
+    // z-index:1;    
     border: solid 1px #CCC;
     box-shadow: 2px 1px 5px 1px rgba(110,104,104,0.75);
     -webkit-box-shadow: 2px 1px 5px 1px rgba(110,104,104,0.75);
     -moz-box-shadow: 2px 1px 5px 1px rgba(110,104,104,0.75);
+    overflow: hidden;
 }
 
+.caroDiv {
+    height: 25px !important;
+}
+
+
 .homeText {
-    line-height: 1.6;
-    padding: 25px 10px 15px 675px; /*t,r,b,l*/
+    // padding: 25px 10px 15px 675px; /*t,r,b,l*/
+    // width: 175px;
+    // margin-top: 15px;
     text-align: left;
-    font-size: 16px;
+    font-size: 14px;
+    // position: absolute;
+    // z-index:2;
+    // top: 50px;
+    // left: 50px;
+    color: white;
+    // font-weight: bold;
 }

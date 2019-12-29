@@ -1,14 +1,28 @@
-<div class="pagediv">
-    <div class="caroContainer">
-        <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+<div class="container">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        ...
+      </div>
+
+
+
+<!-- 
+
+<h1>The flex-grow Property</h1>
+
+<p>Make the third flex item grow eight times faster than the other flex items:</p>
+ style="align-self: flex-start"
+<div class="flex-container">
+<div class="item mat-elevation-z4" style="align-self: flex-start" ><mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
         <mdb-carousel-item>
             <div class="view w-100">
             <img class="d-block w-100" src="../../../assets/images/stock1.jpg" alt="First slide">
             <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
             </div>
             <div class="carousel-caption">
-                <h3 class="h3-responsive">Topic</h3>
-                <p>additional details</p>
+            <h3 class="h3-responsive">Topic</h3>
+            <p>Details</p>
             </div>
         </mdb-carousel-item>
         <mdb-carousel-item>
@@ -17,8 +31,8 @@
             <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
             </div>
             <div class="carousel-caption">
-                <h3 class="h3-responsive">Topic</h3>
-                <p>additional details</p>
+            <h3 class="h3-responsive">Topic</h3>
+            <p>Details</p>
             </div>
         </mdb-carousel-item>
         <mdb-carousel-item>
@@ -28,31 +42,76 @@
             </div>
             <div class="carousel-caption">
             <h3 class="h3-responsive">Topic</h3>
-            <p>additional details</p>
+            <p>Details</p>
             </div>
         </mdb-carousel-item>
-        </mdb-carousel>
-    </div>
-    <div class="homeText">
-            <h3><span class="firstLetter">L</span>one Star Chapter APG</h3>
-        <p>
-                
-                Organized in 1979, the Association of Professional Genealogists (APG) is a 501(c)(6) nonprofit that serves as an umbrella organization for the diverse roles in genealogy. The more than 2,000 US and international members include family historians, professional researchers, librarians, archivists, writers, editors, consultants, indexers, instructors, lecturers, columnists, booksellers, publishers, computer specialists, and geneticists.
-                
-                The Lone Star Chapter is a regional subgroup of APG. Our members represent the broad spectrum of genealogical pursuits covered by the APG umbrella.
-                
-                Membership in APG is open to any person or institution willing to support the objectives and the APG Code of Ethics. Membership in the Lone Star Chapter is open to any APG member. Our members are located primarily in Texas.
-                
-                The Lone Star Chapter supports the objectives of APG:
-                <ul>
-                    <li>To provide education and support for those engaged in genealogical business pursuits;</li>
-                    <li>To engage in activities which improve access, facilitate research, and preserve records used in the fields of genealogy and local history;</li>
-                    <li>To promote awareness of activities and/or laws which may affect genealogical and historical research;</li>
-                    <li>To facilitate collaboration among members;</li>
-                    <li>To promote professional standards in the field of genealogy; and</li>
-                    <li>To promote awareness of, and interest in, professional genealogical services.</li>
-            </ul>
-                Additionally, the Lone Star Chapter supports networking opportunities among members and professional and educational growth.
-        <!-- </p> -->
-    </div>
-</div>
+    </mdb-carousel></div>
+  <div style="flex-grow: 3">ave a size. […] If the items don’t have a size then the content's size is used</div>
+
+
+
+
+<!-- 
+<section class="container">
+        <div class="item mat-elevation-z4" style="align-self: flex-start">
+                <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+                        <mdb-carousel-item>
+                            <div class="view w-100">
+                            <img class="d-block w-100" src="../../../assets/images/stock1.jpg" alt="First slide">
+                            <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+                            </div>
+                            <div class="carousel-caption">
+                            <h3 class="h3-responsive">Topic</h3>
+                            <p>Details</p>
+                            </div>
+                        </mdb-carousel-item>
+                        <mdb-carousel-item>
+                            <div class="view w-100">
+                            <img class="d-block w-100" src="../../../assets/images/stock2.jpg" alt="Second slide">
+                            <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+                            </div>
+                            <div class="carousel-caption">
+                            <h3 class="h3-responsive">Topic</h3>
+                            <p>Details</p>
+                            </div>
+                        </mdb-carousel-item>
+                        <mdb-carousel-item>
+                            <div class="view w-100">
+                            <img class="d-block w-100" src="../../../assets/images/stock3.jpg" alt="Third slide">
+                            <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+                            </div>
+                            <div class="carousel-caption">
+                            <h3 class="h3-responsive">Topic</h3>
+                            <p>Details</p>
+                            </div>
+                        </mdb-carousel-item>
+                    </mdb-carousel>
+        </div>
+        <div class="item mat-elevation-z4">
+                <h3><span class="firstLetter">L</span>one Star Chapter APG</h3>
+                <p>
+                        
+                        Organized in 1979, the Association of Professional Genealogists (APG) is a 501(c)(6) nonprofit that serves as an umbrella organization for the diverse roles in genealogy. The more than 2,000 US and international members include family historians, professional researchers, librarians, archivists, writers, editors, consultants, indexers, instructors, lecturers, columnists, booksellers, publishers, computer specialists, and geneticists.
+                        
+                        The Lone Star Chapter is a regional subgroup of APG. Our members represent the broad spectrum of genealogical pursuits covered by the APG umbrella.
+                        
+                        Membership in APG is open to any person or institution willing to support the objectives and the APG Code of Ethics. Membership in the Lone Star Chapter is open to any APG member. Our members are located primarily in Texas.
+                        
+                        The Lone Star Chapter supports the objectives of APG:
+                        <ul>
+                            <li>To provide education and support for those engaged in genealogical business pursuits;</li>
+                            <li>To engage in activities which improve access, facilitate research, and preserve records used in the fields of genealogy and local history;</li>
+                            <li>To promote awareness of activities and/or laws which may affect genealogical and historical research;</li>
+                            <li>To facilitate collaboration among members;</li>
+                            <li>To promote professional standards in the field of genealogy; and</li>
+                            <li>To promote awareness of, and interest in, professional genealogical services.</li>
+                    </ul>
+                        Additionally, the Lone Star Chapter supports networking opportunities among members and professional and educational growth.
+                        
+        </div>
+      
+        
+      </section> -->
+
+
+ -->
