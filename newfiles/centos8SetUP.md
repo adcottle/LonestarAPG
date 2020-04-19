@@ -1,4 +1,6 @@
 getting Centos 8 setup
+Devices > Optical Drives > Remove disk from virtual drive.
+Click on Machine > Reset
 
 Gno-menu
 Gnome-tweaks
